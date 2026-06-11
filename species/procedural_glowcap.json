@@ -1,0 +1,62 @@
+[
+  {
+    "name": "glowcap",
+    "trunk": "minecraft:mushroom_stem",
+    "leaves": "minecraft:brown_mushroom_block",
+    "profile": "DARK_OAK",
+    "heightMin": 8,
+    "heightMax": 12,
+    "variants": 4,
+    "seed": 4600,
+    "trunkWidth": 2,
+    "trunkShape": "CONSTANT",
+    "canopy": {
+      "startAngle": 120,
+      "squish": 0.45,
+      "mode": "FILLED",
+      "leafDensity": 0.92
+    },
+    "decorators": [
+      {
+        "target": "TRUNK_SURFACE",
+        "block": "minecraft:glow_lichen",
+        "chance": 0.28
+      },
+      {
+        "target": "CANOPY_BOTTOM",
+        "block": "minecraft:shroomlight",
+        "chance": 0.9
+      }
+    ]
+  },
+  {
+    "name": "glowcap",
+    "trunk": "minecraft:mushroom_stem",
+    "leaves": "minecraft:brown_mushroom_block",
+    "profile": "DARK_OAK",
+    "heightMin": 14,
+    "heightMax": 18,
+    "variants": 4,
+    "seed": 4601,
+    "trunkWidth": 2,
+    "trunkShape": "CONSTANT",
+    "canopy": {
+      "startAngle": 115,
+      "squish": 0.4,
+      "mode": "FILLED",
+      "leafDensity": 0.94
+    },
+    "decorators": [
+      {
+        "target": "TRUNK_SURFACE",
+        "block": "minecraft:glow_lichen",
+        "chance": 0.32
+      },
+      {
+        "target": "CANOPY_BOTTOM",
+        "block": "minecraft:shroomlight",
+        "chance": 0.9
+      }
+    ]
+  }
+]

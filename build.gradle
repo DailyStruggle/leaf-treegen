@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+}
+
+allprojects {
+    group = 'net.leaf'
+    version = '0.1.0'
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.papermc.io/repository/maven-public/' }
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    
+    java {
+        toolchain.languageVersion = JavaLanguageVersion.of(21)
+    }
+
+    dependencies {
+        // Common dependencies can go here if needed
+    }
+}
+
+// Unified JAR configuration at the root level
+jar {
+    archiveBaseName.set('leaf-treegen')
+    archiveClassifier.set('')
+    
+    // Default to bundling Paper version as the primary plugin JAR
+    from project(':paper').sourceSets.main.output
+    from project(':common').sourceSets.main.output
+
+    // Include resources (config.yml and species/*.json)
+    from('src/main/resources') {
+        include 'config.yml'
+    }
+    from('common/src/main/resources') {
+        include 'species/*.json'
+    }
+
+    // Shade external dependencies from the Paper module
+    from {
+        project(':paper').configurations.runtimeClasspath
+            .filter { it.name.endsWith('.jar') && !it.path.contains('leaf-treegen') }
+            .collect { zipTree(it) }
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+assemble.dependsOn jar

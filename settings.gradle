@@ -1,0 +1,5 @@
+rootProject.name = 'LeafTreeGen'
+include 'common'
+include 'paper'
+include 'fabric'
+include 'neoforge'

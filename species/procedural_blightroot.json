@@ -1,0 +1,38 @@
+[
+  {
+    "name": "blightroot",
+    "trunk": "minecraft:dark_oak_log",
+    "leaves": "minecraft:dark_oak_leaves",
+    "profile": "DARK_OAK",
+    "heightMin": 8,
+    "heightMax": 12,
+    "variants": 4,
+    "seed": 4300,
+    "trunkWidth": 2,
+    "trunkShape": "SIGMOID",
+    "shapeSteepness": 3.5,
+    "canopy": {
+      "startAngle": 100,
+      "squish": 0.6,
+      "mode": "DENSITY",
+      "leafDensity": 0.28
+    },
+    "decorators": [
+      {
+        "target": "TRUNK_BASE",
+        "block": "minecraft:wither_rose",
+        "chance": 0.35
+      },
+      {
+        "target": "TRUNK_SURFACE",
+        "block": "minecraft:brown_mushroom",
+        "chance": 0.05
+      },
+      {
+        "target": "CANOPY_TOP",
+        "block": "minecraft:dead_bush",
+        "chance": 0.08
+      }
+    ]
+  }
+]

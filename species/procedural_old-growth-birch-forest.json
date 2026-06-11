@@ -1,0 +1,265 @@
+[
+  {
+    "name": "birch",
+    "trunk": "minecraft:birch_log",
+    "leaves": "minecraft:birch_leaves",
+    "profile": "BIRCH",
+    "heightMin": 14,
+    "heightMax": 18,
+    "variants": 2,
+    "seed": 3200,
+    "trunkWidth": 1,
+    "trunkShape": "SINE",
+    "shapePeriod": 0.65,
+    "shapeAmplitude": 0.09,
+    "canopy": {
+      "startAngle": 118,
+      "squish": 1.2,
+      "mode": "TRIMMED",
+      "leafDensity": 0.88
+    }
+  },
+  {
+    "name": "birch",
+    "trunk": "minecraft:birch_log",
+    "leaves": "minecraft:birch_leaves",
+    "profile": "BIRCH",
+    "heightMin": 16,
+    "heightMax": 21,
+    "variants": 3,
+    "seed": 3201,
+    "trunkWidth": 1,
+    "trunkShape": "LOG",
+    "shapeBase": 2.2,
+    "canopy": {
+      "startAngle": 116,
+      "squish": 1.25,
+      "mode": "TRIMMED",
+      "leafDensity": 0.87,
+      "branches": {
+        "probabilityFunction": "LINEAR",
+        "probabilityBase": 0.04,
+        "probabilityCrown": 0.65,
+        "lengthFunction": "SIGMOID",
+        "lengthMax": 3,
+        "lengthSteepness": 5.0,
+        "azimuthMode": "RANDOM",
+        "elevation": 20,
+        "leafStartUp": true,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.86
+      }
+    }
+  },
+  {
+    "name": "birch",
+    "trunk": "minecraft:birch_log",
+    "leaves": "minecraft:birch_leaves",
+    "profile": "BIRCH",
+    "heightMin": 20,
+    "heightMax": 27,
+    "variants": 4,
+    "seed": 3202,
+    "trunkWidth": 1,
+    "trunkShape": "SIGMOID",
+    "shapeSteepness": 4.5,
+    "canopy": {
+      "startAngle": 113,
+      "squish": 1.35,
+      "mode": "TRIMMED",
+      "leafDensity": 0.86,
+      "branches": {
+        "probabilityFunction": "LINEAR",
+        "probabilityBase": 0.03,
+        "probabilityCrown": 0.7,
+        "lengthFunction": "SIGMOID",
+        "lengthMax": 4,
+        "lengthSteepness": 6.0,
+        "azimuthMode": "RANDOM",
+        "elevation": 18,
+        "leafStartUp": true,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.85,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -18,
+          "yawDelta": 70,
+          "lengthScale": 0.5,
+          "clusterRadius": 1,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  },
+  {
+    "name": "birch",
+    "trunk": "minecraft:birch_log",
+    "leaves": "minecraft:birch_leaves",
+    "profile": "BIRCH",
+    "heightMin": 22,
+    "heightMax": 30,
+    "variants": 4,
+    "seed": 3203,
+    "trunkWidth": 1,
+    "trunkShape": "SINE",
+    "shapePeriod": 0.55,
+    "shapeAmplitude": 0.11,
+    "canopy": {
+      "startAngle": 112,
+      "squish": 1.3,
+      "mode": "TRIMMED",
+      "leafDensity": 0.85,
+      "branches": {
+        "probabilityFunction": "GAUSSIAN",
+        "probabilityMean": 0.78,
+        "probabilityStd": 0.13,
+        "lengthFunction": "SIGMOID",
+        "lengthMax": 5,
+        "lengthSteepness": 5.5,
+        "azimuthMode": "RANDOM",
+        "elevation": 17,
+        "leafStartUp": true,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.84,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -20,
+          "yawDelta": 68,
+          "lengthScale": 0.5,
+          "clusterRadius": 1,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  },
+  {
+    "name": "birch",
+    "trunk": "minecraft:birch_log",
+    "leaves": "minecraft:birch_leaves",
+    "profile": "BIRCH",
+    "heightMin": 27,
+    "heightMax": 36,
+    "variants": 5,
+    "seed": 3204,
+    "trunkWidth": 1,
+    "trunkShape": "LINEAR",
+    "shapeStart": 1.0,
+    "shapeEnd": 0.85,
+    "canopy": {
+      "startAngle": 110,
+      "squish": 1.4,
+      "mode": "TRIMMED",
+      "leafDensity": 0.82,
+      "branches": {
+        "probabilityFunction": "TOP_HEAVY",
+        "probabilityExponent": 2.8,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 2,
+        "lengthCrown": 5,
+        "azimuthMode": "RANDOM",
+        "elevation": 15,
+        "leafStartUp": true,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.82,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -18,
+          "yawDelta": 70,
+          "lengthScale": 0.5,
+          "clusterRadius": 1,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  },
+  {
+    "name": "birch",
+    "trunk": "minecraft:birch_log",
+    "leaves": "minecraft:birch_leaves",
+    "profile": "BIRCH",
+    "heightMin": 34,
+    "heightMax": 45,
+    "variants": 5,
+    "seed": 3205,
+    "trunkWidth": 2,
+    "trunkShape": "LOG",
+    "shapeBase": 2.5,
+    "canopy": {
+      "startAngle": 108,
+      "squish": 1.2,
+      "mode": "TRIMMED",
+      "leafDensity": 0.8,
+      "branches": {
+        "probabilityFunction": "TOP_HEAVY",
+        "probabilityExponent": 2.5,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 3,
+        "lengthCrown": 8,
+        "azimuthMode": "RANDOM",
+        "elevation": 14,
+        "leafStartUp": true,
+        "clusterRadius": 3,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.8,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -20,
+          "yawDelta": 65,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  },
+  {
+    "name": "birch",
+    "trunk": "minecraft:birch_log",
+    "leaves": "minecraft:birch_leaves",
+    "profile": "BIRCH",
+    "heightMin": 42,
+    "heightMax": 55,
+    "variants": 6,
+    "seed": 3206,
+    "trunkWidth": 2,
+    "trunkShape": "PARABOLIC",
+    "shapePeakOffset": 0.2,
+    "leanAngle": 10,
+    "leanAzimuth": 0,
+    "leanAzimuthMode": "SPIRAL",
+    "azimuthTurns": 1.5,
+    "trunkCurve": "SIGMOID",
+    "curveSteepness": 5.0,
+    "canopy": {
+      "startAngle": 106,
+      "squish": 1.15,
+      "mode": "TRIMMED",
+      "leafDensity": 0.78,
+      "branches": {
+        "probabilityFunction": "TOP_HEAVY",
+        "probabilityExponent": 3.0,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 4,
+        "lengthCrown": 10,
+        "azimuthMode": "RANDOM",
+        "elevation": 12,
+        "leafStartUp": true,
+        "clusterRadius": 3,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.78,
+        "subBranches": {
+          "count": 3,
+          "pitchDelta": -22,
+          "yawDelta": 62,
+          "lengthScale": 0.48,
+          "clusterRadius": 2,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  }
+]

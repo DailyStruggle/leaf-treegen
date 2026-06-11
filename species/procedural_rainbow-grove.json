@@ -1,0 +1,176 @@
+[
+  {
+    "name": "rainbow",
+    "trunk": "minecraft:birch_log",
+    "leaves": "minecraft:oak_leaves",
+    "profile": "BIRCH",
+    "heightMin": 6,
+    "heightMax": 9,
+    "variants": 2,
+    "seed": 7700,
+    "trunkWidth": 1,
+    "trunkShape": "CONSTANT",
+    "weightedSecondaryLeaves": [
+      {
+        "block": "minecraft:spruce_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:birch_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:jungle_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:acacia_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:dark_oak_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:mangrove_leaves",
+        "weight": 1
+      }
+    ],
+    "secondaryLeafFraction": 0.857,
+    "canopy": {
+      "startAngle": 118,
+      "squish": 1.1,
+      "mode": "TRIMMED",
+      "leafDensity": 0.9
+    }
+  },
+  {
+    "name": "rainbow",
+    "trunk": "minecraft:birch_log",
+    "leaves": "minecraft:oak_leaves",
+    "profile": "BIRCH",
+    "heightMin": 12,
+    "heightMax": 17,
+    "variants": 2,
+    "seed": 7701,
+    "trunkWidth": 1,
+    "trunkShape": "SINE",
+    "shapePeriod": 0.6,
+    "shapeAmplitude": 0.1,
+    "weightedSecondaryLeaves": [
+      {
+        "block": "minecraft:spruce_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:birch_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:jungle_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:acacia_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:dark_oak_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:mangrove_leaves",
+        "weight": 1
+      }
+    ],
+    "secondaryLeafFraction": 0.857,
+    "canopy": {
+      "startAngle": 116,
+      "squish": 1.2,
+      "mode": "TRIMMED",
+      "leafDensity": 0.88,
+      "branches": {
+        "probabilityFunction": "LINEAR",
+        "probabilityBase": 0.05,
+        "probabilityCrown": 0.65,
+        "lengthFunction": "SIGMOID",
+        "lengthMax": 3,
+        "lengthSteepness": 5.0,
+        "azimuthMode": "RANDOM",
+        "elevation": 22,
+        "leafStartUp": true,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.86
+      }
+    }
+  },
+  {
+    "name": "rainbow",
+    "trunk": "minecraft:birch_log",
+    "leaves": "minecraft:oak_leaves",
+    "profile": "BIRCH",
+    "heightMin": 20,
+    "heightMax": 27,
+    "variants": 2,
+    "seed": 7702,
+    "trunkWidth": 1,
+    "trunkShape": "LOG",
+    "shapeBase": 2.2,
+    "weightedSecondaryLeaves": [
+      {
+        "block": "minecraft:spruce_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:birch_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:jungle_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:acacia_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:dark_oak_leaves",
+        "weight": 1
+      },
+      {
+        "block": "minecraft:mangrove_leaves",
+        "weight": 1
+      }
+    ],
+    "secondaryLeafFraction": 0.857,
+    "canopy": {
+      "startAngle": 114,
+      "squish": 1.3,
+      "mode": "TRIMMED",
+      "leafDensity": 0.85,
+      "branches": {
+        "probabilityFunction": "LINEAR",
+        "probabilityBase": 0.04,
+        "probabilityCrown": 0.72,
+        "lengthFunction": "SIGMOID",
+        "lengthMax": 4,
+        "lengthSteepness": 6.0,
+        "azimuthMode": "RANDOM",
+        "elevation": 20,
+        "leafStartUp": true,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.86,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -18,
+          "yawDelta": 70,
+          "lengthScale": 0.5,
+          "clusterRadius": 1,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  }
+]

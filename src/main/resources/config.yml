@@ -1,0 +1,219 @@
+# LeafTreeGen configuration.
+#
+# Each entry under 'species' binds a tree type to a group of generated structure
+# templates. Templates are authored by tools/tree-gen and shipped in the
+# leaf-worldgen datapack as
+#   data/<namespace>/structure/<group>/<variant>.nbt
+# addressable as <namespace>:<group>/<variant>. All .nbt files in <group> are
+# treated as interchangeable variants of the species.
+#
+# On enable and on "/leaftree reload" this plugin GENERATES a worldgen datapack
+# from the values below (one jigsaw structure_set -> structure -> template_pool
+# + a has_structure biome tag per species) into the primary world's
+#   <world>/datapacks/<datapack.name>/
+# so the configured trees are placed naturally during chunk generation. The pack
+# is fully rebuilt each time. Worldgen changes only affect NEWLY generated chunks
+# after a server restart.
+#
+# 'datapack' controls the generated pack:
+#   name        : folder name written under <world>/datapacks. Default: leaf-treegen-generated.
+#   description : pack.mcmeta description.
+#   generate    : set false to disable datapack generation entirely.
+#
+# Per-species keys:
+#   display-name : friendly name (sapling item + messages). Default: id.
+#   namespace    : structure namespace. Default: minecraft.
+#   group        : structure sub-folder. Default: the species id.
+#   biomes       : biome keys this species spawns in (and where its tagged sapling
+#                  may be planted). Empty/omitted = any biome for the sapling, but
+#                  worldgen needs at least one biome. 'minecraft:' is implied.
+#   sapling-item : material used for the tagged "/leaftree give" sapling.
+#   worldgen     : include this species in the generated datapack.
+#                  Default: true when 'biomes' is non-empty.
+#   weight       : species-level weight (how often it's picked for a biome compared to others).
+#                  Default: 1. (Formerly 'count' in some formats).
+#   definitions  : override weights for internal tree variations defined in species JSON.
+#                  Format: { name: weight }.
+#   spacing      : jigsaw random_spread spacing (avg chunks between attempts). Default: 3.
+#   separation   : minimum chunk separation (< spacing). Default: 2.
+#   salt         : placement salt (deterministic spread). Omit/-1 = derived from id.
+#   spread-type  : 'linear' or 'triangular'. Default: linear.
+#   step         : worldgen generation step. Default: surface_structures.
+
+# Generation Mode:
+# DATAPACK:   Generates a vanilla worldgen datapack (recommended for performance and native behavior).
+# PROCEDURAL: Places trees at runtime during chunk load. If 'procedural' block is present, uses the
+#             procedural algorithm; otherwise, it places random .nbt structure variants.
+# BOTH:       Both DATAPACK and PROCEDURAL (likely redundant).
+# NONE:       Only manual placement (commands and saplings).
+generation-mode: BOTH
+
+datapack:
+  name: leaf-treegen-generated
+  description: "LeafTreeGen generated worldgen (from config.yml)."
+
+# Placement overrides and biome mapping.
+# Species are loaded from the 'species/' directory as JSON.
+# You can override worldgen placement settings here.
+placement:
+  # Forest & Plains
+  forest:
+    biomes:
+      - "forest"
+      - "flower_forest"
+      - "plains"
+      - "meadow"
+    replace-vanilla: true
+    spacing: 1
+    separation: 0
+    trees:
+      dark_forest_megas: 100
+
+  # Dense Dark Forest with multi-layered Dark Oak
+  dense_dark_forest_canopy:
+    biomes:
+      - "dark_forest"
+    replace-vanilla: true
+    spacing: 1
+    separation: 0
+    trees:
+      dark_forest_megas: 100
+
+  dense_dark_forest_understory:
+    biomes:
+      - "dark_forest"
+    replace-vanilla: true
+    spacing: 1
+    separation: 0
+    trees:
+      # Mix of medium dark oak varieties for a thick forest floor
+      dark_forest_megas: 100
+  dark_forest:
+    biomes:
+      - "dark_forest"
+    replace-vanilla: true
+    spacing: 1
+    separation: 0
+    trees:
+      dark_forest_megas: 100
+  dark_forest_megas:
+    biomes:
+      - "dark_forest"
+    weight: 90
+    definitions:
+      titan: 100
+      spiral: 1
+    spacing: 1
+    separation: 0
+
+  # Birch
+  birch_forest:
+    biomes:
+      - "birch_forest"
+    spacing: 4
+    separation: 2
+    trees:
+      birch_forest: 90
+      forest: 10
+  old_growth_birch_forest:
+    biomes:
+      - "old_growth_birch_forest"
+    spacing: 4
+    separation: 2
+    trees:
+      maple_birch_giants: 50
+      old_growth_birch_forest: 50
+
+  # Taiga & Snowy
+  taiga:
+    biomes:
+      - "taiga"
+      - "snowy_taiga"
+    spacing: 4
+    separation: 2
+    trees:
+      taiga: 90
+      glacierpine: 10
+  old_growth_pine_taiga:
+    biomes:
+      - "old_growth_pine_taiga"
+      - "old_growth_spruce_taiga"
+    spacing: 5
+    separation: 3
+    trees:
+      old_growth_pine_taiga: 80
+      taiga: 20
+  glacierpine:
+    biomes:
+      - "snowy_plains"
+      - "ice_spikes"
+    spacing: 12
+    separation: 6
+
+  # Jungle
+  jungle:
+    biomes:
+      - "jungle"
+      - "sparse_jungle"
+      - "bamboo_jungle"
+    spacing: 6
+    separation: 3
+
+  # Savanna
+  savanna:
+    biomes:
+      - "savanna"
+      - "savanna_plateau"
+      - "windswept_savanna"
+    spacing: 5
+    separation: 2
+
+  # Other Vanilla Biomes
+  cherry_grove:
+    biomes:
+      - "cherry_grove"
+    spacing: 4
+    separation: 2
+  swamp:
+    # Use forest species (oak) for swamp but with different settings if needed
+    # or we could create a swamp.json later. For now, use forest.
+    biomes:
+      - "swamp"
+      - "mangrove_swamp"
+    spacing: 5
+    separation: 2
+
+  # Custom/Overworld Mix
+  ashwood:
+    biomes:
+      - "windswept_forest"
+      - "windswept_hills"
+    spacing: 6
+    separation: 3
+  rainbow_grove:
+    biomes:
+      - "meadow"
+    spacing: 8
+    separation: 4
+  maple_birch_giants:
+    biomes:
+      - "old_growth_birch_forest"
+    spacing: 10
+    separation: 5
+
+  # Fungi (Overworld/Cave/Other)
+  glowcap:
+    biomes:
+      - "lush_caves"
+    spacing: 8
+    separation: 4
+  cloudcap:
+    biomes:
+      - "deep_dark"
+    spacing: 10
+    separation: 5
+  blightroot:
+    biomes:
+      - "dripstone_caves"
+    spacing: 12
+    separation: 6

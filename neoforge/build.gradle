@@ -1,0 +1,4 @@
+dependencies {
+    implementation project(':common')
+    // Add neoforge dependencies as needed
+}

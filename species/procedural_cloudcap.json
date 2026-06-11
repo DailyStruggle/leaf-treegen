@@ -1,0 +1,92 @@
+[
+  {
+    "name": "cloudcap",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:azalea_leaves",
+    "profile": "JUNGLE",
+    "heightMin": 10,
+    "heightMax": 12,
+    "variants": 3,
+    "seed": 4500,
+    "trunkWidth": 1,
+    "trunkShape": "CONSTANT",
+    "secondaryLeaves": "minecraft:flowering_azalea_leaves",
+    "secondaryLeafFraction": 0.22,
+    "canopy": {
+      "startAngle": 60,
+      "squish": 0.8,
+      "mode": "DENSITY",
+      "leafDensity": 0.86,
+      "layers": [
+        {
+          "yOffset": 10,
+          "radius": 3.5
+        },
+        {
+          "yOffset": 12,
+          "radius": 4.5
+        },
+        {
+          "yOffset": 14,
+          "radius": 4.0
+        },
+        {
+          "yOffset": 16,
+          "radius": 2.5
+        }
+      ]
+    },
+    "decorators": [
+      {
+        "target": "CANOPY_TOP",
+        "block": "minecraft:moss_block",
+        "chance": 0.1
+      }
+    ]
+  },
+  {
+    "name": "cloudcap",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:azalea_leaves",
+    "profile": "JUNGLE",
+    "heightMin": 13,
+    "heightMax": 16,
+    "variants": 3,
+    "seed": 4501,
+    "trunkWidth": 1,
+    "trunkShape": "CONSTANT",
+    "secondaryLeaves": "minecraft:flowering_azalea_leaves",
+    "secondaryLeafFraction": 0.28,
+    "canopy": {
+      "startAngle": 60,
+      "squish": 0.8,
+      "mode": "DENSITY",
+      "leafDensity": 0.88,
+      "layers": [
+        {
+          "yOffset": 13,
+          "radius": 4.0
+        },
+        {
+          "yOffset": 15,
+          "radius": 5.5
+        },
+        {
+          "yOffset": 17,
+          "radius": 5.5
+        },
+        {
+          "yOffset": 19,
+          "radius": 3.5
+        }
+      ]
+    },
+    "decorators": [
+      {
+        "target": "CANOPY_TOP",
+        "block": "minecraft:moss_block",
+        "chance": 0.12
+      }
+    ]
+  }
+]

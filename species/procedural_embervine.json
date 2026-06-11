@@ -1,0 +1,151 @@
+[
+  {
+    "name": "embervine",
+    "trunk": "minecraft:jungle_log",
+    "leaves": "minecraft:jungle_leaves",
+    "profile": "JUNGLE",
+    "heightMin": 9,
+    "heightMax": 12,
+    "variants": 3,
+    "seed": 4100,
+    "trunkWidth": 1,
+    "trunkShape": "CONSTANT",
+    "secondaryLeaves": "minecraft:shroomlight",
+    "secondaryLeafFraction": 0.1,
+    "canopy": {
+      "mode": "DENSITY",
+      "leafDensity": 0.82,
+      "branches": {
+        "probabilityFunction": "TOP_HEAVY",
+        "probabilityExponent": 2.0,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 2,
+        "lengthCrown": 5,
+        "azimuthMode": "RANDOM",
+        "elevation": -15,
+        "leafStartUp": false,
+        "clusterRadius": 2,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.8
+      }
+    },
+    "decorators": [
+      {
+        "target": "BRANCH_TIP",
+        "block": "minecraft:magma_block",
+        "chance": 0.28
+      },
+      {
+        "target": "TRUNK_SURFACE",
+        "block": "minecraft:vine",
+        "chance": 0.18
+      }
+    ]
+  },
+  {
+    "name": "embervine",
+    "trunk": "minecraft:jungle_log",
+    "leaves": "minecraft:jungle_leaves",
+    "profile": "JUNGLE",
+    "heightMin": 13,
+    "heightMax": 17,
+    "variants": 3,
+    "seed": 4101,
+    "trunkWidth": 1,
+    "trunkShape": "LOG",
+    "shapeBase": 2.0,
+    "secondaryLeaves": "minecraft:shroomlight",
+    "secondaryLeafFraction": 0.14,
+    "canopy": {
+      "mode": "DENSITY",
+      "leafDensity": 0.8,
+      "branches": {
+        "probabilityFunction": "TOP_HEAVY",
+        "probabilityExponent": 1.8,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 3,
+        "lengthCrown": 6,
+        "azimuthMode": "RANDOM",
+        "elevation": -18,
+        "leafStartUp": false,
+        "clusterRadius": 2,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.78,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -10,
+          "yawDelta": 50,
+          "lengthScale": 0.5,
+          "clusterRadius": 1,
+          "clusterMode": "TRIMMED",
+          "clusterDensity": 0.8
+        }
+      }
+    },
+    "decorators": [
+      {
+        "target": "BRANCH_TIP",
+        "block": "minecraft:magma_block",
+        "chance": 0.32
+      },
+      {
+        "target": "TRUNK_SURFACE",
+        "block": "minecraft:vine",
+        "chance": 0.2
+      }
+    ]
+  },
+  {
+    "name": "embervine",
+    "trunk": "minecraft:jungle_log",
+    "leaves": "minecraft:jungle_leaves",
+    "profile": "JUNGLE",
+    "heightMin": 18,
+    "heightMax": 24,
+    "variants": 4,
+    "seed": 4102,
+    "trunkWidth": 2,
+    "trunkShape": "LOG",
+    "shapeBase": 2.5,
+    "secondaryLeaves": "minecraft:shroomlight",
+    "secondaryLeafFraction": 0.18,
+    "canopy": {
+      "mode": "DENSITY",
+      "leafDensity": 0.78,
+      "branches": {
+        "probabilityFunction": "TOP_HEAVY",
+        "probabilityExponent": 1.6,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 3,
+        "lengthCrown": 7,
+        "azimuthMode": "RANDOM",
+        "elevation": -20,
+        "leafStartUp": false,
+        "clusterRadius": 3,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.75,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -12,
+          "yawDelta": 55,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "TRIMMED",
+          "clusterDensity": 0.78
+        }
+      }
+    },
+    "decorators": [
+      {
+        "target": "BRANCH_TIP",
+        "block": "minecraft:magma_block",
+        "chance": 0.35
+      },
+      {
+        "target": "TRUNK_SURFACE",
+        "block": "minecraft:vine",
+        "chance": 0.22
+      }
+    ]
+  }
+]

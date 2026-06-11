@@ -1,0 +1,254 @@
+[
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 20,
+    "heightMax": 28,
+    "variants": 2,
+    "seed": 3600,
+    "trunkWidth": 2,
+    "trunkShape": "LOG",
+    "shapeBase": 2.0,
+    "canopy": {
+      "startAngle": 130,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.85
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 24,
+    "heightMax": 34,
+    "variants": 3,
+    "seed": 3601,
+    "trunkWidth": 2,
+    "trunkShape": "SIGMOID",
+    "shapeSteepness": 3.5,
+    "canopy": {
+      "startAngle": 128,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.84,
+      "branches": {
+        "probabilityFunction": "CONSTANT",
+        "probabilityConstant": 0.3,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 4,
+        "lengthCrown": 1,
+        "azimuthMode": "RANDOM",
+        "elevation": 0,
+        "leafStartUp": false,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.8
+      }
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 32,
+    "heightMax": 44,
+    "variants": 4,
+    "seed": 3602,
+    "trunkWidth": 3,
+    "trunkShape": "LOG",
+    "shapeBase": 2.0,
+    "canopy": {
+      "startAngle": 126,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.83,
+      "branches": {
+        "probabilityFunction": "CONSTANT",
+        "probabilityConstant": 0.32,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 5,
+        "lengthCrown": 1,
+        "azimuthMode": "RANDOM",
+        "elevation": 0,
+        "leafStartUp": false,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.78,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -18,
+          "yawDelta": 60,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 38,
+    "heightMax": 52,
+    "variants": 4,
+    "seed": 3603,
+    "trunkWidth": 3,
+    "trunkShape": "SIGMOID",
+    "shapeSteepness": 4.0,
+    "canopy": {
+      "startAngle": 124,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.81,
+      "branches": {
+        "probabilityFunction": "CONSTANT",
+        "probabilityConstant": 0.3,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 6,
+        "lengthCrown": 1,
+        "azimuthMode": "RANDOM",
+        "elevation": 0,
+        "leafStartUp": false,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.76,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -20,
+          "yawDelta": 58,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 44,
+    "heightMax": 58,
+    "variants": 5,
+    "seed": 3604,
+    "trunkWidth": 3,
+    "trunkShape": "LINEAR",
+    "shapeStart": 1.0,
+    "shapeEnd": 0.55,
+    "canopy": {
+      "startAngle": 122,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.79,
+      "branches": {
+        "probabilityFunction": "CONSTANT",
+        "probabilityConstant": 0.28,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 6,
+        "lengthCrown": 1,
+        "azimuthMode": "RANDOM",
+        "elevation": 0,
+        "leafStartUp": false,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.75,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -20,
+          "yawDelta": 58,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 55,
+    "heightMax": 72,
+    "variants": 5,
+    "seed": 3605,
+    "trunkWidth": 4,
+    "trunkShape": "LOG",
+    "shapeBase": 2.0,
+    "canopy": {
+      "startAngle": 120,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.77,
+      "branches": {
+        "probabilityFunction": "CONSTANT",
+        "probabilityConstant": 0.35,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 7,
+        "lengthCrown": 1,
+        "azimuthMode": "RANDOM",
+        "elevation": 0,
+        "leafStartUp": false,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.76,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -20,
+          "yawDelta": 60,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 68,
+    "heightMax": 88,
+    "variants": 6,
+    "seed": 3606,
+    "trunkWidth": 4,
+    "trunkShape": "PARABOLIC",
+    "shapePeakOffset": 0.1,
+    "canopy": {
+      "startAngle": 118,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.74,
+      "branches": {
+        "probabilityFunction": "CONSTANT",
+        "probabilityConstant": 0.3,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 9,
+        "lengthCrown": 1,
+        "azimuthMode": "RANDOM",
+        "elevation": 0,
+        "leafStartUp": false,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.73,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -22,
+          "yawDelta": 58,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  }
+]

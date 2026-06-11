@@ -1,0 +1,28 @@
+{
+  "id": "birch",
+  "display-name": "Tall Birch",
+  "namespace": "leaf",
+  "group": "birch",
+  "biomes": [
+    "minecraft:birch_forest",
+    "minecraft:old_growth_birch_forest"
+  ],
+  "sapling-item": "BIRCH_SAPLING",
+  "procedural": {
+    "trunk-block": "minecraft:birch_log",
+    "leaf-block": "minecraft:birch_leaves",
+    "height-min": 12,
+    "height-max": 25,
+    "trunk-width": 1.0,
+    "trunk-shape": "CONSTANT",
+    "canopy": {
+      "mode": "TRIMMED",
+      "density": 0.88,
+      "layers": [
+        { "yOffset": 0, "radius": 3.0 },
+        { "yOffset": 1, "radius": 2.0 },
+        { "yOffset": -1, "radius": 2.5 }
+      ]
+    }
+  }
+}

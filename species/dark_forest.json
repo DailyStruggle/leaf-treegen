@@ -1,0 +1,40 @@
+{
+  "id": "dark_forest",
+  "display-name": "Titan Dark Oak",
+  "namespace": "leaf",
+  "group": "dark_forest",
+  "biomes": ["minecraft:dark_forest"],
+  "sapling-item": "DARK_OAK_SAPLING",
+  "procedural": {
+    "trunk-block": "minecraft:dark_oak_log",
+    "leaf-block": "minecraft:dark_oak_leaves",
+    "height-min": 15,
+    "height-max": 80,
+    "trunk-width": 4.0,
+    "trunk-shape": "PARABOLIC",
+    "round-trunk": true,
+    "lean-angle": 15.0,
+    "lean-azimuth": 180.0,
+    "azimuth-fn": "SPIRAL",
+    "azimuth-params": {
+      "turns": 2.0
+    },
+    "canopy": {
+      "mode": "DENSITY",
+      "density": 0.9,
+      "secondary-leaves": "minecraft:oak_leaves",
+      "secondary-fraction": 0.2,
+      "branches": {
+        "count": 5,
+        "min-length": 4.0,
+        "max-length": 8.0,
+        "start-height": 0.5
+      },
+      "layers": [
+        { "yOffset": 0, "radius": 6.0 },
+        { "yOffset": 2, "radius": 4.0 },
+        { "yOffset": -2, "radius": 5.0 }
+      ]
+    }
+  }
+}

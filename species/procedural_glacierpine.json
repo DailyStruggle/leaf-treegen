@@ -1,0 +1,122 @@
+[
+  {
+    "name": "glacierpine",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 10,
+    "heightMax": 14,
+    "variants": 3,
+    "seed": 4400,
+    "trunkWidth": 1,
+    "trunkShape": "CONSTANT",
+    "secondaryLeaves": "minecraft:snow_block",
+    "secondaryLeafFraction": 0.12,
+    "canopy": {
+      "startAngle": 134,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.88
+    },
+    "decorators": [
+      {
+        "target": "CANOPY_TOP",
+        "block": "minecraft:snow",
+        "chance": 0.65
+      },
+      {
+        "target": "BRANCH_TIP",
+        "block": "minecraft:pointed_dripstone",
+        "chance": 0.35
+      }
+    ]
+  },
+  {
+    "name": "glacierpine",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 16,
+    "heightMax": 22,
+    "variants": 3,
+    "seed": 4401,
+    "trunkWidth": 2,
+    "trunkShape": "LINEAR",
+    "shapeStart": 1.0,
+    "shapeEnd": 0.65,
+    "secondaryLeaves": "minecraft:snow_block",
+    "secondaryLeafFraction": 0.15,
+    "canopy": {
+      "startAngle": 130,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.86
+    },
+    "decorators": [
+      {
+        "target": "CANOPY_TOP",
+        "block": "minecraft:snow",
+        "chance": 0.7
+      },
+      {
+        "target": "BRANCH_TIP",
+        "block": "minecraft:pointed_dripstone",
+        "chance": 0.42
+      }
+    ]
+  },
+  {
+    "name": "glacierpine",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 26,
+    "heightMax": 36,
+    "variants": 4,
+    "seed": 4402,
+    "trunkWidth": 3,
+    "trunkShape": "LOG",
+    "shapeBase": 2.0,
+    "secondaryLeaves": "minecraft:snow_block",
+    "secondaryLeafFraction": 0.18,
+    "canopy": {
+      "startAngle": 126,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.84,
+      "branches": {
+        "probabilityFunction": "CONSTANT",
+        "probabilityConstant": 0.3,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 5,
+        "lengthCrown": 1,
+        "azimuthMode": "RANDOM",
+        "elevation": 0,
+        "leafStartUp": false,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.8,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -18,
+          "yawDelta": 60,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    },
+    "decorators": [
+      {
+        "target": "CANOPY_TOP",
+        "block": "minecraft:snow",
+        "chance": 0.72
+      },
+      {
+        "target": "BRANCH_TIP",
+        "block": "minecraft:pointed_dripstone",
+        "chance": 0.48
+      }
+    ]
+  }
+]

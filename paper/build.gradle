@@ -1,0 +1,18 @@
+dependencies {
+    implementation project(':common')
+    compileOnly 'io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT'
+    implementation 'com.github.DailyStruggle:CommandsAPI:1.0.1'
+}
+
+jar {
+    archiveClassifier.set('dev')
+}
+
+processResources {
+    from('../src/main/resources') {
+        include 'config.yml'
+    }
+    from('../common/src/main/resources') {
+        include 'species/*.json'
+    }
+}

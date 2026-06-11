@@ -1,0 +1,5 @@
+dependencies {
+    implementation project(':common')
+    compileOnly 'net.fabricmc:fabric-loader:0.16.9'
+    // Add other fabric dependencies as needed
+}

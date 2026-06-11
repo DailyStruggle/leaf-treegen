@@ -1,0 +1,8 @@
+{
+  "id": "volcano",
+  "display-name": "Volcanic Tree",
+  "namespace": "leaf",
+  "group": "volcano",
+  "biomes": [],
+  "sapling-item": "MANGROVE_PROPAGULE"
+}

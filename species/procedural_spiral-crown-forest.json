@@ -1,0 +1,131 @@
+[
+  {
+    "name": "spiral",
+    "trunk": "minecraft:dark_oak_log",
+    "leaves": "minecraft:dark_oak_leaves",
+    "profile": "DARK_OAK",
+    "heightMin": 60,
+    "heightMax": 80,
+    "variants": 5,
+    "seed": 2004,
+    "trunkWidth": 3,
+    "trunkShape": "PARABOLIC",
+    "shapePeakOffset": 0.38,
+    "shapeFloor": 0.58,
+    "leanAngle": 24,
+    "leanAzimuth": 0,
+    "leanAzimuthMode": "SPIRAL",
+    "azimuthTurns": 1.0,
+    "azimuthStart": 0,
+    "trunkCurve": "SIGMOID",
+    "curveSteepness": 5.5,
+    "canopy": {
+      "startAngle": 146,
+      "squish": 0.36,
+      "mode": "DENSITY",
+      "leafDensity": 0.9,
+      "branches": {
+        "probabilityFunction": "TOP_HEAVY",
+        "probabilityExponent": 2.0,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 3,
+        "lengthCrown": 9,
+        "azimuthMode": "RANDOM",
+        "elevation": 12,
+        "leafStartUp": true,
+        "clusterRadius": 4,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.88,
+        "subBranches": {
+          "count": 3,
+          "pitchDelta": -18,
+          "yawDelta": 60,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "DENSITY",
+          "clusterDensity": 0.82
+        }
+      }
+    }
+  },
+  {
+    "name": "titan",
+    "trunk": "minecraft:dark_oak_log",
+    "leaves": "minecraft:dark_oak_leaves",
+    "profile": "DARK_OAK",
+    "heightMin": 81,
+    "heightMax": 98,
+    "variants": 5,
+    "seed": 2001,
+    "trunkWidth": 4,
+    "trunkShape": "PARABOLIC",
+    "shapePeakOffset": 0.3,
+    "shapeFloor": 0.65,
+    "leanAngle": 28,
+    "leanAzimuth": 120,
+    "trunkCurve": "SIGMOID",
+    "curveSteepness": 7.0,
+    "canopy": {
+      "startAngle": 148,
+      "squish": 0.38,
+      "mode": "DENSITY",
+      "leafDensity": 0.9,
+      "branches": {
+        "probabilityFunction": "TOP_HEAVY",
+        "probabilityExponent": 2.5,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 4,
+        "lengthCrown": 12,
+        "azimuthMode": "RANDOM",
+        "elevation": 14,
+        "leafStartUp": true,
+        "clusterRadius": 5,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.88,
+        "subBranches": {
+          "count": 3,
+          "pitchDelta": -20,
+          "yawDelta": 58,
+          "lengthScale": 0.5,
+          "clusterRadius": 3,
+          "clusterMode": "DENSITY",
+          "clusterDensity": 0.82
+        }
+      }
+    }
+  },
+  {
+    "name": "twisted",
+    "trunk": "minecraft:dark_oak_log",
+    "leaves": "minecraft:dark_oak_leaves",
+    "profile": "DARK_OAK",
+    "heightMin": 11,
+    "heightMax": 16,
+    "variants": 5,
+    "seed": 800,
+    "trunkWidth": 2,
+    "trunkShape": "LOG",
+    "shapeBase": 2.5,
+    "leanAngle": 8,
+    "leanAzimuth": 180,
+    "trunkCurve": "PARABOLIC",
+    "canopy": {
+      "startAngle": 152,
+      "squish": 0.28,
+      "mode": "DENSITY",
+      "leafDensity": 0.9,
+      "branches": {
+        "probabilityFunction": "NOISE",
+        "probabilityScale": 4.0,
+        "lengthFunction": "CONSTANT",
+        "lengthConstant": 3,
+        "azimuthMode": "RANDOM",
+        "elevation": 8,
+        "leafStartUp": true,
+        "clusterRadius": 3,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.88
+      }
+    }
+  }
+]

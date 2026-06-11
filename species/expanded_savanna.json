@@ -1,0 +1,5392 @@
+[
+  {
+    "name": "acacia",
+    "comment": "acacia small A - short lean, flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 5,
+    "height_max": 8,
+    "seed": 3800,
+    "count": 2,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 60,
+    "lean_angle": 20,
+    "trunk_curve_fn": "linear",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small A - short lean, flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 5,
+    "height_max": 8,
+    "seed": 3900,
+    "count": 2,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 60,
+    "lean_angle": 20,
+    "trunk_curve_fn": "linear",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small A - short lean, flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 5,
+    "height_max": 8,
+    "seed": 4000,
+    "count": 2,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 60,
+    "lean_angle": 20,
+    "trunk_curve_fn": "linear",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small A - short lean, flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 5,
+    "height_max": 8,
+    "seed": 4100,
+    "count": 2,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 60,
+    "lean_angle": 20,
+    "trunk_curve_fn": "linear",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small A - short lean, flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 5,
+    "height_max": 8,
+    "seed": 4200,
+    "count": 2,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 60,
+    "lean_angle": 20,
+    "trunk_curve_fn": "linear",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small A - short lean, flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 5,
+    "height_max": 8,
+    "seed": 4300,
+    "count": 2,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 60,
+    "lean_angle": 20,
+    "trunk_curve_fn": "linear",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small A - short lean, flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 5,
+    "height_max": 8,
+    "seed": 4400,
+    "count": 2,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 60,
+    "lean_angle": 20,
+    "trunk_curve_fn": "linear",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small A - short lean, flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 5,
+    "height_max": 8,
+    "seed": 4500,
+    "count": 2,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 60,
+    "lean_angle": 20,
+    "trunk_curve_fn": "linear",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small A - short lean, flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 5,
+    "height_max": 8,
+    "seed": 4600,
+    "count": 2,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 60,
+    "lean_angle": 20,
+    "trunk_curve_fn": "linear",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small A - short lean, flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 5,
+    "height_max": 8,
+    "seed": 4700,
+    "count": 2,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 60,
+    "lean_angle": 20,
+    "trunk_curve_fn": "linear",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small B - sigmoid lean, wider flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 7,
+    "height_max": 10,
+    "seed": 3801,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 200,
+    "lean_angle": 22,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 14.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 3
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small B - sigmoid lean, wider flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 7,
+    "height_max": 10,
+    "seed": 3901,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 200,
+    "lean_angle": 22,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 14.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 3
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small B - sigmoid lean, wider flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 7,
+    "height_max": 10,
+    "seed": 4001,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 200,
+    "lean_angle": 22,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 14.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 3
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small B - sigmoid lean, wider flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 7,
+    "height_max": 10,
+    "seed": 4101,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 200,
+    "lean_angle": 22,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 14.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 3
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small B - sigmoid lean, wider flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 7,
+    "height_max": 10,
+    "seed": 4201,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 200,
+    "lean_angle": 22,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 14.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 3
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small B - sigmoid lean, wider flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 7,
+    "height_max": 10,
+    "seed": 4301,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 200,
+    "lean_angle": 22,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 14.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 3
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small B - sigmoid lean, wider flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 7,
+    "height_max": 10,
+    "seed": 4401,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 200,
+    "lean_angle": 22,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 14.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 3
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small B - sigmoid lean, wider flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 7,
+    "height_max": 10,
+    "seed": 4501,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 200,
+    "lean_angle": 22,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 14.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 3
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small B - sigmoid lean, wider flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 7,
+    "height_max": 10,
+    "seed": 4601,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 200,
+    "lean_angle": 22,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 14.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 3
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small B - sigmoid lean, wider flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 7,
+    "height_max": 10,
+    "seed": 4701,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 200,
+    "lean_angle": 22,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 14.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 3
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small C - log lean, branching flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 8,
+    "height_max": 12,
+    "seed": 3802,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 330,
+    "lean_angle": 18,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 13.0,
+          "midpoint": 0.86
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 4
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 55,
+          "length_scale": 0.55,
+          "cluster_radius": 1,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small C - log lean, branching flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 8,
+    "height_max": 12,
+    "seed": 3902,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 330,
+    "lean_angle": 18,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 13.0,
+          "midpoint": 0.86
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 4
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 55,
+          "length_scale": 0.55,
+          "cluster_radius": 1,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small C - log lean, branching flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 8,
+    "height_max": 12,
+    "seed": 4002,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 330,
+    "lean_angle": 18,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 13.0,
+          "midpoint": 0.86
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 4
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 55,
+          "length_scale": 0.55,
+          "cluster_radius": 1,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small C - log lean, branching flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 8,
+    "height_max": 12,
+    "seed": 4102,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 330,
+    "lean_angle": 18,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 13.0,
+          "midpoint": 0.86
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 4
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 55,
+          "length_scale": 0.55,
+          "cluster_radius": 1,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small C - log lean, branching flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 8,
+    "height_max": 12,
+    "seed": 4202,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 330,
+    "lean_angle": 18,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 13.0,
+          "midpoint": 0.86
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 4
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 55,
+          "length_scale": 0.55,
+          "cluster_radius": 1,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small C - log lean, branching flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 8,
+    "height_max": 12,
+    "seed": 4302,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 330,
+    "lean_angle": 18,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 13.0,
+          "midpoint": 0.86
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 4
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 55,
+          "length_scale": 0.55,
+          "cluster_radius": 1,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small C - log lean, branching flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 8,
+    "height_max": 12,
+    "seed": 4402,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 330,
+    "lean_angle": 18,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 13.0,
+          "midpoint": 0.86
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 4
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 55,
+          "length_scale": 0.55,
+          "cluster_radius": 1,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small C - log lean, branching flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 8,
+    "height_max": 12,
+    "seed": 4502,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 330,
+    "lean_angle": 18,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 13.0,
+          "midpoint": 0.86
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 4
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 55,
+          "length_scale": 0.55,
+          "cluster_radius": 1,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small C - log lean, branching flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 8,
+    "height_max": 12,
+    "seed": 4602,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 330,
+    "lean_angle": 18,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 13.0,
+          "midpoint": 0.86
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 4
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 55,
+          "length_scale": 0.55,
+          "cluster_radius": 1,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia small C - log lean, branching flat top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 8,
+    "height_max": 12,
+    "seed": 4702,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 330,
+    "lean_angle": 18,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 13.0,
+          "midpoint": 0.86
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 4
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 55,
+          "length_scale": 0.55,
+          "cluster_radius": 1,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium A - sigmoid lean, wide canopy",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 12,
+    "height_max": 18,
+    "seed": 3803,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 120,
+    "lean_angle": 16,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.84
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 5
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 52,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium A - sigmoid lean, wide canopy",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 12,
+    "height_max": 18,
+    "seed": 3903,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 120,
+    "lean_angle": 16,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.84
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 5
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 52,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium A - sigmoid lean, wide canopy",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 12,
+    "height_max": 18,
+    "seed": 4003,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 120,
+    "lean_angle": 16,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.84
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 5
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 52,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium A - sigmoid lean, wide canopy",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 12,
+    "height_max": 18,
+    "seed": 4103,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 120,
+    "lean_angle": 16,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.84
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 5
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 52,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium A - sigmoid lean, wide canopy",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 12,
+    "height_max": 18,
+    "seed": 4203,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 120,
+    "lean_angle": 16,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.84
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 5
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 52,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium A - sigmoid lean, wide canopy",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 12,
+    "height_max": 18,
+    "seed": 4303,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 120,
+    "lean_angle": 16,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.84
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 5
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 52,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium A - sigmoid lean, wide canopy",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 12,
+    "height_max": 18,
+    "seed": 4403,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 120,
+    "lean_angle": 16,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.84
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 5
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 52,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium A - sigmoid lean, wide canopy",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 12,
+    "height_max": 18,
+    "seed": 4503,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 120,
+    "lean_angle": 16,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.84
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 5
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 52,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium A - sigmoid lean, wide canopy",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 12,
+    "height_max": 18,
+    "seed": 4603,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 120,
+    "lean_angle": 16,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.84
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 5
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 52,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium A - sigmoid lean, wide canopy",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 12,
+    "height_max": 18,
+    "seed": 4703,
+    "count": 3,
+    "trunk_width": 1,
+    "trunk_shape": "constant",
+    "trunk_shape_params": {},
+    "lean_azimuth": 120,
+    "lean_angle": 16,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 5.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.84
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 5
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -8,
+          "yaw_delta": 52,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium B - parabolic lean, layered top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 14,
+    "height_max": 22,
+    "seed": 3804,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 260,
+    "lean_angle": 14,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.82
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 6
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 50,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium B - parabolic lean, layered top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 14,
+    "height_max": 22,
+    "seed": 3904,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 260,
+    "lean_angle": 14,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.82
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 6
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 50,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium B - parabolic lean, layered top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 14,
+    "height_max": 22,
+    "seed": 4004,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 260,
+    "lean_angle": 14,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.82
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 6
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 50,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium B - parabolic lean, layered top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 14,
+    "height_max": 22,
+    "seed": 4104,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 260,
+    "lean_angle": 14,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.82
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 6
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 50,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium B - parabolic lean, layered top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 14,
+    "height_max": 22,
+    "seed": 4204,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 260,
+    "lean_angle": 14,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.82
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 6
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 50,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium B - parabolic lean, layered top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 14,
+    "height_max": 22,
+    "seed": 4304,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 260,
+    "lean_angle": 14,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.82
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 6
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 50,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium B - parabolic lean, layered top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 14,
+    "height_max": 22,
+    "seed": 4404,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 260,
+    "lean_angle": 14,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.82
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 6
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 50,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium B - parabolic lean, layered top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 14,
+    "height_max": 22,
+    "seed": 4504,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 260,
+    "lean_angle": 14,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.82
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 6
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 50,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium B - parabolic lean, layered top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 14,
+    "height_max": 22,
+    "seed": 4604,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 260,
+    "lean_angle": 14,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.82
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 6
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 50,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium B - parabolic lean, layered top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 14,
+    "height_max": 22,
+    "seed": 4704,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 260,
+    "lean_angle": 14,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 12.0,
+          "midpoint": 0.82
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 6
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 50,
+          "length_scale": 0.55,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium C - tall lean, multi-branch top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 28,
+    "seed": 3805,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.55
+    },
+    "lean_azimuth": 80,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 7
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 48,
+          "length_scale": 0.58,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium C - tall lean, multi-branch top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 28,
+    "seed": 3905,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.55
+    },
+    "lean_azimuth": 80,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 7
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 48,
+          "length_scale": 0.58,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium C - tall lean, multi-branch top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 28,
+    "seed": 4005,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.55
+    },
+    "lean_azimuth": 80,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 7
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 48,
+          "length_scale": 0.58,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium C - tall lean, multi-branch top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 28,
+    "seed": 4105,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.55
+    },
+    "lean_azimuth": 80,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 7
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 48,
+          "length_scale": 0.58,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium C - tall lean, multi-branch top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 28,
+    "seed": 4205,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.55
+    },
+    "lean_azimuth": 80,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 7
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 48,
+          "length_scale": 0.58,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium C - tall lean, multi-branch top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 28,
+    "seed": 4305,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.55
+    },
+    "lean_azimuth": 80,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 7
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 48,
+          "length_scale": 0.58,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium C - tall lean, multi-branch top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 28,
+    "seed": 4405,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.55
+    },
+    "lean_azimuth": 80,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 7
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 48,
+          "length_scale": 0.58,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium C - tall lean, multi-branch top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 28,
+    "seed": 4505,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.55
+    },
+    "lean_azimuth": 80,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 7
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 48,
+          "length_scale": 0.58,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium C - tall lean, multi-branch top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 28,
+    "seed": 4605,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.55
+    },
+    "lean_azimuth": 80,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 7
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 48,
+          "length_scale": 0.58,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia medium C - tall lean, multi-branch top",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 28,
+    "seed": 4705,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.55
+    },
+    "lean_azimuth": 80,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 7
+        },
+        "azimuth": "random",
+        "elevation": 5,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -8,
+          "yaw_delta": 48,
+          "length_scale": 0.58,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall A - large lean, wide umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 28,
+    "height_max": 40,
+    "seed": 3806,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.5
+    },
+    "lean_azimuth": 170,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 8
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 48,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall A - large lean, wide umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 28,
+    "height_max": 40,
+    "seed": 3906,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.5
+    },
+    "lean_azimuth": 170,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 8
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 48,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall A - large lean, wide umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 28,
+    "height_max": 40,
+    "seed": 4006,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.5
+    },
+    "lean_azimuth": 170,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 8
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 48,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall A - large lean, wide umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 28,
+    "height_max": 40,
+    "seed": 4106,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.5
+    },
+    "lean_azimuth": 170,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 8
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 48,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall A - large lean, wide umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 28,
+    "height_max": 40,
+    "seed": 4206,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.5
+    },
+    "lean_azimuth": 170,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 8
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 48,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall A - large lean, wide umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 28,
+    "height_max": 40,
+    "seed": 4306,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.5
+    },
+    "lean_azimuth": 170,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 8
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 48,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall A - large lean, wide umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 28,
+    "height_max": 40,
+    "seed": 4406,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.5
+    },
+    "lean_azimuth": 170,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 8
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 48,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall A - large lean, wide umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 28,
+    "height_max": 40,
+    "seed": 4506,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.5
+    },
+    "lean_azimuth": 170,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 8
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 48,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall A - large lean, wide umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 28,
+    "height_max": 40,
+    "seed": 4606,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.5
+    },
+    "lean_azimuth": 170,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 8
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 48,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall A - large lean, wide umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 28,
+    "height_max": 40,
+    "seed": 4706,
+    "count": 4,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.5
+    },
+    "lean_azimuth": 170,
+    "lean_angle": 12,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.0
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 11.0,
+          "midpoint": 0.88
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 8
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 48,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall B - very tall, sparse umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 36,
+    "height_max": 50,
+    "seed": 3807,
+    "count": 5,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.45
+    },
+    "lean_azimuth": 300,
+    "lean_angle": 10,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.5
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 10.0,
+          "midpoint": 0.9
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 9
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall B - very tall, sparse umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 36,
+    "height_max": 50,
+    "seed": 3907,
+    "count": 5,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.45
+    },
+    "lean_azimuth": 300,
+    "lean_angle": 10,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.5
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 10.0,
+          "midpoint": 0.9
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 9
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall B - very tall, sparse umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 36,
+    "height_max": 50,
+    "seed": 4007,
+    "count": 5,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.45
+    },
+    "lean_azimuth": 300,
+    "lean_angle": 10,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.5
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 10.0,
+          "midpoint": 0.9
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 9
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall B - very tall, sparse umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 36,
+    "height_max": 50,
+    "seed": 4107,
+    "count": 5,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.45
+    },
+    "lean_azimuth": 300,
+    "lean_angle": 10,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.5
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 10.0,
+          "midpoint": 0.9
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 9
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall B - very tall, sparse umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 36,
+    "height_max": 50,
+    "seed": 4207,
+    "count": 5,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.45
+    },
+    "lean_azimuth": 300,
+    "lean_angle": 10,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.5
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 10.0,
+          "midpoint": 0.9
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 9
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall B - very tall, sparse umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 36,
+    "height_max": 50,
+    "seed": 4307,
+    "count": 5,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.45
+    },
+    "lean_azimuth": 300,
+    "lean_angle": 10,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.5
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 10.0,
+          "midpoint": 0.9
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 9
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall B - very tall, sparse umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 36,
+    "height_max": 50,
+    "seed": 4407,
+    "count": 5,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.45
+    },
+    "lean_azimuth": 300,
+    "lean_angle": 10,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.5
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 10.0,
+          "midpoint": 0.9
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 9
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall B - very tall, sparse umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 36,
+    "height_max": 50,
+    "seed": 4507,
+    "count": 5,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.45
+    },
+    "lean_azimuth": 300,
+    "lean_angle": 10,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.5
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 10.0,
+          "midpoint": 0.9
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 9
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall B - very tall, sparse umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 36,
+    "height_max": 50,
+    "seed": 4607,
+    "count": 5,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.45
+    },
+    "lean_azimuth": 300,
+    "lean_angle": 10,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.5
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 10.0,
+          "midpoint": 0.9
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 9
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "acacia",
+    "comment": "acacia tall B - very tall, sparse umbrella",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 36,
+    "height_max": 50,
+    "seed": 4707,
+    "count": 5,
+    "trunk_width": 1,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.45
+    },
+    "lean_azimuth": 300,
+    "lean_angle": 10,
+    "trunk_curve_fn": "sigmoid",
+    "trunk_curve_params": {
+      "steepness": 6.5
+    },
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "sigmoid",
+        "prob_params": {
+          "steepness": 10.0,
+          "midpoint": 0.9
+        },
+        "length_fn": "constant",
+        "length_params": {
+          "length": 9
+        },
+        "azimuth": "random",
+        "elevation": 4,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -7,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia A - wide-canopy, medium",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 26,
+    "seed": 3808,
+    "count": 3,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.7
+    },
+    "lean_azimuth": 140,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 9
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia A - wide-canopy, medium",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 26,
+    "seed": 3908,
+    "count": 3,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.7
+    },
+    "lean_azimuth": 140,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 9
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia A - wide-canopy, medium",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 26,
+    "seed": 4008,
+    "count": 3,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.7
+    },
+    "lean_azimuth": 140,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 9
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia A - wide-canopy, medium",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 26,
+    "seed": 4108,
+    "count": 3,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.7
+    },
+    "lean_azimuth": 140,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 9
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia A - wide-canopy, medium",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 26,
+    "seed": 4208,
+    "count": 3,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.7
+    },
+    "lean_azimuth": 140,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 9
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia A - wide-canopy, medium",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 26,
+    "seed": 4308,
+    "count": 3,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.7
+    },
+    "lean_azimuth": 140,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 9
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia A - wide-canopy, medium",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 26,
+    "seed": 4408,
+    "count": 3,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.7
+    },
+    "lean_azimuth": 140,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 9
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia A - wide-canopy, medium",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 26,
+    "seed": 4508,
+    "count": 3,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.7
+    },
+    "lean_azimuth": 140,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 9
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia A - wide-canopy, medium",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 26,
+    "seed": 4608,
+    "count": 3,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.7
+    },
+    "lean_azimuth": 140,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 9
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia A - wide-canopy, medium",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 18,
+    "height_max": 26,
+    "seed": 4708,
+    "count": 3,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.7
+    },
+    "lean_azimuth": 140,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 9
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 46,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia B - wide-canopy, tall",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 24,
+    "height_max": 36,
+    "seed": 3809,
+    "count": 4,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.65
+    },
+    "lean_azimuth": 220,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 11
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 45,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia B - wide-canopy, tall",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 24,
+    "height_max": 36,
+    "seed": 3909,
+    "count": 4,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.65
+    },
+    "lean_azimuth": 220,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 11
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 45,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia B - wide-canopy, tall",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 24,
+    "height_max": 36,
+    "seed": 4009,
+    "count": 4,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.65
+    },
+    "lean_azimuth": 220,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 11
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 45,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia B - wide-canopy, tall",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 24,
+    "height_max": 36,
+    "seed": 4109,
+    "count": 4,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.65
+    },
+    "lean_azimuth": 220,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 11
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 45,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia B - wide-canopy, tall",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 24,
+    "height_max": 36,
+    "seed": 4209,
+    "count": 4,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.65
+    },
+    "lean_azimuth": 220,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 11
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 45,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia B - wide-canopy, tall",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 24,
+    "height_max": 36,
+    "seed": 4309,
+    "count": 4,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.65
+    },
+    "lean_azimuth": 220,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 11
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 45,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia B - wide-canopy, tall",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 24,
+    "height_max": 36,
+    "seed": 4409,
+    "count": 4,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.65
+    },
+    "lean_azimuth": 220,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 11
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 45,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia B - wide-canopy, tall",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 24,
+    "height_max": 36,
+    "seed": 4509,
+    "count": 4,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.65
+    },
+    "lean_azimuth": 220,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 11
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 45,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia B - wide-canopy, tall",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 24,
+    "height_max": 36,
+    "seed": 4609,
+    "count": 4,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.65
+    },
+    "lean_azimuth": 220,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 11
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 45,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia B - wide-canopy, tall",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 24,
+    "height_max": 36,
+    "seed": 4709,
+    "count": 4,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.65
+    },
+    "lean_azimuth": 220,
+    "lean_angle": 10,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.9,
+          "std": 0.08
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 11
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 45,
+          "length_scale": 0.6,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia C - giant umbrella, very wide",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 32,
+    "height_max": 48,
+    "seed": 3810,
+    "count": 5,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 50,
+    "lean_angle": 8,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.92,
+          "std": 0.07
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 14
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 44,
+          "length_scale": 0.62,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia C - giant umbrella, very wide",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 32,
+    "height_max": 48,
+    "seed": 3910,
+    "count": 5,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 50,
+    "lean_angle": 8,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.92,
+          "std": 0.07
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 14
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 44,
+          "length_scale": 0.62,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia C - giant umbrella, very wide",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 32,
+    "height_max": 48,
+    "seed": 4010,
+    "count": 5,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 50,
+    "lean_angle": 8,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.92,
+          "std": 0.07
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 14
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 44,
+          "length_scale": 0.62,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia C - giant umbrella, very wide",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 32,
+    "height_max": 48,
+    "seed": 4110,
+    "count": 5,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 50,
+    "lean_angle": 8,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.92,
+          "std": 0.07
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 14
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 44,
+          "length_scale": 0.62,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia C - giant umbrella, very wide",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 32,
+    "height_max": 48,
+    "seed": 4210,
+    "count": 5,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 50,
+    "lean_angle": 8,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.92,
+          "std": 0.07
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 14
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 44,
+          "length_scale": 0.62,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia C - giant umbrella, very wide",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 32,
+    "height_max": 48,
+    "seed": 4310,
+    "count": 5,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 50,
+    "lean_angle": 8,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.92,
+          "std": 0.07
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 14
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 44,
+          "length_scale": 0.62,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia C - giant umbrella, very wide",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 32,
+    "height_max": 48,
+    "seed": 4410,
+    "count": 5,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 50,
+    "lean_angle": 8,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.92,
+          "std": 0.07
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 14
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 44,
+          "length_scale": 0.62,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia C - giant umbrella, very wide",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 32,
+    "height_max": 48,
+    "seed": 4510,
+    "count": 5,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 50,
+    "lean_angle": 8,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.92,
+          "std": 0.07
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 14
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 44,
+          "length_scale": 0.62,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia C - giant umbrella, very wide",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 32,
+    "height_max": 48,
+    "seed": 4610,
+    "count": 5,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 50,
+    "lean_angle": 8,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.92,
+          "std": 0.07
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 14
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 44,
+          "length_scale": 0.62,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  },
+  {
+    "name": "savanna_acacia",
+    "comment": "savanna acacia C - giant umbrella, very wide",
+    "trunk": "minecraft:acacia_log",
+    "leaves": "minecraft:acacia_leaves",
+    "profile": "acacia",
+    "height_min": 32,
+    "height_max": 48,
+    "seed": 4710,
+    "count": 5,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": {
+      "start": 1.0,
+      "end": 0.6
+    },
+    "lean_azimuth": 50,
+    "lean_angle": 8,
+    "trunk_curve_fn": "log",
+    "trunk_curve_params": {},
+    "canopy": {
+      "start_angle": 180,
+      "squish": 1.0,
+      "mode": "filled",
+      "leaf_density": 1.0,
+      "branches": {
+        "prob_fn": "gaussian",
+        "prob_params": {
+          "mean": 0.92,
+          "std": 0.07
+        },
+        "length_fn": "parabolic",
+        "length_params": {
+          "max_len": 14
+        },
+        "azimuth": "random",
+        "elevation": 3,
+        "leaf_start_up": true,
+        "cluster_radius": 3,
+        "cluster_mode": "filled",
+        "cluster_density": 1.0,
+        "sub_branches": {
+          "count": 3,
+          "pitch_delta": -6,
+          "yaw_delta": 44,
+          "length_scale": 0.62,
+          "cluster_radius": 2,
+          "cluster_mode": "filled"
+        }
+      }
+    }
+  }
+]

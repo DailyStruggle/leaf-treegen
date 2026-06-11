@@ -1,0 +1,289 @@
+[
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 10,
+    "heightMax": 14,
+    "variants": 2,
+    "seed": 3500,
+    "trunkWidth": 1,
+    "trunkShape": "CONSTANT",
+    "canopy": {
+      "startAngle": 136,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.86
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 12,
+    "heightMax": 16,
+    "variants": 3,
+    "seed": 3501,
+    "trunkWidth": 1,
+    "trunkShape": "CONSTANT",
+    "canopy": {
+      "startAngle": 134,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.88
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 11,
+    "heightMax": 15,
+    "variants": 3,
+    "seed": 3502,
+    "trunkWidth": 1,
+    "trunkShape": "LINEAR",
+    "shapeStart": 1.0,
+    "shapeEnd": 0.8,
+    "canopy": {
+      "startAngle": 132,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.85
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 18,
+    "heightMax": 26,
+    "variants": 3,
+    "seed": 3503,
+    "trunkWidth": 2,
+    "trunkShape": "LINEAR",
+    "shapeStart": 1.0,
+    "shapeEnd": 0.65,
+    "canopy": {
+      "startAngle": 130,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.85
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 20,
+    "heightMax": 30,
+    "variants": 4,
+    "seed": 3504,
+    "trunkWidth": 2,
+    "trunkShape": "SIGMOID",
+    "shapeSteepness": 3.5,
+    "canopy": {
+      "startAngle": 128,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.84,
+      "branches": {
+        "probabilityFunction": "CONSTANT",
+        "probabilityConstant": 0.3,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 4,
+        "lengthCrown": 1,
+        "azimuthMode": "RANDOM",
+        "elevation": 0,
+        "leafStartUp": false,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.8
+      }
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 22,
+    "heightMax": 32,
+    "variants": 4,
+    "seed": 3505,
+    "trunkWidth": 2,
+    "trunkShape": "LOG",
+    "shapeBase": 2.0,
+    "canopy": {
+      "startAngle": 126,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.83
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 32,
+    "heightMax": 44,
+    "variants": 4,
+    "seed": 3506,
+    "trunkWidth": 3,
+    "trunkShape": "LOG",
+    "shapeBase": 2.0,
+    "canopy": {
+      "startAngle": 124,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.82,
+      "branches": {
+        "probabilityFunction": "CONSTANT",
+        "probabilityConstant": 0.32,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 5,
+        "lengthCrown": 1,
+        "azimuthMode": "RANDOM",
+        "elevation": 0,
+        "leafStartUp": false,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.78,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -18,
+          "yawDelta": 60,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 38,
+    "heightMax": 52,
+    "variants": 5,
+    "seed": 3507,
+    "trunkWidth": 3,
+    "trunkShape": "SIGMOID",
+    "shapeSteepness": 4.0,
+    "canopy": {
+      "startAngle": 122,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.8,
+      "branches": {
+        "probabilityFunction": "CONSTANT",
+        "probabilityConstant": 0.28,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 6,
+        "lengthCrown": 1,
+        "azimuthMode": "RANDOM",
+        "elevation": 0,
+        "leafStartUp": false,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.76,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -20,
+          "yawDelta": 58,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 52,
+    "heightMax": 68,
+    "variants": 5,
+    "seed": 3508,
+    "trunkWidth": 4,
+    "trunkShape": "LOG",
+    "shapeBase": 2.0,
+    "canopy": {
+      "startAngle": 120,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.78,
+      "branches": {
+        "probabilityFunction": "CONSTANT",
+        "probabilityConstant": 0.35,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 7,
+        "lengthCrown": 1,
+        "azimuthMode": "RANDOM",
+        "elevation": 0,
+        "leafStartUp": false,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.78,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -20,
+          "yawDelta": 60,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  },
+  {
+    "name": "spruce",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "profile": "SPRUCE",
+    "heightMin": 65,
+    "heightMax": 82,
+    "variants": 6,
+    "seed": 3509,
+    "trunkWidth": 4,
+    "trunkShape": "PARABOLIC",
+    "shapePeakOffset": 0.1,
+    "canopy": {
+      "startAngle": 118,
+      "squish": 1.0,
+      "mode": "TRIMMED",
+      "leafDensity": 0.75,
+      "branches": {
+        "probabilityFunction": "CONSTANT",
+        "probabilityConstant": 0.3,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 8,
+        "lengthCrown": 1,
+        "azimuthMode": "RANDOM",
+        "elevation": 0,
+        "leafStartUp": false,
+        "clusterRadius": 2,
+        "clusterMode": "TRIMMED",
+        "clusterDensity": 0.75,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -22,
+          "yawDelta": 58,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "TRIMMED"
+        }
+      }
+    }
+  }
+]

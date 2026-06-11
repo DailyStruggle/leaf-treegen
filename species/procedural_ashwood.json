@@ -1,0 +1,147 @@
+[
+  {
+    "name": "ashwood",
+    "trunk": "minecraft:basalt",
+    "leaves": "minecraft:dead_bush",
+    "profile": "OAK",
+    "heightMin": 6,
+    "heightMax": 8,
+    "variants": 3,
+    "seed": 4200,
+    "roots": false,
+    "trunkWidth": 1,
+    "trunkShape": "LOG",
+    "shapeBase": 2.0,
+    "canopy": {
+      "mode": "DENSITY",
+      "leafDensity": 0.22,
+      "layers": [
+        {
+          "yOffset": 6,
+          "radius": 2.0
+        },
+        {
+          "yOffset": 8,
+          "radius": 1.0
+        }
+      ]
+    },
+    "decorators": [
+      {
+        "target": "BRANCH_TIP",
+        "block": "minecraft:soul_torch",
+        "chance": 0.12
+      },
+      {
+        "target": "TRUNK_BASE",
+        "block": "minecraft:basalt",
+        "chance": 0.35
+      }
+    ]
+  },
+  {
+    "name": "ashwood",
+    "trunk": "minecraft:basalt",
+    "leaves": "minecraft:dead_bush",
+    "profile": "OAK",
+    "heightMin": 9,
+    "heightMax": 12,
+    "variants": 3,
+    "seed": 4201,
+    "roots": false,
+    "trunkWidth": 1,
+    "trunkShape": "LOG",
+    "shapeBase": 2.5,
+    "canopy": {
+      "mode": "DENSITY",
+      "leafDensity": 0.2,
+      "branches": {
+        "probabilityFunction": "TOP_HEAVY",
+        "probabilityExponent": 2.5,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 2,
+        "lengthCrown": 4,
+        "azimuthMode": "RANDOM",
+        "elevation": 10,
+        "leafStartUp": false,
+        "clusterRadius": 1,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.3
+      }
+    },
+    "decorators": [
+      {
+        "target": "BRANCH_TIP",
+        "block": "minecraft:soul_torch",
+        "chance": 0.15
+      },
+      {
+        "target": "TRUNK_SURFACE",
+        "block": "minecraft:glow_lichen",
+        "chance": 0.06
+      },
+      {
+        "target": "TRUNK_BASE",
+        "block": "minecraft:basalt",
+        "chance": 0.4
+      }
+    ]
+  },
+  {
+    "name": "ashwood",
+    "trunk": "minecraft:basalt",
+    "leaves": "minecraft:dead_bush",
+    "profile": "OAK",
+    "heightMin": 13,
+    "heightMax": 17,
+    "variants": 3,
+    "seed": 4202,
+    "roots": false,
+    "trunkWidth": 2,
+    "trunkShape": "LOG",
+    "shapeBase": 3.0,
+    "canopy": {
+      "mode": "DENSITY",
+      "leafDensity": 0.18,
+      "branches": {
+        "probabilityFunction": "TOP_HEAVY",
+        "probabilityExponent": 2.0,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 2,
+        "lengthCrown": 5,
+        "azimuthMode": "RANDOM",
+        "elevation": 8,
+        "leafStartUp": false,
+        "clusterRadius": 1,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.25,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": 5,
+          "yawDelta": 60,
+          "lengthScale": 0.5,
+          "clusterRadius": 1,
+          "clusterMode": "DENSITY",
+          "clusterDensity": 0.2
+        }
+      }
+    },
+    "decorators": [
+      {
+        "target": "BRANCH_TIP",
+        "block": "minecraft:soul_torch",
+        "chance": 0.18
+      },
+      {
+        "target": "TRUNK_SURFACE",
+        "block": "minecraft:glow_lichen",
+        "chance": 0.07
+      },
+      {
+        "target": "TRUNK_BASE",
+        "block": "minecraft:basalt",
+        "chance": 0.45
+      }
+    ]
+  }
+]

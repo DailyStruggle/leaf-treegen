@@ -1,0 +1,82 @@
+[
+  {
+    "name": "lavatree",
+    "trunk": "minecraft:lava",
+    "leaves": "minecraft:lava",
+    "profile": "OAK",
+    "heightMin": 16,
+    "heightMax": 24,
+    "variants": 3,
+    "seed": 7777,
+    "roots": true,
+    "trunkWidth": 12,
+    "trunkShape": "SIGMOID",
+    "shapeSteepness": 4.0,
+    "canopy": {
+      "mode": "DENSITY",
+      "leafDensity": 1.0,
+      "branches": {
+        "probabilityFunction": "CONSTANT",
+        "probabilityConstant": 1.0,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 4,
+        "lengthCrown": 9,
+        "azimuthMode": "RANDOM",
+        "elevation": 40,
+        "leafStartUp": false,
+        "clusterRadius": 3,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 1.0,
+        "subBranches": {
+          "count": 3,
+          "pitchDelta": 8,
+          "yawDelta": 40,
+          "lengthScale": 0.8,
+          "clusterRadius": 1,
+          "clusterMode": "DENSITY",
+          "clusterDensity": 1.0
+        }
+      }
+    }
+  },
+  {
+    "name": "lavatreebig",
+    "trunk": "minecraft:lava",
+    "leaves": "minecraft:lava",
+    "profile": "OAK",
+    "heightMin": 64,
+    "heightMax": 90,
+    "variants": 3,
+    "seed": 9111,
+    "roots": true,
+    "trunkWidth": 30,
+    "trunkShape": "SIGMOID",
+    "shapeSteepness": 4.0,
+    "canopy": {
+      "mode": "DENSITY",
+      "leafDensity": 1.0,
+      "branches": {
+        "probabilityFunction": "CONSTANT",
+        "probabilityConstant": 1.0,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 8,
+        "lengthCrown": 20,
+        "azimuthMode": "RANDOM",
+        "elevation": 40,
+        "leafStartUp": false,
+        "clusterRadius": 5,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 1.0,
+        "subBranches": {
+          "count": 4,
+          "pitchDelta": 8,
+          "yawDelta": 40,
+          "lengthScale": 0.8,
+          "clusterRadius": 2,
+          "clusterMode": "DENSITY",
+          "clusterDensity": 1.0
+        }
+      }
+    }
+  }
+]

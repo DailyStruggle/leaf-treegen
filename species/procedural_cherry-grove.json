@@ -1,0 +1,385 @@
+[
+  {
+    "name": "cherry",
+    "trunk": "minecraft:cherry_log",
+    "leaves": "minecraft:cherry_leaves",
+    "profile": "CHERRY",
+    "heightMin": 7,
+    "heightMax": 10,
+    "variants": 2,
+    "seed": 3400,
+    "trunkWidth": 1,
+    "trunkShape": "SINE",
+    "shapePeriod": 0.8,
+    "shapeAmplitude": 0.12,
+    "canopy": {
+      "startAngle": 50,
+      "squish": 1.0,
+      "mode": "DENSITY",
+      "leafDensity": 0.92,
+      "layers": [
+        {
+          "yOffset": 5,
+          "radius": 3.0
+        },
+        {
+          "yOffset": 7,
+          "radius": 3.5
+        },
+        {
+          "yOffset": 9,
+          "radius": 2.5
+        }
+      ]
+    }
+  },
+  {
+    "name": "cherry",
+    "trunk": "minecraft:cherry_log",
+    "leaves": "minecraft:cherry_leaves",
+    "profile": "CHERRY",
+    "heightMin": 8,
+    "heightMax": 12,
+    "variants": 3,
+    "seed": 3401,
+    "trunkWidth": 1,
+    "trunkShape": "SINE",
+    "shapePeriod": 0.75,
+    "shapeAmplitude": 0.14,
+    "canopy": {
+      "startAngle": 48,
+      "squish": 1.0,
+      "mode": "DENSITY",
+      "leafDensity": 0.9,
+      "layers": [
+        {
+          "yOffset": 6,
+          "radius": 3.5
+        },
+        {
+          "yOffset": 8,
+          "radius": 4.0
+        },
+        {
+          "yOffset": 10,
+          "radius": 3.0
+        },
+        {
+          "yOffset": 12,
+          "radius": 1.5
+        }
+      ]
+    }
+  },
+  {
+    "name": "cherry",
+    "trunk": "minecraft:cherry_log",
+    "leaves": "minecraft:cherry_leaves",
+    "profile": "CHERRY",
+    "heightMin": 9,
+    "heightMax": 13,
+    "variants": 3,
+    "seed": 3402,
+    "trunkWidth": 1,
+    "trunkShape": "LOG",
+    "shapeBase": 2.2,
+    "canopy": {
+      "startAngle": 55,
+      "squish": 0.9,
+      "mode": "DENSITY",
+      "leafDensity": 0.88
+    }
+  },
+  {
+    "name": "cherry",
+    "trunk": "minecraft:cherry_log",
+    "leaves": "minecraft:cherry_leaves",
+    "profile": "CHERRY",
+    "heightMin": 13,
+    "heightMax": 18,
+    "variants": 3,
+    "seed": 3403,
+    "trunkWidth": 2,
+    "trunkShape": "LOG",
+    "shapeBase": 2.4,
+    "canopy": {
+      "startAngle": 62,
+      "squish": 1.0,
+      "mode": "DENSITY",
+      "leafDensity": 0.88,
+      "branches": {
+        "probabilityFunction": "GAUSSIAN",
+        "probabilityMean": 0.7,
+        "probabilityStd": 0.15,
+        "lengthFunction": "PARABOLIC",
+        "lengthMax": 4,
+        "azimuthMode": "RANDOM",
+        "elevation": 26,
+        "leafStartUp": true,
+        "clusterRadius": 3,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.88
+      }
+    }
+  },
+  {
+    "name": "cherry",
+    "trunk": "minecraft:cherry_log",
+    "leaves": "minecraft:cherry_leaves",
+    "profile": "CHERRY",
+    "heightMin": 15,
+    "heightMax": 21,
+    "variants": 4,
+    "seed": 3404,
+    "trunkWidth": 2,
+    "trunkShape": "SIGMOID",
+    "shapeSteepness": 4.5,
+    "canopy": {
+      "startAngle": 65,
+      "squish": 1.0,
+      "mode": "DENSITY",
+      "leafDensity": 0.87,
+      "branches": {
+        "probabilityFunction": "GAUSSIAN",
+        "probabilityMean": 0.72,
+        "probabilityStd": 0.14,
+        "lengthFunction": "PARABOLIC",
+        "lengthMax": 5,
+        "azimuthMode": "RANDOM",
+        "elevation": 24,
+        "leafStartUp": true,
+        "clusterRadius": 3,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.87,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -20,
+          "yawDelta": 65,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "DENSITY",
+          "clusterDensity": 0.84
+        }
+      }
+    }
+  },
+  {
+    "name": "cherry",
+    "trunk": "minecraft:cherry_log",
+    "leaves": "minecraft:cherry_leaves",
+    "profile": "CHERRY",
+    "heightMin": 16,
+    "heightMax": 22,
+    "variants": 4,
+    "seed": 3405,
+    "trunkWidth": 2,
+    "trunkShape": "PARABOLIC",
+    "shapePeakOffset": 0.22,
+    "canopy": {
+      "startAngle": 68,
+      "squish": 0.85,
+      "mode": "DENSITY",
+      "leafDensity": 0.86,
+      "branches": {
+        "probabilityFunction": "GAUSSIAN",
+        "probabilityMean": 0.74,
+        "probabilityStd": 0.13,
+        "lengthFunction": "PARABOLIC",
+        "lengthMax": 6,
+        "azimuthMode": "RANDOM",
+        "elevation": 22,
+        "leafStartUp": true,
+        "clusterRadius": 3,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.86,
+        "subBranches": {
+          "count": 2,
+          "pitchDelta": -18,
+          "yawDelta": 62,
+          "lengthScale": 0.5,
+          "clusterRadius": 2,
+          "clusterMode": "DENSITY",
+          "clusterDensity": 0.83
+        }
+      }
+    }
+  },
+  {
+    "name": "cherry",
+    "trunk": "minecraft:cherry_log",
+    "leaves": "minecraft:cherry_leaves",
+    "profile": "CHERRY",
+    "heightMin": 40,
+    "heightMax": 58,
+    "variants": 4,
+    "seed": 3406,
+    "trunkWidth": 3,
+    "trunkShape": "PARABOLIC",
+    "shapePeakOffset": 0.24,
+    "canopy": {
+      "startAngle": 88,
+      "squish": 0.72,
+      "mode": "DENSITY",
+      "leafDensity": 0.9,
+      "branches": {
+        "probabilityFunction": "TOP_HEAVY",
+        "probabilityExponent": 2.5,
+        "lengthFunction": "PARABOLIC",
+        "lengthMax": 12,
+        "azimuthMode": "RANDOM",
+        "elevation": 20,
+        "leafStartUp": true,
+        "clusterRadius": 5,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.88,
+        "subBranches": {
+          "count": 3,
+          "pitchDelta": -18,
+          "yawDelta": 55,
+          "lengthScale": 0.58,
+          "clusterRadius": 3,
+          "clusterMode": "DENSITY",
+          "clusterDensity": 0.84
+        }
+      }
+    }
+  },
+  {
+    "name": "cherry",
+    "trunk": "minecraft:cherry_log",
+    "leaves": "minecraft:cherry_leaves",
+    "profile": "CHERRY",
+    "heightMin": 55,
+    "heightMax": 75,
+    "variants": 5,
+    "seed": 3407,
+    "trunkWidth": 3,
+    "trunkShape": "SIGMOID",
+    "shapeSteepness": 5.0,
+    "leanAngle": 18,
+    "leanAzimuth": 90,
+    "trunkCurve": "SIGMOID",
+    "curveSteepness": 7.0,
+    "canopy": {
+      "startAngle": 90,
+      "squish": 0.75,
+      "mode": "DENSITY",
+      "leafDensity": 0.88,
+      "branches": {
+        "probabilityFunction": "GAUSSIAN",
+        "probabilityMean": 0.76,
+        "probabilityStd": 0.14,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 5,
+        "lengthCrown": 11,
+        "azimuthMode": "RANDOM",
+        "elevation": 16,
+        "leafStartUp": true,
+        "clusterRadius": 5,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.87,
+        "subBranches": {
+          "count": 3,
+          "pitchDelta": -20,
+          "yawDelta": 58,
+          "lengthScale": 0.55,
+          "clusterRadius": 4,
+          "clusterMode": "DENSITY",
+          "clusterDensity": 0.83
+        }
+      }
+    }
+  },
+  {
+    "name": "cherry",
+    "trunk": "minecraft:cherry_log",
+    "leaves": "minecraft:cherry_leaves",
+    "profile": "CHERRY",
+    "heightMin": 72,
+    "heightMax": 92,
+    "variants": 5,
+    "seed": 3408,
+    "trunkWidth": 4,
+    "trunkShape": "PARABOLIC",
+    "shapePeakOffset": 0.28,
+    "leanAngle": 12,
+    "leanAzimuth": 0,
+    "leanAzimuthMode": "SPIRAL",
+    "azimuthTurns": 3.0,
+    "trunkCurve": "PARABOLIC",
+    "canopy": {
+      "startAngle": 90,
+      "squish": 0.68,
+      "mode": "DENSITY",
+      "leafDensity": 0.9,
+      "branches": {
+        "probabilityFunction": "TOP_HEAVY",
+        "probabilityExponent": 2.5,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 7,
+        "lengthCrown": 20,
+        "azimuthMode": "RANDOM",
+        "elevation": 12,
+        "leafStartUp": true,
+        "clusterRadius": 6,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.88,
+        "subBranches": {
+          "count": 4,
+          "pitchDelta": -26,
+          "yawDelta": 52,
+          "lengthScale": 0.62,
+          "clusterRadius": 5,
+          "clusterMode": "DENSITY",
+          "clusterDensity": 0.84
+        }
+      }
+    }
+  },
+  {
+    "name": "cherry",
+    "trunk": "minecraft:cherry_log",
+    "leaves": "minecraft:cherry_leaves",
+    "profile": "CHERRY",
+    "heightMin": 88,
+    "heightMax": 112,
+    "variants": 6,
+    "seed": 3409,
+    "trunkWidth": 5,
+    "trunkShape": "PARABOLIC",
+    "shapePeakOffset": 0.32,
+    "leanAngle": 10,
+    "leanAzimuth": 180,
+    "leanAzimuthMode": "SPIRAL",
+    "azimuthTurns": 4.0,
+    "trunkCurve": "PARABOLIC",
+    "canopy": {
+      "startAngle": 90,
+      "squish": 0.65,
+      "mode": "DENSITY",
+      "leafDensity": 0.9,
+      "branches": {
+        "probabilityFunction": "TOP_HEAVY",
+        "probabilityExponent": 2.5,
+        "lengthFunction": "LINEAR",
+        "lengthBase": 8,
+        "lengthCrown": 25,
+        "azimuthMode": "RANDOM",
+        "elevation": 10,
+        "leafStartUp": true,
+        "clusterRadius": 7,
+        "clusterMode": "DENSITY",
+        "clusterDensity": 0.88,
+        "subBranches": {
+          "count": 4,
+          "pitchDelta": -28,
+          "yawDelta": 50,
+          "lengthScale": 0.65,
+          "clusterRadius": 6,
+          "clusterMode": "DENSITY",
+          "clusterDensity": 0.84
+        }
+      }
+    }
+  }
+]
