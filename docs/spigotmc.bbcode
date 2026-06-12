@@ -1,0 +1,127 @@
+[SIZE=6][B]LeafTreeGen[/B][/SIZE]
+
+Procedural, biome-aware custom trees that generate through vanilla worldgen.
+
+LeafTreeGen adds dozens of hand-tuned and procedurally generated tree species. Every tree is baked into vanilla [ICODE].nbt[/ICODE] structure templates at startup and wired into jigsaw template pools, so placement is handled by the game's own worldgen pipeline rather than by runtime listeners.
+
+[HR][/HR]
+
+[SIZE=5][B]Features[/B][/SIZE]
+
+[LIST]
+[*][B]Biome-matched species[/B] - savanna acacias, dark-forest canopies, glacier pines, cherry groves, spiral-crown forests, and rainbow groves, each assigned to the biomes they fit
+[*][B]Procedural engine[/B] - trees are generated in Java from per-species parameters (height, trunk shape, lean angle, canopy layers), so no pre-baked NBT files are required
+[*][B]Jigsaw worldgen[/B] - the plugin generates a vanilla worldgen datapack on first load; Minecraft's structure system handles placement
+[*][B]Plantable saplings[/B] - players can receive NBT-tagged saplings via [ICODE]/leaftree give[/ICODE] that grow into a random variant of the species when planted in a valid biome
+[*][B]Reload command[/B] - [ICODE]/leaftree reload[/ICODE] rebakes all variants and regenerates the datapack
+[*][B]Server-friendly placement[/B] - multi-block tree placement is timeboxed against a per-tick budget rather than run inline, so large trees don't stall the main thread
+[*][B]Paper, Folia, Fabric, and NeoForge[/B] - one unified jar runs on Paper (and Folia builds), Fabric, and NeoForge, with full feature parity (worldgen, saplings, and the [ICODE]/leaftree[/ICODE] command) across every platform
+[/LIST]
+
+[HR][/HR]
+
+[SIZE=5][B]Species Highlights[/B][/SIZE]
+
+[TABLE]
+[TR]
+[TH]Category[/TH]
+[TH]Examples[/TH]
+[/TR]
+[TR]
+[TD]Temperate[/TD]
+[TD]Forest, Birch Forest, Old-Growth Birch, Maple-Birch Giants, Ashwood[/TD]
+[/TR]
+[TR]
+[TD]Tropical[/TD]
+[TD]Jungle, Cherry Grove, Jacaranda Grove[/TD]
+[/TR]
+[TR]
+[TD]Cold[/TD]
+[TD]Taiga, Old-Growth Pine Taiga, Glacier Pine[/TD]
+[/TR]
+[TR]
+[TD]Dark & Exotic[/TD]
+[TD]Dark Forest Giants, Spiral-Crown Forest, Rainbow Grove, Cloudcap[/TD]
+[/TR]
+[TR]
+[TD]Special[/TD]
+[TD]Blightroot, Embervine, Glowcap, Lavatree, Volcano[/TD]
+[/TR]
+[/TABLE]
+
+[HR][/HR]
+
+[SIZE=5][B]Commands[/B][/SIZE]
+
+[TABLE]
+[TR]
+[TH]Command[/TH]
+[TH]Description[/TH]
+[/TR]
+[TR]
+[TD][ICODE]/leaftree generate species=<id>[/ICODE][/TD]
+[TD]Place a tree at your cursor (admin test)[/TD]
+[/TR]
+[TR]
+[TD][ICODE]/leaftree give species=<id> [player] [amount][/ICODE][/TD]
+[TD]Hand out custom saplings[/TD]
+[/TR]
+[TR]
+[TD][ICODE]/leaftree list [species=<id>][/ICODE][/TD]
+[TD]List registered species or variants[/TD]
+[/TR]
+[TR]
+[TD][ICODE]/leaftree reload[/ICODE][/TD]
+[TD]Apply config changes and regenerate the datapack[/TD]
+[/TR]
+[/TABLE]
+
+Requires the [ICODE]leaftreegen.admin[/ICODE] permission node.
+
+[HR][/HR]
+
+[SIZE=5][B]Configuration[/B][/SIZE]
+
+Species are defined as JSON files in the [ICODE]species/[/ICODE] folder. Biome assignments and placement tuning (spacing, separation, salt) live in [ICODE]config.yml[/ICODE] and can be overridden per-species without touching the species files themselves.
+
+[CODE=yaml]
+generation-mode: DATAPACK   # DATAPACK | PROCEDURAL | BOTH | NONE
+
+placement:
+  glacierpine:
+    spacing: 6
+    separation: 3
+    biomes:
+      - minecraft:snowy_taiga
+      - minecraft:grove
+[/CODE]
+
+[CODE=json]
+{
+  "name": "glacierpine",
+  "procedural": {
+    "trunk-block": "minecraft:spruce_log",
+    "leaf-block": "minecraft:spruce_leaves",
+    "height-min": 10,
+    "height-max": 18,
+    "trunk-shape": "LINEAR",
+    "canopy": [
+      { "yOffset": 0, "radius": 4 },
+      { "yOffset": 3, "radius": 3 },
+      { "yOffset": 6, "radius": 2 }
+    ]
+  }
+}
+[/CODE]
+
+[SIZE=5][B]Requirements[/B][/SIZE]
+
+[LIST]
+[*]Java 25+
+[*]One of:
+[LIST]
+[*]Paper or Folia 1.21+
+[*]Fabric 26.1+ (Fabric Loader 0.18.4+, Fabric API)
+[*]NeoForge 26.1+
+[/LIST]
+[/LIST]
