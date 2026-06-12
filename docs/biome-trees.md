@@ -34,7 +34,7 @@ section of `config.yml`.
  Biome | Species | Iconic shape | Role
 -------|---------|--------------|-----
  `taiga` | `taiga` | Conical spruce | Primary
- `snowy_taiga` | `evergreen` + `glacierpine` | Snow-dusted evergreen conifers from small up to towering mega firs, mixed with frost-laden glacier spruce (tall trees are full large evergreens, not a small cap on a thin trunk) | Primary
+ `snowy_taiga` | `evergreen` | Snow-dusted conical spruce in two sizes (a medium and a towering tall) using a volume-layer crown (no branches) so the cone fills from the base rather than perching a small branch hat on a bare tapering trunk | Primary
  `snowy_taiga` | `christmas-tree` | Festive decorated spruce: colored-glass ornaments and glowing shroomlight / sea-lantern / multi-color froglight / glowstone baubles plus glowing end-rod icicles on the branch tips (no top star: `canopy_top` caps every column, not just the apex) | Very rare landmark
  `old_growth_pine_taiga` | `old-growth-pine-taiga` | Tall bare-trunked pine | Primary
  `old_growth_spruce_taiga` | `old-growth-pine-taiga` | Tall bare-trunked pine | Primary

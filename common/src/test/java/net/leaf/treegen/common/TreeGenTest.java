@@ -5,6 +5,9 @@ import com.google.gson.JsonObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
+
+import java.util.concurrent.TimeUnit;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -647,6 +650,83 @@ public class TreeGenTest {
     }
 
     @Test
+    public void testDecayBranchesStayHiddenInsideCanopy() {
+        // Regression for "logs scattered about the exterior" of large cherry / oak
+        // canopies. The leaf-decay connector must run wood close enough to the leaf
+        // shell that no leaf decays (orphan count 0), but every log it places must be
+        // buried inside the canopy - none may surface on the outer leaves. We exercise
+        // the widest procedural variants (cherry-grove, forest oaks, small/mid oaks).
+        registry.loadSpecies();
+        ProceduralGenerator generator = new ProceduralGenerator(platform, registry);
+        int[][] dirs = {{1,0,0},{-1,0,0},{0,1,0},{0,-1,0},{0,0,1},{0,0,-1}};
+        String[] focus = {"cherry-grove", "forest", "oak-small-mid"};
+        for (String sp : focus) {
+            TreeSpecies species = registry.getSpeciesMap().get(sp);
+            Assertions.assertNotNull(species, sp + " species should be loaded");
+            Map<String, TreeSpecies.ProceduralParams> defs = species.treeDefinitions();
+            if (defs == null || defs.isEmpty()) {
+                if (species.procedural() != null) {
+                    defs = Map.of("(root)", species.procedural());
+                } else { continue; }
+            }
+            for (Map.Entry<String, TreeSpecies.ProceduralParams> de : defs.entrySet()) {
+                for (int i = 0; i < 8; i++) {
+                    TreeModel model = generator.buildProceduralModel(sp + ":" + de.getKey(), de.getValue(), new Random(i));
+                    Map<TreeModel.BlockPos, String> blocks = model.getBlocks();
+                    // Snapshot of the wood the connector placed this build.
+                    Set<TreeModel.BlockPos> conn = new HashSet<>(generator.lastConnectionWood);
+
+                    Set<TreeModel.BlockPos> wood = new HashSet<>();
+                    Set<TreeModel.BlockPos> leavesSet = new HashSet<>();
+                    for (Map.Entry<TreeModel.BlockPos, String> e : blocks.entrySet()) {
+                        String v = e.getValue();
+                        if (v.contains("log") || v.contains("wood") || v.contains("stem")) wood.add(e.getKey());
+                        else if (v.contains("leaves")) leavesSet.add(e.getKey());
+                    }
+
+                    // (a) No connector-placed log may have an air-exposed face.
+                    int exposedConn = 0;
+                    for (TreeModel.BlockPos p : conn) {
+                        for (int[] d : dirs) {
+                            if (!blocks.containsKey(new TreeModel.BlockPos(p.x()+d[0], p.y()+d[1], p.z()+d[2]))) {
+                                exposedConn++;
+                                break;
+                            }
+                        }
+                    }
+                    Assertions.assertEquals(0, exposedConn,
+                            sp + ":" + de.getKey() + " has " + exposedConn
+                                    + " decay-prevention logs exposed on the canopy surface (sample " + i + ")");
+
+                    // (b) No leaf may decay: every leaf must be within vanilla's radius.
+                    Map<TreeModel.BlockPos, Integer> dist = new HashMap<>();
+                    java.util.ArrayDeque<TreeModel.BlockPos> q = new java.util.ArrayDeque<>();
+                    for (TreeModel.BlockPos l : leavesSet) {
+                        for (int[] d : dirs) {
+                            if (wood.contains(new TreeModel.BlockPos(l.x()+d[0], l.y()+d[1], l.z()+d[2]))) { dist.put(l,1); q.add(l); break; }
+                        }
+                    }
+                    while (!q.isEmpty()) {
+                        TreeModel.BlockPos cur = q.poll(); int cd = dist.get(cur);
+                        if (cd >= 6) continue;
+                        for (int[] d : dirs) {
+                            TreeModel.BlockPos n = new TreeModel.BlockPos(cur.x()+d[0], cur.y()+d[1], cur.z()+d[2]);
+                            if (leavesSet.contains(n) && !dist.containsKey(n)) { dist.put(n, cd+1); q.add(n); }
+                        }
+                    }
+                    long orphan = leavesSet.stream().filter(l -> !dist.containsKey(l)).count();
+                    Assertions.assertEquals(0, orphan,
+                            sp + ":" + de.getKey() + " has " + orphan
+                                    + " leaves beyond the 6-block decay radius (sample " + i + ")");
+                }
+            }
+        }
+    }
+
+    @Test
+    // Resolves variant selection directly (no geometry build), so this is fast. The
+    // timeout is a cheap safety net in case selection logic ever regresses into a loop.
+    @Timeout(value = 30, unit = TimeUnit.SECONDS)
     public void testContainerSelectsAllVariants() {
         // Regression test: a container species with multiple tree definitions must
         // randomly select among ALL of them. Previously the first definition leaked
@@ -661,8 +741,11 @@ public class TreeGenTest {
         ProceduralGenerator generator = new ProceduralGenerator(platform, registry);
         Set<String> selectedDefs = new HashSet<>();
         for (int i = 0; i < 2000; i++) {
-            TreeModel m = generator.buildModel(megas, new Random(i));
-            String id = m.getSpeciesId();
+            // Only the variant *selection* matters here, not the geometry. Resolving the
+            // selected id directly (instead of building 2000 large procedural models) keeps
+            // this regression test fast while exercising the exact same selection logic.
+            String id = generator.selectModelId(megas, new Random(i));
+            Assertions.assertNotNull(id, "Selection should resolve a model id (sample " + i + ")");
             String def = id.contains(":") ? id.substring(id.indexOf(':') + 1) : id;
             selectedDefs.add(def);
         }
@@ -958,6 +1041,17 @@ public class TreeGenTest {
                 "placed_feature should apply a count placement modifier. Was: " + pineContent);
         Assertions.assertTrue(pineContent.contains("\"count\": 10"),
                 "count should equal trees-per-placement (10). Was: " + pineContent);
+        // Structure-placed features must NOT carry a biome filter: the vanilla BiomeFilter
+        // resolves the placed feature from the biome's feature lists to biome-check it, which
+        // fails for jigsaw structure feature_pool_element placements and crashes feature
+        // placement with "Tried to biome check an unregistered feature".
+        Assertions.assertFalse(pineContent.contains("minecraft:biome"),
+                "structure-placed feature must not include a minecraft:biome filter. Was: " + pineContent);
+        // Trees must not be scattered on top of water: the placed feature must carry a
+        // block_predicate_filter requiring solid ground below, matching vanilla behaviour.
+        Assertions.assertTrue(pineContent.contains("minecraft:block_predicate_filter")
+                        && pineContent.contains("minecraft:solid"),
+                "placed_feature should filter out non-solid (water) ground. Was: " + pineContent);
 
         // The structure set still drives placement (no NBT baked for this species).
         Path structureSet = worldgen.resolve("structure_set").resolve("old-growth-pine-taiga.json");
@@ -1005,6 +1099,54 @@ public class TreeGenTest {
                         "Baked structure should be gzip-compressed: " + p);
             }
         }
+    }
+
+    @Test
+    public void testDatapackSkipsRegenerationWhenConfigUnchanged() throws Exception {
+        // Startup optimization: regenerating the datapack (and re-baking NBT) on every
+        // boot is expensive. When the config is unchanged the already-valid datapack on
+        // disk must be reused instead of being wiped and rebuilt.
+        registry.loadSpecies();
+        TreeSpecies glowcap = registry.getSpeciesMap().get("glowcap");
+        Assertions.assertNotNull(glowcap, "glowcap species should be loaded");
+
+        TreeSpecies placed = new TreeSpecies(
+                glowcap.id(), glowcap.displayName(), glowcap.namespace(), glowcap.group(),
+                Set.of("lush_caves"), glowcap.saplingItem(), true, false,
+                glowcap.spacing(), glowcap.separation(), glowcap.salt(), glowcap.spreadType(), glowcap.step(),
+                glowcap.variants(), glowcap.procedural(), glowcap.trees(), glowcap.treeDefinitions(), glowcap.weight());
+
+        Map<String, TreeSpecies> species = new HashMap<>();
+        species.put(placed.id(), placed);
+        TreeGenConfig config = new TreeGenConfig(species, "leaf-treegen-generated",
+                "Test", TreeGenConfig.GenerationMode.DATAPACK);
+
+        DatapackGenerator generator = new DatapackGenerator(platform);
+        int first = generator.generate("world", config, registry);
+        Assertions.assertTrue(first > 0, "first generation should write at least one species");
+
+        Path packRoot = platform.getWorldFolder("world")
+                .resolve("datapacks").resolve("leaf-treegen-generated");
+        Path marker = packRoot.resolve(".treegen-fingerprint");
+        Assertions.assertTrue(java.nio.file.Files.isRegularFile(marker),
+                "fingerprint marker should be written");
+
+        // Drop a sentinel into the pack; a true regeneration would wipe it away.
+        Path sentinel = packRoot.resolve("sentinel.txt");
+        java.nio.file.Files.writeString(sentinel, "keep-me");
+
+        int second = generator.generate("world", config, registry);
+        Assertions.assertEquals(first, second, "unchanged config should return the same species count");
+        Assertions.assertTrue(java.nio.file.Files.exists(sentinel),
+                "unchanged config must not wipe/regenerate the datapack");
+
+        // Changing the config (here the pack description) must force a regeneration.
+        TreeGenConfig changed = new TreeGenConfig(species, "leaf-treegen-generated",
+                "Different description", TreeGenConfig.GenerationMode.DATAPACK);
+        int third = generator.generate("world", changed, registry);
+        Assertions.assertTrue(third > 0, "changed config should regenerate");
+        Assertions.assertFalse(java.nio.file.Files.exists(sentinel),
+                "changed config must wipe and regenerate the datapack");
     }
 
     @Test
@@ -1158,6 +1300,147 @@ public class TreeGenTest {
                 "Runtime must reuse at most count(=3) pre-computed variants, got " + distinctGeometries.size());
         Assertions.assertTrue(distinctGeometries.size() > 1,
                 "With count=3 more than one variant should be produced across 200 placements");
+    }
+
+    @Test
+    public void testLeavesPlacedAfterTheirConnectingWoodOrLeaf() {
+        // Regression for large cherry leaves despawning in runtime (non-DATAPACK)
+        // placement. Platforms that apply block physics compute a leaf's decay
+        // distance when it is written and a log/closer leaf placed afterwards does
+        // not correct it; leaves written before their connecting blocks were stamped
+        // distance 7 and decayed. SegmentedTreeModel.orderForPlacement must emit each
+        // leaf only after an orthogonal neighbour that is either wood or a leaf
+        // closer to the trunk (placed earlier), so the computed distance is final.
+        registry.loadSpecies();
+        ProceduralGenerator generator = new ProceduralGenerator(platform, registry);
+        int[][] dirs = {{1,0,0},{-1,0,0},{0,1,0},{0,-1,0},{0,0,1},{0,0,-1}};
+        TreeSpecies species = registry.getSpeciesMap().get("cherry-grove");
+        Assertions.assertNotNull(species, "cherry-grove species should be loaded");
+
+        for (Map.Entry<String, TreeSpecies.ProceduralParams> de : species.treeDefinitions().entrySet()) {
+            for (int i = 0; i < 6; i++) {
+                TreeModel model = generator.buildProceduralModel("cherry-grove:" + de.getKey(), de.getValue(), new Random(i));
+                Map<TreeModel.BlockPos, String> blocks = model.getBlocks();
+
+                List<TreeModel.BlockPos> positions = new ArrayList<>(blocks.keySet());
+                Map<TreeModel.BlockPos, String> stateByPos = new HashMap<>(blocks);
+                List<TreeModel.BlockPos> ordered = SegmentedTreeModel.orderForPlacement(positions, stateByPos);
+
+                Set<TreeModel.BlockPos> placed = new HashSet<>();
+                for (TreeModel.BlockPos p : ordered) {
+                    String s = stateByPos.get(p);
+                    boolean leaf = s.contains("leaves");
+                    if (leaf) {
+                        boolean supported = false;
+                        for (int[] d : dirs) {
+                            TreeModel.BlockPos n = new TreeModel.BlockPos(p.x()+d[0], p.y()+d[1], p.z()+d[2]);
+                            String ns = stateByPos.get(n);
+                            if (ns == null) continue;
+                            boolean nWood = ns.contains("log") || ns.contains("wood") || ns.contains("stem");
+                            // A neighbour that is wood, or a leaf already placed (hence
+                            // closer to the trunk), anchors this leaf's decay distance.
+                            if (nWood || (ns.contains("leaves") && placed.contains(n))) {
+                                supported = true;
+                                break;
+                            }
+                        }
+                        Assertions.assertTrue(supported,
+                                "cherry-grove:" + de.getKey() + " (sample " + i + ") places leaf at " + p
+                                        + " before any connecting wood/closer leaf");
+                    }
+                    placed.add(p);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testLeafStatesBakeDecayDistanceAndPersistentFalse() {
+        // Leaves must be written with a final, correct decay distance so they do not
+        // despawn after placement (runtime OR datapack NBT). Every leaf state in the
+        // model must carry persistent=false and a distance within vanilla's radius.
+        registry.loadSpecies();
+        ProceduralGenerator generator = new ProceduralGenerator(platform, registry);
+        TreeSpecies species = registry.getSpeciesMap().get("cherry-grove");
+        Assertions.assertNotNull(species, "cherry-grove species should be loaded");
+
+        for (Map.Entry<String, TreeSpecies.ProceduralParams> de : species.treeDefinitions().entrySet()) {
+            for (int i = 0; i < 6; i++) {
+                TreeModel model = generator.buildProceduralModel("cherry-grove:" + de.getKey(), de.getValue(), new Random(i));
+                for (Map.Entry<TreeModel.BlockPos, String> e : model.getBlocks().entrySet()) {
+                    String s = e.getValue();
+                    if (!s.contains("leaves")) continue;
+                    Assertions.assertTrue(s.contains("persistent=false"),
+                            "cherry-grove:" + de.getKey() + " leaf state missing persistent=false: " + s);
+                    java.util.regex.Matcher m = java.util.regex.Pattern.compile("distance=(\\d+)").matcher(s);
+                    Assertions.assertTrue(m.find(), "leaf state missing distance: " + s);
+                    int d = Integer.parseInt(m.group(1));
+                    Assertions.assertTrue(d >= 1 && d <= 6,
+                            "cherry-grove:" + de.getKey() + " (sample " + i + ") leaf baked with decay distance " + d
+                                    + " (must be 1..6 to survive): " + s);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testLeafExteriorOrnamentsAreRendered() {
+        // Verify that leaf_exterior decorators actually scatter ornaments across the canopy.
+        registry.loadSpecies();
+        ProceduralGenerator generator = new ProceduralGenerator(platform, registry);
+        TreeSpecies christmas = registry.getSpeciesMap().get("christmas-tree");
+        Assertions.assertNotNull(christmas, "christmas-tree species should be loaded");
+
+        long totalOrnaments = 0;
+        long totalLeaves = 0;
+        for (Map.Entry<String, TreeSpecies.ProceduralParams> de : christmas.treeDefinitions().entrySet()) {
+            for (int seed = 0; seed < 5; seed++) {
+                TreeModel model = generator.buildProceduralModel("christmas-tree:" + de.getKey(), de.getValue(), new Random(seed));
+                Map<TreeModel.BlockPos, String> blocks = model.getBlocks();
+                long ornaments = blocks.values().stream()
+                        .filter(b -> b.contains("stained_glass") || b.contains("froglight")
+                                || b.contains("end_rod") || b.contains("glowstone")
+                                || b.contains("shroomlight") || b.contains("sea_lantern"))
+                        .count();
+                long leaves = blocks.values().stream().filter(b -> b.contains("leaves")).count();
+                totalOrnaments += ornaments;
+                totalLeaves += leaves;
+                System.out.println("[DEBUG_LOG] christmas-tree " + de.getKey() + " seed=" + seed
+                        + " leaves=" + leaves + " ornaments=" + ornaments);
+            }
+        }
+        System.out.println("[DEBUG_LOG] TOTAL leaves=" + totalLeaves + " ornaments=" + totalOrnaments);
+        Assertions.assertTrue(totalOrnaments >= 10,
+                "christmas-tree leaf_exterior ornaments should be >= 10 across 5 seeds, got " + totalOrnaments);
+    }
+
+    @Test
+    public void testBranchTipOrnamentsAreRendered() {
+        // Regression: branch_tip decorators (the christmas tree's ornaments) used to
+        // place nothing because the branch system rasterises wood to the endpoint and
+        // re-skins it with leaves AFTER decorators ran, erasing every ornament. The
+        // generator now decorates last and hangs ornaments on the leafy shell around
+        // each branch tip, so a fully decorated tree must carry visible ornaments.
+        registry.loadSpecies();
+        ProceduralGenerator generator = new ProceduralGenerator(platform, registry);
+        TreeSpecies christmas = registry.getSpeciesMap().get("christmas-tree");
+        Assertions.assertNotNull(christmas, "christmas-tree species should be loaded. keys=" + registry.getSpeciesMap().keySet());
+        Assertions.assertNotNull(christmas.treeDefinitions(), "christmas-tree should expose tree definitions");
+
+        boolean anyOrnaments = false;
+        for (Map.Entry<String, TreeSpecies.ProceduralParams> de : christmas.treeDefinitions().entrySet()) {
+            for (int seed = 0; seed < 5; seed++) {
+                TreeModel model = generator.buildProceduralModel("christmas-tree:" + de.getKey(), de.getValue(), new Random(seed));
+                long ornaments = model.getBlocks().values().stream()
+                        .filter(b -> b.contains("stained_glass") || b.contains("froglight")
+                                || b.contains("end_rod") || b.contains("glowstone")
+                                || b.contains("shroomlight") || b.contains("sea_lantern"))
+                        .count();
+                if (ornaments > 0) anyOrnaments = true;
+            }
+        }
+        Assertions.assertTrue(anyOrnaments,
+                "christmas-tree must render branch_tip ornaments (stained glass / froglight / end-rod / glowstone)");
     }
 
     private static class MockPlatform implements Platform {

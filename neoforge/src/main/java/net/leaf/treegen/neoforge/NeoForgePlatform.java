@@ -1,4 +1,4 @@
-package net.leaf.treegen.fabric;
+package net.leaf.treegen.neoforge;
 
 import net.leaf.treegen.common.Platform;
 import java.io.FileInputStream;
@@ -9,7 +9,7 @@ import java.util.Properties;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-public class FabricPlatform implements Platform {
+public class NeoForgePlatform implements Platform {
     @Override public Logger logger() { return Logger.getLogger("LeafTreeGen"); }
     @Override public Path getRootFolder() { return Path.of("config", "leaf-treegen"); }
     @Override public Path getWorldFolder(String worldName) { return Path.of(worldName); }

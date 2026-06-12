@@ -97,28 +97,41 @@ public final class TreeModel {
 
     public void place(Platform platform, String worldName, int ox, int oy, int oz) {
         Map<Long, Map<BlockPos, String>> chunks = new java.util.TreeMap<>();
-        
-        blocks.forEach((pos, state) -> {
-            int worldX = ox + pos.x;
-            int worldY = oy + pos.y;
-            int worldZ = oz + pos.z;
-            
-            int cx = worldX >> 4;
-            int cz = worldZ >> 4;
-            long key = ((long) cx << 32) | (cz & 0xFFFFFFFFL);
-            
-            chunks.computeIfAbsent(key, k -> new java.util.TreeMap<>(java.util.Comparator
-                        .comparingInt(BlockPos::y)
-                        .thenComparingInt(BlockPos::x)
-                        .thenComparingInt(BlockPos::z)))
-                  .put(new BlockPos(worldX, worldY, worldZ), state);
-        });
+
+        // Emit wood (trunk/branches) before leaves so the log skeleton is in place
+        // when each leaf is written. Platforms that apply block physics compute a
+        // leaf's decay "distance" at write time and a log placed afterwards does not
+        // re-trigger it; writing leaves first left wide canopies (e.g. large cherry
+        // trees) with outer leaves stamped distance 7 that decayed despite the
+        // finished geometry keeping them in range. A LinkedHashMap preserves this
+        // wood-first insertion order for the per-chunk placement.
+        for (int pass = 0; pass < 2; pass++) {
+            boolean woodPass = pass == 0;
+            blocks.forEach((pos, state) -> {
+                if (isWood(state) != woodPass) return;
+                int worldX = ox + pos.x;
+                int worldY = oy + pos.y;
+                int worldZ = oz + pos.z;
+
+                int cx = worldX >> 4;
+                int cz = worldZ >> 4;
+                long key = ((long) cx << 32) | (cz & 0xFFFFFFFFL);
+
+                chunks.computeIfAbsent(key, k -> new java.util.LinkedHashMap<>())
+                      .put(new BlockPos(worldX, worldY, worldZ), state);
+            });
+        }
 
         chunks.forEach((key, chunkBlocks) -> {
             int cx = (int) (key.longValue() >> 32);
             int cz = (int) key.longValue();
             platform.setBlocks(worldName, cx, cz, chunkBlocks);
         });
+    }
+
+    /** Whether a block-state is wood (log/wood/stem), for wood-first placement ordering. */
+    private static boolean isWood(String state) {
+        return state.contains("log") || state.contains("wood") || state.contains("stem");
     }
 
     /**

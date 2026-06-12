@@ -8,6 +8,8 @@ import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -33,6 +35,19 @@ public final class DatapackGenerator {
         if (worldFolder == null) return 0;
 
         Path packRoot = worldFolder.resolve("datapacks").resolve(config.packName());
+        int dataVersion = platform.getDataVersion();
+
+        // Avoid the (expensive) full regeneration -- including NBT baking -- on every
+        // startup. We persist a fingerprint of the inputs that determine the datapack
+        // contents and skip regeneration when nothing relevant changed.
+        String fingerprint = computeFingerprint(config, dataVersion);
+        Integer cached = readFingerprintIfUnchanged(packRoot, fingerprint);
+        if (cached != null) {
+            platform.logger().info("Worldgen datapack '" + config.packName()
+                    + "' is up to date (config unchanged); skipping regeneration of " + cached + " species.");
+            return cached;
+        }
+
         try {
             wipe(packRoot);
             Files.createDirectories(packRoot);
@@ -56,7 +71,6 @@ public final class DatapackGenerator {
             // resolution) and the platform's data version for all variants.
             ProceduralGenerator bakeGenerator = new ProceduralGenerator(platform, registry);
             bakeGenerator.setConfigSpecies(activeSpecies);
-            int dataVersion = platform.getDataVersion();
 
             for (TreeSpecies species : activeSpecies.values()) {
                 if (!species.worldgen()) {
@@ -96,7 +110,8 @@ public final class DatapackGenerator {
                     // Vanilla-feature placement: place vanilla minecraft:tree configured features
                     // via this species' jigsaw structure, scattering several per placement so the
                     // biome reaches vanilla-like density (the NBT path is one tree per structure).
-                    writeFeaturePool(packRoot, species, ns, id, group, poolName);
+                    writeFeaturePool(packRoot, species, ns, id, group, poolName,
+                            config.allowsWaterGrowth(species.id()));
                 } else if (species.trees() != null && !species.trees().isEmpty()) {
                     writeGroupPool(packRoot, species, ns, id, group, poolName, config, registry,
                             worldName, bakeGenerator, dataVersion);
@@ -116,6 +131,7 @@ public final class DatapackGenerator {
                 written++;
             }
 
+            writeFingerprint(packRoot, fingerprint, written);
             platform.logger().info("Generated worldgen datapack '" + config.packName() + "' with "
                     + written + " species at " + packRoot);
             return written;
@@ -390,7 +406,7 @@ public final class DatapackGenerator {
      * datapack, with no custom worldgen feature and no biome JSON edits.
      */
     private void writeFeaturePool(Path packRoot, TreeSpecies species, String ns, String id, String group,
-                                  String poolName) throws IOException {
+                                  String poolName, boolean allowWaterGrowth) throws IOException {
         TreeSpecies.FeatureConfig fc = species.featureConfig();
         int perPlacement = Math.max(1, fc.treesPerPlacement());
 
@@ -403,14 +419,32 @@ public final class DatapackGenerator {
             String placedId = ns + ":" + placedPath;
 
             // placed_feature: the vanilla configured feature plus tree placement modifiers.
+            // NOTE: no minecraft:biome modifier here. These placed features are referenced from a
+            // structure feature_pool_element, so they are placed during jigsaw structure post-processing
+            // rather than as registered biome decorations. The vanilla BiomeFilter (minecraft:biome)
+            // resolves the "top" placed feature from the biome's feature lists to biome-check it; for a
+            // structure-placed feature that lookup fails, throwing
+            // "Tried to biome check an unregistered feature, or a feature that should not restrict the biome".
+            List<Object> placement = new ArrayList<>();
+            placement.add(Map.of("type", "minecraft:count", "count", perPlacement));
+            placement.add(Map.of("type", "minecraft:in_square"));
+            placement.add(Map.of("type", "minecraft:heightmap", "heightmap", "WORLD_SURFACE_WG"));
+            // Reject placements that land on or in liquid. WORLD_SURFACE_WG snaps the
+            // tree to the top of the water column, so without this filter vanilla tree
+            // features get scattered on top of oceans, rivers and swamps where vanilla
+            // worldgen would never put them. The block directly below the placement must
+            // be solid ground. Species flagged for water growth (e.g. swamp/mangrove)
+            // skip the filter so they keep their amphibious behaviour.
+            if (!allowWaterGrowth) {
+                placement.add(Map.of(
+                        "type", "minecraft:block_predicate_filter",
+                        "predicate", Map.of(
+                                "type", "minecraft:solid",
+                                "offset", List.of(0, -1, 0))));
+            }
             Map<String, Object> placed = new LinkedHashMap<>();
             placed.put("feature", featureId);
-            placed.put("placement", List.of(
-                    Map.of("type", "minecraft:count", "count", perPlacement),
-                    Map.of("type", "minecraft:in_square"),
-                    Map.of("type", "minecraft:heightmap", "heightmap", "WORLD_SURFACE_WG"),
-                    Map.of("type", "minecraft:biome")
-            ));
+            placed.put("placement", placement);
             writeJson(dataFile(packRoot, ns, "worldgen/placed_feature/" + placedPath + ".json"), placed);
 
             // feature_pool_element referencing the placed feature.
@@ -528,6 +562,93 @@ public final class DatapackGenerator {
     private static void writeJson(Path file, Object value) throws IOException {
         Files.createDirectories(file.getParent());
         Files.writeString(file, GSON.toJson(value), StandardCharsets.UTF_8);
+    }
+
+    /** Name of the marker file (inside the pack root) that stores the inputs fingerprint. */
+    private static final String FINGERPRINT_FILE = ".treegen-fingerprint";
+
+    /**
+     * Computes a stable fingerprint over every input that influences the generated
+     * datapack contents: the configured species, pack name/description, generation
+     * mode, water-growth overrides, and the platform data version (NBT format).
+     * When this fingerprint is unchanged the datapack on disk is still valid and
+     * regeneration can be skipped.
+     */
+    private static String computeFingerprint(TreeGenConfig config, int dataVersion) {
+        Map<String, Object> input = new LinkedHashMap<>();
+        input.put("packName", config.packName());
+        input.put("packDescription", config.packDescription());
+        input.put("mode", config.mode() == null ? null : config.mode().name());
+        input.put("dataVersion", dataVersion);
+        List<String> water = new ArrayList<>(config.waterGrowthTrees());
+        water.sort(Comparator.naturalOrder());
+        input.put("waterGrowthTrees", water);
+        input.put("saplingDropChance", config.saplingDropChance());
+        // Species serialized in a deterministic (sorted) key order.
+        Map<String, TreeSpecies> species = config.species();
+        Map<String, TreeSpecies> sorted = new LinkedHashMap<>();
+        List<String> keys = new ArrayList<>(species.keySet());
+        keys.sort(Comparator.naturalOrder());
+        for (String key : keys) {
+            sorted.put(key, species.get(key));
+        }
+        input.put("species", sorted);
+
+        String json = GSON.toJson(input);
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(json.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder(hash.length * 2);
+            for (byte b : hash) {
+                sb.append(Character.forDigit((b >> 4) & 0xF, 16));
+                sb.append(Character.forDigit(b & 0xF, 16));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException ex) {
+            // SHA-256 is guaranteed to be available; fall back to the raw JSON.
+            return Integer.toHexString(json.hashCode());
+        }
+    }
+
+    /**
+     * Returns the previously written species count when the on-disk datapack was
+     * generated from the same fingerprint (and the pack still exists), otherwise
+     * {@code null} to indicate regeneration is required.
+     */
+    private Integer readFingerprintIfUnchanged(Path packRoot, String fingerprint) {
+        Path marker = packRoot.resolve(FINGERPRINT_FILE);
+        if (!Files.isRegularFile(marker) || !Files.isRegularFile(packRoot.resolve("pack.mcmeta"))) {
+            return null;
+        }
+        try {
+            String content = Files.readString(marker, StandardCharsets.UTF_8).trim();
+            int sep = content.indexOf(' ');
+            String storedHash = sep >= 0 ? content.substring(0, sep) : content;
+            if (!fingerprint.equals(storedHash)) {
+                return null;
+            }
+            if (sep < 0) {
+                return 0;
+            }
+            try {
+                return Integer.parseInt(content.substring(sep + 1).trim());
+            } catch (NumberFormatException ex) {
+                return 0;
+            }
+        } catch (IOException ex) {
+            // Unreadable marker: regenerate to be safe.
+            return null;
+        }
+    }
+
+    /** Persists the fingerprint and written-species count alongside the datapack. */
+    private void writeFingerprint(Path packRoot, String fingerprint, int written) {
+        try {
+            Files.writeString(packRoot.resolve(FINGERPRINT_FILE), fingerprint + " " + written,
+                    StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+            platform.logger().warning("Failed to write datapack fingerprint: " + ex.getMessage());
+        }
     }
 
     private static void wipe(Path root) throws IOException {

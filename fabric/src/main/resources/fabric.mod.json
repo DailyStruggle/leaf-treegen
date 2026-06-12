@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "leaf_treegen",
+  "version": "0.1.0",
+  "name": "LeafTreeGen",
+  "description": "Procedural tree generation for Minecraft.",
+  "authors": ["leaf"],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["net.leaf.treegen.fabric.FabricMod"]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": ">=26.1"
+  }
+}

@@ -17,7 +17,7 @@ subprojects {
     apply plugin: 'java'
     
     java {
-        toolchain.languageVersion = JavaLanguageVersion.of(21)
+        toolchain.languageVersion = JavaLanguageVersion.of(25)
     }
 
     dependencies {
@@ -30,8 +30,10 @@ jar {
     archiveBaseName.set('leaf-treegen')
     archiveClassifier.set('')
     
-    // Default to bundling Paper version as the primary plugin JAR
+    // Bundle all platform implementations into one unified JAR
     from project(':paper').sourceSets.main.output
+    from project(':fabric').sourceSets.main.output
+    from project(':neoforge').sourceSets.main.output
     from project(':common').sourceSets.main.output
 
     // Include resources (config.yml and species/*.json)
@@ -42,10 +44,27 @@ jar {
         include 'species/*.json'
     }
 
-    // Shade external dependencies from the Paper module
+    // Include loader descriptors from each platform module
+    from project(':fabric').sourceSets.main.resources
+    from project(':neoforge').sourceSets.main.resources
+
+    // Shade external dependencies from the Paper module.
+    // Exclude libraries that the server (NeoForge/Fabric/Paper) already provides on
+    // the classpath to avoid ClassCastException from classloader splits.
     from {
         project(':paper').configurations.runtimeClasspath
-            .filter { it.name.endsWith('.jar') && !it.path.contains('leaf-treegen') }
+            .filter { jar ->
+                jar.name.endsWith('.jar') &&
+                !jar.path.contains('leaf-treegen') &&
+                // Exclude Gson -- bundled by Minecraft/NeoForge/Paper; shading it
+                // causes com.google.gson.JsonObject classloader split errors.
+                !jar.name.startsWith('gson') &&
+                // Exclude other server-provided libraries to be safe.
+                !jar.name.startsWith('guava') &&
+                !jar.name.startsWith('commons-') &&
+                !jar.name.startsWith('slf4j') &&
+                !jar.name.startsWith('log4j')
+            }
             .collect { zipTree(it) }
     }
 

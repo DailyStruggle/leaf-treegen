@@ -1,4 +1,6 @@
+
 dependencies {
     implementation project(':common')
-    // Add neoforge dependencies as needed
+    // FancyModLoader (FML) jar provides @Mod annotation - sourced from local Gradle cache
+    compileOnly files("${System.getProperty('user.home')}/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/loader/11.0.13/c9c89eaf35535990110088224d188748d81eaecf/loader-11.0.13.jar")
 }

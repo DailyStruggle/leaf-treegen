@@ -147,6 +147,82 @@ public final class ProceduralGenerator {
         return buildModel(species, random, new HashSet<>());
     }
 
+    /**
+     * Resolves which model id {@link #buildModel(TreeSpecies, Random)} would select for the
+     * given species and random source, WITHOUT building the (potentially very expensive)
+     * procedural geometry. The selection logic mirrors {@link #buildModel} exactly, so this
+     * is safe to use in tests that only need to verify variant/definition selection coverage.
+     */
+    public String selectModelId(TreeSpecies species, Random random) {
+        return selectModelId(species, random, new HashSet<>());
+    }
+
+    private String selectModelId(TreeSpecies species, Random random, Set<String> visited) {
+        if (species.trees() != null && !species.trees().isEmpty()) {
+            if (!visited.add(species.id().toLowerCase(java.util.Locale.ROOT))) {
+                TreeSpecies jsonSpecies = registry.getSpeciesMap().get(species.id().toLowerCase(java.util.Locale.ROOT));
+                if (jsonSpecies != null && jsonSpecies != species
+                        && (jsonSpecies.trees() == null || jsonSpecies.trees().isEmpty())) {
+                    return selectModelId(jsonSpecies, random, visited);
+                }
+                return null;
+            }
+            int totalWeight = species.trees().stream().mapToInt(TreeSpecies.WeightedSpecies::weight).sum();
+            int r = random.nextInt(totalWeight);
+            int current = 0;
+            for (TreeSpecies.WeightedSpecies ws : species.trees()) {
+                current += ws.weight();
+                if (r < current) {
+                    String[] parts = ws.id().split(":", 2);
+                    TreeSpecies child = resolveChild(parts[0], species.id());
+                    if (child != null) {
+                        if (parts.length > 1) {
+                            TreeSpecies.ProceduralParams named = child.treeDefinitions() != null ? child.treeDefinitions().get(parts[1]) : null;
+                            if (named != null) {
+                                return child.id() + ":" + parts[1];
+                            }
+                        }
+                        return selectModelId(child, random, visited);
+                    }
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        TreeSpecies.ProceduralParams params = species.procedural();
+        if (params == null) {
+            List<String> variants = species.variantLocations();
+            if (!variants.isEmpty()) {
+                return null;
+            } else if (species.treeDefinitions() != null && !species.treeDefinitions().isEmpty()) {
+                Map<String, TreeSpecies.ProceduralParams> defs = species.treeDefinitions();
+                List<String> names = new ArrayList<>(defs.keySet());
+
+                int totalWeight = 0;
+                for (TreeSpecies.ProceduralParams p : defs.values()) {
+                    totalWeight += Math.max(1, p.weight());
+                }
+
+                int target = random.nextInt(totalWeight);
+                int current = 0;
+                String selected = names.get(0);
+                for (String name : names) {
+                    TreeSpecies.ProceduralParams p = defs.get(name);
+                    current += Math.max(1, p.weight());
+                    if (target < current) {
+                        selected = name;
+                        break;
+                    }
+                }
+                return species.id() + ":" + selected;
+            }
+            return null;
+        }
+
+        return species.id();
+    }
+
     private TreeModel buildModel(TreeSpecies species, Random random, Set<String> visited) {
         // platform.logger().info("[DEBUG_LOG] Selecting tree definition for species: " + species.id());
         if (species.trees() != null && !species.trees().isEmpty()) {
@@ -384,14 +460,6 @@ public final class ProceduralGenerator {
             }
         }
 
-        // Accent decorators (vines, cobwebs, fungus, base scatter, etc.). Mirrors the
-        // offline Python decorators.py so the live/sapling generator renders the same
-        // accents the NBT export tool would. canopy_bottom is intentionally handled by
-        // the undersideLeaves path above and excluded from this list at parse time.
-        if (params.decorators() != null && !params.decorators().isEmpty()) {
-            applyDecorators(params.decorators(), trunkBlocks, canopyBlocks, branchEndpoints, new Random(random.nextLong()));
-        }
-
         Map<TreeModel.BlockPos, String> finalBlocks = new HashMap<>(trunkBlocks);
         canopyBlocks.forEach((pos, b) -> {
             if (!finalBlocks.containsKey(pos)) {
@@ -401,7 +469,139 @@ public final class ProceduralGenerator {
 
         connectLeavesWithBranches(finalBlocks, params.trunkBlock());
 
+        // Hide the decay-prevention branches inside the canopy. The connector has to
+        // run wood out close to the leaf shell to keep wide canopies (big cherry,
+        // ancient oak) within vanilla's 6-block decay radius, but on thin canopies
+        // that wood inevitably surfaces, leaving logs scattered across the outer
+        // leaves. Skinning every air-exposed face of the freshly placed branch wood
+        // with a leaf buries those logs again; because each skin leaf sits directly
+        // against wood it is at decay distance 1 and never decays itself.
+        if (!lastConnectionWood.isEmpty()) {
+            String wrapLeaves = params.leafBlock();
+            String wrapSecondary = canopy != null ? canopy.secondaryLeaves() : null;
+            double wrapFraction = canopy != null ? canopy.secondaryFraction() : 0.0;
+            buryExposedConnectionWood(finalBlocks, wrapLeaves, wrapSecondary, wrapFraction,
+                    new Random(random.nextLong()));
+        }
+
+        // Re-cap exposed log tops AFTER connecting leaves with branches. The branch
+        // connector rasterises wood out to orphan leaves and can convert the leaf
+        // that previously capped the trunk apex (or push a new wood tip above it)
+        // into wood, reintroducing the one-block air gap above the highest log.
+        // Capping again on the merged geometry guarantees no exposed log top is
+        // left bare regardless of what the connector did.
+        if (params.capTrunk() && canopy != null) {
+            capExposedLogTops(finalBlocks, params.leafBlock(), new Random(random.nextLong()),
+                    canopy.secondaryLeaves(), canopy.secondaryFraction());
+        }
+
+        // Accent decorators (ornaments, vines, snow, base scatter, etc.). Mirrors the
+        // offline Python decorators.py, which decorates LAST. This must run after the
+        // leaf/branch connector, the exposed-wood burying and the log-top re-capping:
+        // those passes re-skin branch tips and apexes with leaves/wood and would
+        // otherwise erase any ornament placed earlier. canopy_bottom is intentionally
+        // handled by the undersideLeaves path above and excluded at parse time.
+        if (params.decorators() != null && !params.decorators().isEmpty()) {
+            applyDecorators(params.decorators(), trunkBlocks, finalBlocks, branchEndpoints, new Random(random.nextLong()));
+        }
+
+        // Bake each leaf's final decay distance into its block-state. The decay
+        // "distance" of a placed leaf is fixed the moment it is written (the engine
+        // does not retroactively lower it when a closer log/leaf is added later, and
+        // some placement paths never recompute it at all), so leaves left at the
+        // default distance 7 decay on the next random tick even though the finished
+        // geometry keeps them in range. Computing the real distance here and writing
+        // it (with persistent=false) makes the placed state already correct for both
+        // the runtime and the datapack-baked NBT path, while still letting the leaves
+        // decay normally once the player removes the supporting wood.
+        bakeLeafDecayDistances(finalBlocks);
+
         return new TreeModel(speciesId, finalBlocks, false);
+    }
+
+    /**
+     * Rewrites every leaf block-state in the finished model to carry its true
+     * vanilla decay distance (a multi-source BFS from the wood, capped at
+     * {@value #MAX_LEAF_DISTANCE}+1) plus {@code persistent=false}. Existing
+     * properties on a leaf state are preserved; {@code distance}/{@code persistent}
+     * are overwritten. Non-leaf blocks (logs, decorators, underside glow) are left
+     * untouched.
+     */
+    private void bakeLeafDecayDistances(Map<TreeModel.BlockPos, String> blocks) {
+        Set<TreeModel.BlockPos> wood = new HashSet<>();
+        List<TreeModel.BlockPos> leaves = new ArrayList<>();
+        Set<TreeModel.BlockPos> leafSet = new HashSet<>();
+        for (Map.Entry<TreeModel.BlockPos, String> e : blocks.entrySet()) {
+            String v = e.getValue();
+            if (isWood(v)) {
+                wood.add(e.getKey());
+            } else if (isLeaf(v)) {
+                leaves.add(e.getKey());
+                leafSet.add(e.getKey());
+            }
+        }
+        if (leaves.isEmpty()) return;
+
+        Map<TreeModel.BlockPos, Integer> dist = new HashMap<>();
+        ArrayDeque<TreeModel.BlockPos> queue = new ArrayDeque<>();
+        for (TreeModel.BlockPos leaf : leaves) {
+            if (adjacentToWood(leaf, wood)) {
+                dist.put(leaf, 1);
+                queue.add(leaf);
+            }
+        }
+        while (!queue.isEmpty()) {
+            TreeModel.BlockPos cur = queue.poll();
+            int d = dist.get(cur);
+            if (d >= MAX_LEAF_DISTANCE) continue;
+            for (int[] o : ORTHOGONAL) {
+                TreeModel.BlockPos n = new TreeModel.BlockPos(cur.x() + o[0], cur.y() + o[1], cur.z() + o[2]);
+                if (leafSet.contains(n) && !dist.containsKey(n)) {
+                    dist.put(n, d + 1);
+                    queue.add(n);
+                }
+            }
+        }
+
+        for (TreeModel.BlockPos leaf : leaves) {
+            // A leaf the BFS never reached is beyond the decay radius; vanilla's max
+            // distance is 7, so clamp unreachable leaves there (they should not exist
+            // after the connector, but staying faithful keeps the state valid).
+            int d = dist.getOrDefault(leaf, MAX_LEAF_DISTANCE + 1);
+            blocks.put(leaf, withLeafDecayState(blocks.get(leaf), d));
+        }
+    }
+
+    /**
+     * Returns {@code state} with its {@code distance} set to {@code distance} and
+     * {@code persistent=false}, preserving any other existing block-state
+     * properties (e.g. {@code waterlogged}).
+     */
+    private static String withLeafDecayState(String state, int distance) {
+        String base = state;
+        Map<String, String> props = new LinkedHashMap<>();
+        int lb = state.indexOf('[');
+        if (lb >= 0) {
+            base = state.substring(0, lb);
+            int rb = state.indexOf(']', lb);
+            String inner = state.substring(lb + 1, rb < 0 ? state.length() : rb);
+            for (String pair : inner.split(",")) {
+                String p = pair.trim();
+                if (p.isEmpty()) continue;
+                int eq = p.indexOf('=');
+                if (eq > 0) props.put(p.substring(0, eq).trim(), p.substring(eq + 1).trim());
+            }
+        }
+        props.put("distance", Integer.toString(distance));
+        props.put("persistent", "false");
+        StringBuilder sb = new StringBuilder(base).append('[');
+        boolean first = true;
+        for (Map.Entry<String, String> e : props.entrySet()) {
+            if (!first) sb.append(',');
+            sb.append(e.getKey()).append('=').append(e.getValue());
+            first = false;
+        }
+        return sb.append(']').toString();
     }
 
     /** Vanilla destroys any leaf whose distance to the nearest log exceeds this. */
@@ -411,6 +611,13 @@ public final class ProceduralGenerator {
     private static final int[][] ORTHOGONAL = {
             {1, 0, 0}, {-1, 0, 0}, {0, 1, 0}, {0, -1, 0}, {0, 0, 1}, {0, 0, -1}
     };
+
+    /**
+     * Positions of the wood the leaf-decay connector placed during the current
+     * build. {@link #buryExposedConnectionWood} skins their exposed faces with
+     * leaves so the branches stay hidden inside the canopy.
+     */
+    final Set<TreeModel.BlockPos> lastConnectionWood = new HashSet<>();
 
     /**
      * Ensures every leaf stays within Minecraft's leaf-decay radius by extending
@@ -426,13 +633,16 @@ public final class ProceduralGenerator {
      * leaves decay normally once the player removes the wood.
      */
     private void connectLeavesWithBranches(Map<TreeModel.BlockPos, String> blocks, String trunkBlock) {
+        lastConnectionWood.clear();
         String branchWood = (trunkBlock == null || trunkBlock.isBlank())
                 ? "minecraft:oak_log"
                 : trunkBlock.split("\\[")[0];
 
-        // Each pass connects one orphan and (usually) many of its neighbours, so the
-        // guard only needs to exceed the worst-case number of disconnected clusters.
-        for (int guard = 0; guard < 4096; guard++) {
+        // A single pass connects every orphaned leaf. The outer guard only needs to
+        // re-run if rasterising those branches somehow leaves a new orphan, which it
+        // never should (each orphan ends up orthogonally adjacent to wood), so this
+        // normally returns after the first pass.
+        for (int guard = 0; guard < 16; guard++) {
             Set<TreeModel.BlockPos> wood = new HashSet<>();
             List<TreeModel.BlockPos> leaves = new ArrayList<>();
             for (Map.Entry<TreeModel.BlockPos, String> e : blocks.entrySet()) {
@@ -444,6 +654,12 @@ public final class ProceduralGenerator {
                 }
             }
             if (wood.isEmpty() || leaves.isEmpty()) return;
+
+            // Spatial hash of every wood block so nearest-wood queries are near O(1)
+            // instead of scanning the entire wood set. On wide canopies the linear
+            // scan (O(orphans * wood)) was the dominant remaining cost.
+            WoodGrid grid = new WoodGrid(8);
+            for (TreeModel.BlockPos w : wood) grid.add(w);
 
             Set<TreeModel.BlockPos> leafSet = new HashSet<>(leaves);
 
@@ -471,23 +687,123 @@ public final class ProceduralGenerator {
                 }
             }
 
-            // The orphan farthest from the trunk is connected first so its branch can
-            // also rescue intermediate leaves it threads through.
-            TreeModel.BlockPos orphan = null;
-            long bestSq = -1;
+            // Collect every orphan (leaf still out of decay range) and connect the
+            // farthest ones first so each branch can also rescue the intermediate
+            // leaves it threads through. Earlier versions connected a single orphan
+            // per pass and rescanned the whole model each time, which made wide
+            // canopies (e.g. titan mega oaks) quadratic-per-orphan and effectively
+            // stalled. Connecting all orphans in one pass against an incrementally
+            // grown wood set keeps it to a single scan.
+            List<TreeModel.BlockPos> orphans = new ArrayList<>();
+            Map<TreeModel.BlockPos, Long> orphanDistSq = new HashMap<>();
             for (TreeModel.BlockPos leaf : leaves) {
-                if (dist.containsKey(leaf)) continue;
-                TreeModel.BlockPos nearest = nearestWood(leaf, wood);
-                if (nearest == null) continue;
-                long sq = squaredDistance(leaf, nearest);
-                if (sq > bestSq) {
-                    bestSq = sq;
-                    orphan = leaf;
+                if (!dist.containsKey(leaf)) {
+                    orphans.add(leaf);
+                    // Cache each orphan's distance to its nearest wood once. Computing it
+                    // inside the sort comparator instead would rescan the whole wood set
+                    // on every comparison (O(orphans*log(orphans)*wood)), which dominated
+                    // the runtime for wide canopies.
+                    orphanDistSq.put(leaf, squaredDistance(leaf, grid.nearest(leaf)));
                 }
             }
-            if (orphan == null) return; // every leaf is within range
+            if (orphans.isEmpty()) return; // every leaf is within range
 
-            rasterizeWoodLine(blocks, nearestWood(orphan, wood), orphan, branchWood);
+            orphans.sort((a, b) -> Long.compare(orphanDistSq.get(b), orphanDistSq.get(a)));
+
+            // Greedy set cover: a single buried branch keeps every leaf within its
+            // 6-block decay neighbourhood alive, so one branch typically rescues
+            // hundreds of orphans, not just the one it points at. Connecting EVERY
+            // orphan (the old behaviour) buried a separate log beside each one,
+            // flooding wide canopies (cherry, ancient oak) with hundreds of logs
+            // that surfaced on the leaf shell. Instead we branch to the farthest
+            // remaining orphan, then mark every orphan now within decay range of
+            // the freshly placed wood as covered and skip it.
+            Set<TreeModel.BlockPos> remaining = new HashSet<>(orphans);
+            for (TreeModel.BlockPos orphan : orphans) {
+                if (!remaining.contains(orphan)) continue; // already covered by an earlier branch
+                // Prefer routing from wood that is close to the trunk axis (x=0,z=0)
+                // rather than purely the geometrically nearest wood block. A lateral
+                // branch tip far from the trunk is geometrically close but produces a
+                // long horizontal connector that surfaces on the canopy exterior.
+                // Score each candidate as: distToOrphan + trunkDist * 0.5, where
+                // trunkDist is the horizontal distance of the wood block from x=0,z=0.
+                // We only search within a 2x radius of the nearest distance to keep it fast.
+                TreeModel.BlockPos geometricNearest = grid.nearest(orphan);
+                if (geometricNearest == null) continue;
+                long nearestSq = squaredDistance(geometricNearest, orphan);
+                long searchSq = nearestSq * 4 + 1; // 2x radius
+                TreeModel.BlockPos best = geometricNearest;
+                double bestScore = Double.MAX_VALUE;
+                for (TreeModel.BlockPos w : wood) {
+                    long dSq = squaredDistance(w, orphan);
+                    if (dSq > searchSq) continue;
+                    double trunkDist = Math.sqrt((double) w.x() * w.x() + (double) w.z() * w.z());
+                    double score = Math.sqrt((double) dSq) + trunkDist * 0.5;
+                    if (score < bestScore) { bestScore = score; best = w; }
+                }
+                TreeModel.BlockPos nearest = best;
+                List<TreeModel.BlockPos> placed =
+                        rasterizeWoodLine(blocks, nearest, orphan, branchWood, wood, grid);
+                // The path leaves we converted to wood are no longer leaves.
+                placed.forEach(leafSet::remove);
+                lastConnectionWood.addAll(placed);
+                markCovered(placed, leafSet, remaining);
+            }
+        }
+    }
+
+    /**
+     * Multi-source BFS from freshly placed branch wood through the surrounding
+     * leaves, marking every orphan reachable within {@value #MAX_LEAF_DISTANCE}
+     * orthogonal leaf steps as covered (removing it from {@code remaining}). This
+     * lets one buried branch satisfy the decay radius for a whole neighbourhood of
+     * orphan leaves instead of growing a separate exposed log beside each one.
+     */
+    private void markCovered(List<TreeModel.BlockPos> placedWood,
+                             Set<TreeModel.BlockPos> leafSet, Set<TreeModel.BlockPos> remaining) {
+        Map<TreeModel.BlockPos, Integer> dist = new HashMap<>();
+        ArrayDeque<TreeModel.BlockPos> queue = new ArrayDeque<>();
+        for (TreeModel.BlockPos w : placedWood) {
+            for (int[] o : ORTHOGONAL) {
+                TreeModel.BlockPos n = new TreeModel.BlockPos(w.x() + o[0], w.y() + o[1], w.z() + o[2]);
+                if (leafSet.contains(n) && !dist.containsKey(n)) {
+                    dist.put(n, 1);
+                    queue.add(n);
+                    remaining.remove(n);
+                }
+            }
+        }
+        while (!queue.isEmpty()) {
+            TreeModel.BlockPos cur = queue.poll();
+            int d = dist.get(cur);
+            if (d >= MAX_LEAF_DISTANCE) continue;
+            for (int[] o : ORTHOGONAL) {
+                TreeModel.BlockPos n = new TreeModel.BlockPos(cur.x() + o[0], cur.y() + o[1], cur.z() + o[2]);
+                if (leafSet.contains(n) && !dist.containsKey(n)) {
+                    dist.put(n, d + 1);
+                    queue.add(n);
+                    remaining.remove(n);
+                }
+            }
+        }
+    }
+
+    /**
+     * Skins every air-exposed face of the wood the decay connector just placed with
+     * a leaf, hiding those branch logs inside the canopy. The added leaves border
+     * wood directly, so they sit at decay distance 1 and never decay themselves;
+     * they simply fill the holes where the connection branches would otherwise have
+     * poked through the outer leaf shell.
+     */
+    private void buryExposedConnectionWood(Map<TreeModel.BlockPos, String> blocks, String leafBlock,
+                                           String secondaryLeaves, double secondaryFraction, Random random) {
+        for (TreeModel.BlockPos w : lastConnectionWood) {
+            for (int[] o : ORTHOGONAL) {
+                TreeModel.BlockPos n = new TreeModel.BlockPos(w.x() + o[0], w.y() + o[1], w.z() + o[2]);
+                if (!blocks.containsKey(n)) {
+                    blocks.put(n, resolveLeaf(leafBlock, secondaryLeaves, secondaryFraction, random));
+                }
+            }
         }
     }
 
@@ -508,17 +824,78 @@ public final class ProceduralGenerator {
         return false;
     }
 
-    private static TreeModel.BlockPos nearestWood(TreeModel.BlockPos leaf, Set<TreeModel.BlockPos> wood) {
-        TreeModel.BlockPos best = null;
-        long bestSq = Long.MAX_VALUE;
-        for (TreeModel.BlockPos w : wood) {
-            long sq = squaredDistance(leaf, w);
-            if (sq < bestSq) {
-                bestSq = sq;
-                best = w;
-            }
+    /**
+     * Uniform spatial hash over wood block positions, supporting fast nearest-wood
+     * queries. Buckets are cubes of {@code cell} blocks; a nearest query expands
+     * Chebyshev shells outward from the query cell and stops once no closer wood
+     * can possibly exist in an unexplored shell.
+     */
+    private static final class WoodGrid {
+        private final int cell;
+        private final Map<Long, List<TreeModel.BlockPos>> buckets = new HashMap<>();
+        private int minCx = Integer.MAX_VALUE, minCy = Integer.MAX_VALUE, minCz = Integer.MAX_VALUE;
+        private int maxCx = Integer.MIN_VALUE, maxCy = Integer.MIN_VALUE, maxCz = Integer.MIN_VALUE;
+
+        WoodGrid(int cell) {
+            this.cell = cell;
         }
-        return best;
+
+        private static long key(int cx, int cy, int cz) {
+            return (cx & 0x1FFFFFL) | ((cy & 0x1FFFFFL) << 21) | ((cz & 0x1FFFFFL) << 42);
+        }
+
+        void add(TreeModel.BlockPos p) {
+            int cx = Math.floorDiv(p.x(), cell);
+            int cy = Math.floorDiv(p.y(), cell);
+            int cz = Math.floorDiv(p.z(), cell);
+            buckets.computeIfAbsent(key(cx, cy, cz), k -> new ArrayList<>()).add(p);
+            if (cx < minCx) minCx = cx;
+            if (cy < minCy) minCy = cy;
+            if (cz < minCz) minCz = cz;
+            if (cx > maxCx) maxCx = cx;
+            if (cy > maxCy) maxCy = cy;
+            if (cz > maxCz) maxCz = cz;
+        }
+
+        TreeModel.BlockPos nearest(TreeModel.BlockPos q) {
+            if (buckets.isEmpty()) return null;
+            int qcx = Math.floorDiv(q.x(), cell);
+            int qcy = Math.floorDiv(q.y(), cell);
+            int qcz = Math.floorDiv(q.z(), cell);
+            // Bound the shell expansion by how far the grid actually extends.
+            int maxR = 0;
+            maxR = Math.max(maxR, Math.max(Math.abs(qcx - minCx), Math.abs(qcx - maxCx)));
+            maxR = Math.max(maxR, Math.max(Math.abs(qcy - minCy), Math.abs(qcy - maxCy)));
+            maxR = Math.max(maxR, Math.max(Math.abs(qcz - minCz), Math.abs(qcz - maxCz)));
+
+            TreeModel.BlockPos best = null;
+            long bestSq = Long.MAX_VALUE;
+            for (int r = 0; r <= maxR; r++) {
+                if (best != null) {
+                    // Closest possible point in any cell at Chebyshev radius r is at
+                    // least (r-1)*cell away; once that exceeds the best found, stop.
+                    long minDist = (long) (r - 1) * cell;
+                    if (minDist > 0 && minDist * minDist > bestSq) break;
+                }
+                for (int dx = -r; dx <= r; dx++) {
+                    for (int dy = -r; dy <= r; dy++) {
+                        for (int dz = -r; dz <= r; dz++) {
+                            if (Math.max(Math.abs(dx), Math.max(Math.abs(dy), Math.abs(dz))) != r) continue;
+                            List<TreeModel.BlockPos> b = buckets.get(key(qcx + dx, qcy + dy, qcz + dz));
+                            if (b == null) continue;
+                            for (TreeModel.BlockPos w : b) {
+                                long sq = squaredDistance(q, w);
+                                if (sq < bestSq) {
+                                    bestSq = sq;
+                                    best = w;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return best;
+        }
     }
 
     private static long squaredDistance(TreeModel.BlockPos a, TreeModel.BlockPos b) {
@@ -530,14 +907,26 @@ public final class ProceduralGenerator {
 
     /**
      * Walks orthogonally (one axis per step, largest remaining delta first) from a
-     * log towards an orphan leaf, turning the air/leaf cells it crosses into wood.
-     * The orphan cell itself is left as a leaf; because the final step is
-     * orthogonal, the wood now sits directly beside it, dropping its decay
-     * distance back to 1.
+     * log towards an orphan leaf, turning the air cells it crosses into wood.
+     *
+     * <p>Rather than extending wood until it sits directly beside the orphan
+     * (which buried a log in the outermost canopy leaf and left it exposed on the
+     * surface, e.g. the spruce logs poking through the leaf shell), the branch
+     * stops short: the last few cells nearest the orphan are kept as leaves so the
+     * orphan stays within {@value #MAX_LEAF_DISTANCE} orthogonal leaf steps of the
+     * new wood tip while that tip remains tucked inside the canopy. We leave the
+     * longest leaf-only suffix of the path (capped so the orphan's decay distance
+     * never exceeds the radius) untouched and only rasterise wood up to it.
      */
-    private void rasterizeWoodLine(Map<TreeModel.BlockPos, String> blocks,
-                                   TreeModel.BlockPos from, TreeModel.BlockPos to, String branchWood) {
-        if (from == null || to == null) return;
+    private List<TreeModel.BlockPos> rasterizeWoodLine(Map<TreeModel.BlockPos, String> blocks,
+                                   TreeModel.BlockPos from, TreeModel.BlockPos to, String branchWood,
+                                   Set<TreeModel.BlockPos> wood, WoodGrid grid) {
+        List<TreeModel.BlockPos> placed = new ArrayList<>();
+        if (from == null || to == null) return placed;
+
+        // Collect the orthogonal cells the branch would cross, from the log
+        // (exclusive) up to but excluding the orphan leaf itself.
+        List<TreeModel.BlockPos> path = new ArrayList<>();
         int x = from.x(), y = from.y(), z = from.z();
         while (x != to.x() || y != to.y() || z != to.z()) {
             int dx = to.x() - x, dy = to.y() - y, dz = to.z() - z;
@@ -551,11 +940,35 @@ public final class ProceduralGenerator {
             }
             TreeModel.BlockPos pos = new TreeModel.BlockPos(x, y, z);
             if (pos.equals(to)) break;
+            path.add(pos);
+        }
+
+        // Keep the longest run of existing leaves at the orphan end of the path as
+        // leaves. Leaving up to MAX_LEAF_DISTANCE-1 of them means the orphan
+        // (one further step out) ends at most MAX_LEAF_DISTANCE leaf steps from the
+        // wood tip, satisfying the decay radius without surfacing a log.
+        int suffix = 0;
+        for (int i = path.size() - 1; i >= 0 && suffix < MAX_LEAF_DISTANCE - 1; i--) {
+            String cur = blocks.get(path.get(i));
+            if (cur != null && isLeaf(cur)) {
+                suffix++;
+            } else {
+                break;
+            }
+        }
+
+        int placeUpTo = path.size() - suffix;
+        for (int i = 0; i < placeUpTo; i++) {
+            TreeModel.BlockPos pos = path.get(i);
             String cur = blocks.get(pos);
             if (cur == null || isLeaf(cur)) {
                 blocks.put(pos, branchWood);
+                if (wood != null) wood.add(pos);
+                if (grid != null) grid.add(pos);
+                placed.add(pos);
             }
         }
+        return placed;
     }
 
     private record BlockPos(int x, int y, int z) {}
@@ -630,6 +1043,35 @@ public final class ProceduralGenerator {
                 String leaf = (secondaryLeaves != null && random.nextDouble() < secondaryFraction) ? secondaryLeaves : leafBlock;
                 canopy.put(above, leaf);
                 combined.put(above, leaf);
+            }
+        }
+    }
+
+    /**
+     * Fills the cell directly above every exposed top log in a single merged block
+     * map with a leaf, so the canopy stays connected to the trunk apex. Unlike
+     * {@link #capTrunkTip}, this operates on the final, already-merged geometry and
+     * is therefore safe to run after {@link #connectLeavesWithBranches}, which can
+     * otherwise turn the capping leaf into wood and reopen the air gap.
+     */
+    private void capExposedLogTops(Map<TreeModel.BlockPos, String> blocks, String leafBlock, Random random, String secondaryLeaves, double secondaryFraction) {
+        List<TreeModel.BlockPos> logs = blocks.entrySet().stream()
+                .filter(e -> isWood(e.getValue()))
+                .map(Map.Entry::getKey)
+                .toList();
+
+        if (logs.isEmpty()) return;
+
+        int topY = logs.stream().mapToInt(TreeModel.BlockPos::y).max().orElse(0);
+        List<TreeModel.BlockPos> exposed = logs.stream()
+                .filter(p -> p.y() >= topY - 1 && !blocks.containsKey(new TreeModel.BlockPos(p.x(), p.y() + 1, p.z())))
+                .toList();
+
+        for (TreeModel.BlockPos p : exposed) {
+            TreeModel.BlockPos above = new TreeModel.BlockPos(p.x(), p.y() + 1, p.z());
+            if (!blocks.containsKey(above)) {
+                String leaf = (secondaryLeaves != null && random.nextDouble() < secondaryFraction) ? secondaryLeaves : leafBlock;
+                blocks.put(above, leaf);
             }
         }
     }
@@ -1062,12 +1504,16 @@ public final class ProceduralGenerator {
                 case "trunk_surface" -> applyTrunkSurface(result, existing, dec, trunkBlocks.keySet(), random);
                 case "canopy_top" -> applyCanopyTop(result, existing, dec, random);
                 case "trunk_base" -> applyTrunkBase(result, existing, dec, trunkBlocks.keySet(), random);
+                case "leaf_exterior" -> applyLeafExterior(result, existing, dec, random);
                 default -> { /* unknown target: ignore (e.g. canopy_bottom handled elsewhere) */ }
             }
         }
 
         // Merge decorator blocks into the canopy (they live in the final model).
-        result.forEach(canopyBlocks::putIfAbsent);
+        // Use put (not putIfAbsent) so branch_tip ornaments can overwrite the leaf
+        // block sitting on the branch tip; every other decorator target only ever
+        // writes into air cells, so overwriting is a no-op for them.
+        result.forEach(canopyBlocks::put);
     }
 
     /** Cardinal direction facing away from the trunk center, for orientable accents. */
@@ -1086,17 +1532,72 @@ public final class ProceduralGenerator {
         return facing != null ? block + "[facing=" + facing + "]" : block;
     }
 
-    /** Place the decorator at each branch endpoint with the configured chance. */
+    /**
+     * Place the decorator near each branch endpoint with the configured chance.
+     * Ornaments hang on the leafy shell around a branch tip; the first non-wood
+     * candidate cell (just outside the tip, the tip itself, or just below it) is
+     * used, overwriting a leaf there. Structural wood and cells already taken by
+     * another decorator are left untouched.
+     */
     private void applyBranchTip(Map<TreeModel.BlockPos, String> result, Map<TreeModel.BlockPos, String> existing,
                                 TreeSpecies.Decorator dec, List<double[]> branchEndpoints, Random random) {
         if (branchEndpoints == null || branchEndpoints.isEmpty()) return;
         for (double[] ep : branchEndpoints) {
             if (random.nextDouble() > dec.chance()) continue;
-            TreeModel.BlockPos pos = new TreeModel.BlockPos(
-                    (int) Math.round(ep[0]), (int) Math.round(ep[1]), (int) Math.round(ep[2]));
-            if (existing.containsKey(pos) || result.containsKey(pos)) continue;
-            String facing = dec.axisAware() ? facingAway(ep[3], ep[4], pos.x(), pos.z()) : null;
-            result.put(pos, expandBlock(dec.block(), facing));
+            int tx = (int) Math.round(ep[0]);
+            int ty = (int) Math.round(ep[1]);
+            int tz = (int) Math.round(ep[2]);
+            // Try all 6 orthogonal neighbors of the tip plus the tip itself, preferring
+            // the outward direction first. The first cell that is not structural wood and
+            // not already claimed by a different decorator wins.
+            int odx = (int) Math.signum(ep[0] - ep[3]);
+            int odz = (int) Math.signum(ep[2] - ep[4]);
+            TreeModel.BlockPos[] candidates = {
+                    new TreeModel.BlockPos(tx + odx, ty, tz + odz),
+                    new TreeModel.BlockPos(tx, ty, tz),
+                    new TreeModel.BlockPos(tx, ty - 1, tz),
+                    new TreeModel.BlockPos(tx, ty + 1, tz),
+                    new TreeModel.BlockPos(tx + (odx == 0 ? 1 : 0), ty, tz),
+                    new TreeModel.BlockPos(tx - (odx == 0 ? 1 : 0), ty, tz),
+                    new TreeModel.BlockPos(tx, ty, tz + (odz == 0 ? 1 : 0)),
+                    new TreeModel.BlockPos(tx, ty, tz - (odz == 0 ? 1 : 0))
+            };
+            for (TreeModel.BlockPos pos : candidates) {
+                if (result.containsKey(pos)) continue;
+                String occupant = existing.get(pos);
+                if (occupant != null && isStructuralWood(occupant)) continue;
+                String facing = dec.axisAware() ? facingAway(ep[3], ep[4], pos.x(), pos.z()) : null;
+                result.put(pos, expandBlock(dec.block(), facing));
+                break;
+            }
+        }
+    }
+
+    /** Whether the block is load-bearing trunk/branch wood that ornaments must not replace. */
+    private boolean isStructuralWood(String block) {
+        String base = block.split("\\[")[0];
+        return base.contains("log") || base.contains("wood") || base.contains("stem") || base.contains("hyphae");
+    }
+
+    /**
+     * Place the decorator on the air cell adjacent to each exterior leaf block.
+     * "Exterior" means the leaf has at least one non-underside neighbor (N/S/E/W/up)
+     * that is empty (not in existing tree blocks or already-placed decorators).
+     * The underside (y-1) is skipped so ornaments don't hang below the canopy.
+     * Each qualifying air cell is independently rolled against dec.chance().
+     */
+    private void applyLeafExterior(Map<TreeModel.BlockPos, String> result, Map<TreeModel.BlockPos, String> existing,
+                                   TreeSpecies.Decorator dec, Random random) {
+        int[][] dirs = {{1, 0, 0}, {-1, 0, 0}, {0, 0, 1}, {0, 0, -1}, {0, 1, 0}}; // N/S/E/W/up, no underside
+        for (TreeModel.BlockPos pos : existing.keySet()) {
+            String block = existing.get(pos);
+            if (block == null || isStructuralWood(block)) continue; // only leaf cells
+            for (int[] d : dirs) {
+                TreeModel.BlockPos neighbor = new TreeModel.BlockPos(pos.x() + d[0], pos.y() + d[1], pos.z() + d[2]);
+                if (existing.containsKey(neighbor) || result.containsKey(neighbor)) continue;
+                if (random.nextDouble() > dec.chance()) continue;
+                result.put(neighbor, expandBlock(dec.block(), null));
+            }
         }
     }
 

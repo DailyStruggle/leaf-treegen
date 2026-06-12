@@ -236,10 +236,10 @@ placement:
     feature-trees:
       - "minecraft:spruce 6"
       - "minecraft:pine 4"
-  # Snowy taiga is now all evergreen conifers (small through mega) plus the
-  # frost-laden glacierpine spruce for a colder look. The regular conical taiga
-  # spruce is no longer used here; the tall trees are full large evergreens
-  # rather than a small cap on a thin trunk.
+  # Snowy taiga is a single evergreen conifer species (two sizes: a medium and a
+  # towering tall, both full conical snow-laden spruces using the glacierpine
+  # silhouette), plus the occasional decorated christmas-tree mixed into the
+  # odds. The dedicated glacierpine spruce stays on the other snowy biomes only.
   snowy_taiga:
     biomes:
       - "snowy_taiga"
@@ -247,20 +247,14 @@ placement:
     spacing: 3
     separation: 1
     trees:
-      evergreen: 75
-      glacierpine: 25
-  # Very rare festive landmark: a decorated christmas tree (glowing star, colored
-  # ornaments) scattered extremely sparsely through the snowy taiga. Additive
-  # overlay (does not suppress the primary snowy_taiga trees) with very wide
-  # spacing so it shows up only as an occasional surprise.
-  christmas-tree:
-    biomes:
-      - "snowy_taiga"
-    weight: 1
-    spacing: 96
-    separation: 48
-    trees:
-      christmas-tree: 100
+      evergreen: 90
+      # Festive decorated christmas tree mixed straight into the snowy taiga
+      # odds; a small share of every placement is a christmas tree, so they
+      # reliably appear among the regular evergreens.
+      christmas-tree: 10
+  # NOTE: the christmas-tree definition itself lives in species/christmas-tree.json
+  # and is pulled in automatically by the reference above; it no longer needs its
+  # own standalone structure set (the previous sparse landmark never showed up).
   # Old-growth pine/spruce taiga is a very dense vanilla biome. The one-tree-per-
   # structure NBT path tops out at ~1 tree per chunk, so instead we place vanilla
   # minecraft:tree configured features (mega pine + pine + spruce) through this

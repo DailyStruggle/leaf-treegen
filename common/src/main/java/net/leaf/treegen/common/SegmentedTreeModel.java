@@ -67,21 +67,48 @@ public final class SegmentedTreeModel {
     public void place(Platform platform, String worldName, int ox, int oy, int oz) {
         long startTime = System.nanoTime();
         Map<Long, Map<TreeModel.BlockPos, String>> chunks = new HashMap<>();
-        
+
+        // Decide the order blocks are written, then bucket them into per-chunk
+        // LinkedHashMaps that preserve that order.
+        //
+        // Platforms that apply block physics compute a leaf's decay "distance" the
+        // moment it is written (deferred by at most one tick), and a log or closer
+        // leaf placed *afterwards* does not re-trigger that computation. With the
+        // previous undefined HashMap iteration order, outer leaves of wide canopies
+        // (e.g. large cherry trees) were frequently written before the wood/leaves
+        // that connect them to the trunk, so they were stamped with distance 7 and
+        // decayed on the next random tick even though the finished geometry keeps
+        // every leaf within range. (DATAPACK placement is immune because vanilla
+        // stamps the whole structure at once and only then recomputes distances.)
+        //
+        // We therefore emit: (1) all wood, then (2) leaves ordered by their decay
+        // distance to the nearest wood (nearest first), then (3) anything else. This
+        // guarantees that when a leaf is written, the wood plus every leaf closer to
+        // the trunk than it already exist, so its computed distance is final and
+        // correct. Runtime placement is throttled across ticks, so this ordering is
+        // what makes the canopy survive across batches, not just within one update.
+        List<TreeModel.BlockPos> positions = new ArrayList<>();
+        Map<TreeModel.BlockPos, String> stateByPos = new HashMap<>();
         for (Segment segment : segments) {
             for (int i = 0; i < segment.blockIndices.length; i++) {
                 int worldX = ox + segment.offsetX + (segment.relativePositions[i * 2] & 0xFF);
                 int worldY = oy + segment.offsetY;
                 int worldZ = oz + segment.offsetZ + (segment.relativePositions[i * 2 + 1] & 0xFF);
                 String state = palette.get(segment.blockIndices[i] & 0xFF);
-                
-                int cx = worldX >> 4;
-                int cz = worldZ >> 4;
-                long key = ((long) cx << 32) | (cz & 0xFFFFFFFFL);
-                
-                chunks.computeIfAbsent(key, k -> new LinkedHashMap<>())
-                      .put(new TreeModel.BlockPos(worldX, worldY, worldZ), state);
+                TreeModel.BlockPos pos = new TreeModel.BlockPos(worldX, worldY, worldZ);
+                positions.add(pos);
+                stateByPos.put(pos, state);
             }
+        }
+
+        List<TreeModel.BlockPos> ordered = orderForPlacement(positions, stateByPos);
+
+        for (TreeModel.BlockPos pos : ordered) {
+            int cx = pos.x() >> 4;
+            int cz = pos.z() >> 4;
+            long key = ((long) cx << 32) | (cz & 0xFFFFFFFFL);
+            chunks.computeIfAbsent(key, k -> new LinkedHashMap<>())
+                  .put(pos, stateByPos.get(pos));
         }
         long groupTime = System.nanoTime();
 
@@ -110,6 +137,83 @@ public final class SegmentedTreeModel {
             platform.logger().info(String.format("[LeafTreeGen Profiling] %s placed at %d,%d,%d: %.2fms total (Grouping: %.2fms, Blocks: %d)", 
                 speciesId, ox, oy, oz, totalMs, groupMs, placed));
         }
+    }
+
+    /** Orthogonal neighbour offsets used both by leaf-decay distance and this ordering. */
+    private static final int[][] ORTHOGONAL = {
+            {1, 0, 0}, {-1, 0, 0}, {0, 1, 0}, {0, -1, 0}, {0, 0, 1}, {0, 0, -1}
+    };
+
+    /**
+     * Returns the order blocks should be written so that, when each leaf is placed,
+     * the wood and every leaf closer to the trunk already exist: all wood first,
+     * then leaves in ascending decay-distance from the nearest wood (a multi-source
+     * BFS that mirrors vanilla's leaf-distance propagation), then everything else.
+     */
+    static List<TreeModel.BlockPos> orderForPlacement(
+            List<TreeModel.BlockPos> positions, Map<TreeModel.BlockPos, String> stateByPos) {
+        Set<TreeModel.BlockPos> leaves = new HashSet<>();
+        Set<TreeModel.BlockPos> wood = new HashSet<>();
+        for (TreeModel.BlockPos p : positions) {
+            String s = stateByPos.get(p);
+            if (isWood(s)) wood.add(p);
+            else if (isLeaf(s)) leaves.add(p);
+        }
+
+        // Multi-source BFS from wood through leaves -> leaf -> distance to wood.
+        Map<TreeModel.BlockPos, Integer> dist = new HashMap<>();
+        ArrayDeque<TreeModel.BlockPos> queue = new ArrayDeque<>();
+        for (TreeModel.BlockPos leaf : leaves) {
+            for (int[] o : ORTHOGONAL) {
+                if (wood.contains(new TreeModel.BlockPos(leaf.x() + o[0], leaf.y() + o[1], leaf.z() + o[2]))) {
+                    dist.put(leaf, 1);
+                    queue.add(leaf);
+                    break;
+                }
+            }
+        }
+        while (!queue.isEmpty()) {
+            TreeModel.BlockPos cur = queue.poll();
+            int d = dist.get(cur);
+            for (int[] o : ORTHOGONAL) {
+                TreeModel.BlockPos n = new TreeModel.BlockPos(cur.x() + o[0], cur.y() + o[1], cur.z() + o[2]);
+                if (leaves.contains(n) && !dist.containsKey(n)) {
+                    dist.put(n, d + 1);
+                    queue.add(n);
+                }
+            }
+        }
+
+        List<TreeModel.BlockPos> woodList = new ArrayList<>();
+        List<TreeModel.BlockPos> leafList = new ArrayList<>();
+        List<TreeModel.BlockPos> otherList = new ArrayList<>();
+        for (TreeModel.BlockPos p : positions) {
+            String s = stateByPos.get(p);
+            if (isWood(s)) woodList.add(p);
+            else if (isLeaf(s)) leafList.add(p);
+            else otherList.add(p);
+        }
+        // Leaves with no path to wood (shouldn't happen post-connector) sort last.
+        leafList.sort(Comparator.comparingInt(p -> dist.getOrDefault(p, Integer.MAX_VALUE)));
+
+        List<TreeModel.BlockPos> ordered = new ArrayList<>(positions.size());
+        ordered.addAll(woodList);
+        ordered.addAll(leafList);
+        ordered.addAll(otherList);
+        return ordered;
+    }
+
+    /**
+     * Whether a palette block-state is "wood" (a log/wood/stem) for placement
+     * ordering. Matches {@code ProceduralGenerator.isWood} so the leaf-decay
+     * skeleton (trunk + decay-prevention branches) is recognised and placed first.
+     */
+    private static boolean isWood(String state) {
+        return state.contains("log") || state.contains("wood") || state.contains("stem");
+    }
+
+    private static boolean isLeaf(String state) {
+        return state.contains("leaves");
     }
 
     public String getSpeciesId() {
