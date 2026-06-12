@@ -66,19 +66,23 @@ public final class PaperSaplingListener implements Listener {
 
         Location base = target.getLocation();
 
-        String biome = plugin.platform().getBiomeKey(base.getWorld().getName(), base.getBlockX(), base.getBlockY(), base.getBlockZ());
-        if (!species.allowsBiome(biome)) {
-            player.sendMessage(Component.text(species.displayName() + " won't take root here.", NamedTextColor.YELLOW));
-            return;
-        }
+        // Biome restrictions only gate natural worldgen; a magical sapling is hand-planted by a
+        // player, so it may take root on any grass/ground regardless of the current biome.
 
-        List<String> variants = plugin.registry().variantsFor(base.getWorld().getName(), species);
-        if (variants.isEmpty()) {
-            player.sendMessage(Component.text("No tree templates available.", NamedTextColor.RED));
-            return;
+        // If the sapling is bound to a specific variant, grow exactly that tree; otherwise the
+        // variant is left unspecified until placement and chosen at random for the species.
+        String boundVariant = PaperSaplingItem.variant(inHand);
+        String variant;
+        if (boundVariant != null && !boundVariant.isBlank()) {
+            variant = boundVariant;
+        } else {
+            List<String> variants = plugin.registry().variantsFor(base.getWorld().getName(), species);
+            if (variants.isEmpty()) {
+                player.sendMessage(Component.text("No tree templates available.", NamedTextColor.RED));
+                return;
+            }
+            variant = variants.get(random.nextInt(variants.size()));
         }
-
-        String variant = variants.get(random.nextInt(variants.size()));
         
         final String finalWorldName = base.getWorld().getName();
         final int finalX = base.getBlockX();

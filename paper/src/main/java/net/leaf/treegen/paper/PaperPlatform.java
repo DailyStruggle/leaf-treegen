@@ -22,7 +22,6 @@ import java.util.logging.Logger;
 
 public class PaperPlatform implements Platform {
     private final JavaPlugin plugin;
-    private final StructureRotation[] rotations = StructureRotation.values();
 
     private final Map<String, org.bukkit.block.data.BlockData> blockDataCache = new ConcurrentHashMap<>();
 
@@ -54,7 +53,7 @@ public class PaperPlatform implements Platform {
     @Override public Path getRootFolder() { return plugin.getDataFolder().toPath(); }
     @Override public Path getWorldFolder(String worldName) { 
         World world = Bukkit.getWorld(worldName);
-        if (world != null) return world.getWorldFolder().toPath();
+        if (world != null) return resolveLevelFolder(world.getWorldFolder().toPath());
         
         // Fallback for onLoad when worlds aren't registered yet
         File folder = new File(worldName);
@@ -62,6 +61,29 @@ public class PaperPlatform implements Platform {
             return folder.toPath();
         }
         return null;
+    }
+
+    /**
+     * Resolves the level (base) folder that owns the {@code datapacks} directory.
+     *
+     * <p>On regular Paper the overworld's {@link World#getWorldFolder()} already
+     * points at the level folder (e.g. {@code ./world}), which is where the
+     * worldgen datapacks are written. On Folia the world is regionised and
+     * {@code getWorldFolder()} returns a dimension subfolder nested under the
+     * level folder (e.g. {@code world/dimensions/minecraft/overworld}), so the
+     * {@code datapacks} directory lives in a parent directory. Walk up a few
+     * levels to find the folder that actually contains {@code datapacks};
+     * fall back to the original folder when none is found.</p>
+     */
+    private static Path resolveLevelFolder(Path worldFolder) {
+        Path current = worldFolder;
+        for (int depth = 0; depth < 8 && current != null; depth++) {
+            if (new File(current.toFile(), "datapacks").isDirectory()) {
+                return current;
+            }
+            current = current.getParent();
+        }
+        return worldFolder;
     }
     @Override public List<String> getWorldNames() { 
         return Bukkit.getWorlds().stream().map(World::getName).toList(); 
@@ -109,13 +131,18 @@ public class PaperPlatform implements Platform {
         if (s == null) return false;
 
         Location loc = new Location(world, x, y, z);
-        // Centre logic (simplified for multi-platform, but can be kept same as before)
+        // Centre the structure on the clicked block. The structure grows in +X/+Z from its
+        // origin corner, so subtracting half the (un-rotated) footprint lines the trunk up with
+        // the target column. We place with StructureRotation.NONE: a random rotation would swap
+        // the X/Z footprint and pivot the structure around the origin, landing the tree off-centre
+        // (the Fabric/NeoForge platforms likewise place un-rotated). Variety still comes from the
+        // multiple baked template variants selected per placement.
         int offsetX = s.getSize().getBlockX() / 2;
         int offsetZ = s.getSize().getBlockZ() / 2;
         Location origin = loc.clone().subtract(offsetX, 0, offsetZ);
 
         try {
-            s.place(origin, true, rotations[new java.util.Random().nextInt(rotations.length)], Mirror.NONE, 0, 1.0f, new java.util.Random());
+            s.place(origin, true, StructureRotation.NONE, Mirror.NONE, 0, 1.0f, new java.util.Random());
             
             // Post-process leaves if needed to set persistent=false
             // Bukkit's Structure API doesn't easily allow intercepting block data during placement 

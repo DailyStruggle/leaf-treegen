@@ -55,13 +55,51 @@ public final class PaperLeafTreeGenPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PaperTreeSuppressionListener(this), this);
         getServer().getPluginManager().registerEvents(new PaperLeafDropListener(this), this);
 
-        new PaperTreeGenCommand(this);
+        registerCommand(new PaperTreeGenCommand(this));
 
         platform.scheduleRepeatingTask(() -> {
             io.github.dailystruggle.commandsapi.common.CommandsAPI.execute();
         }, 1, 1);
 
         getLogger().info("LeafTreeGen (Paper) enabled.");
+    }
+
+    /**
+     * Ensures the {@code /leaftree} command is bound to its executor.
+     *
+     * <p>{@link io.github.dailystruggle.commandsapi.bukkit.localCommands.BukkitTreeCommand}
+     * only binds itself through {@code Bukkit.getPluginCommand(name)} inside its
+     * constructor, which returns {@code null} for Paper plugins (loaded from
+     * {@code paper-plugin.yml}), so the executor is never attached and the
+     * command appears unregistered (notably on Folia).</p>
+     *
+     * <p>Paper plugins also reject {@link JavaPlugin#getCommand(String)} during
+     * startup (it throws {@link UnsupportedOperationException} because YAML-based
+     * command declarations are unsupported). We therefore register the command
+     * explicitly into the live server command map, which works the same on Paper
+     * and Folia regardless of descriptor parsing.</p>
+     */
+    private void registerCommand(PaperTreeGenCommand command) {
+        // Register a lightweight wrapper directly into the live command map.
+        // Note: JavaPlugin#getCommand cannot be used on Paper plugins (it throws
+        // UnsupportedOperationException during startup).
+        org.bukkit.command.Command wrapper = new org.bukkit.command.Command(command.name()) {
+            @Override
+            public boolean execute(org.bukkit.command.CommandSender sender, String label, String[] args) {
+                return command.onCommand(sender, this, label, args);
+            }
+
+            @Override
+            public java.util.List<String> tabComplete(org.bukkit.command.CommandSender sender, String alias, String[] args) {
+                java.util.List<String> result = command.onTabComplete(sender, this, alias, args);
+                return result != null ? result : java.util.Collections.emptyList();
+            }
+        };
+        wrapper.setDescription(command.description());
+        wrapper.setPermission(command.permission());
+        wrapper.setUsage("/" + command.name() + " <generate|give|list|reload|debug|stats> ...");
+        getServer().getCommandMap().register(getName().toLowerCase(java.util.Locale.ROOT), wrapper);
+        getLogger().info("Registered '/" + command.name() + "' via command map fallback.");
     }
 
     public void reload() {

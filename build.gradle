@@ -10,6 +10,8 @@ allprojects {
         mavenCentral()
         maven { url 'https://repo.papermc.io/repository/maven-public/' }
         maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.neoforged.net/releases' }
+        maven { url 'https://maven.fabricmc.net/' }
     }
 }
 
@@ -35,6 +37,17 @@ jar {
     from project(':fabric').sourceSets.main.output
     from project(':neoforge').sourceSets.main.output
     from project(':common').sourceSets.main.output
+
+    // Bundle LICENSE and offline usage docs so users have a wiki equivalent
+    // even if the project wiki or Modrinth page goes offline.
+    from(rootDir) {
+        include 'LICENSE'
+        into 'META-INF/leaftreegen'
+    }
+    from('docs') {
+        include 'usage.md'
+        into 'META-INF/leaftreegen'
+    }
 
     // Include resources (config.yml and species/*.json)
     from('src/main/resources') {

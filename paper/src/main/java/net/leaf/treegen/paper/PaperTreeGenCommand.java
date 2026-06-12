@@ -106,6 +106,7 @@ public final class PaperTreeGenCommand extends BukkitTreeCommand {
             addParameter("species", new SpeciesParameter());
             addParameter("player", new OnlinePlayerParameter("leaftreegen.admin", "Target player", (s, v) -> true));
             addParameter("amount", new IntegerParameter("leaftreegen.admin", "Amount", (u, v) -> true, 1, 64));
+            addParameter("variant", new VariantParameter());
         }
         @Override public String name() { return "give"; }
         @Override public String permission() { return "leaftreegen.admin"; }
@@ -117,9 +118,27 @@ public final class PaperTreeGenCommand extends BukkitTreeCommand {
             Player target = (parameterValues.containsKey("player")) ? Bukkit.getPlayerExact(parameterValues.get("player").get(0)) : (sender instanceof Player ? (Player)sender : null);
             if (target == null) { sender.sendMessage("Player not found."); return true; }
             int amount = parameterValues.containsKey("amount") ? Integer.parseInt(parameterValues.get("amount").get(0)) : 1;
-            ItemStack item = PaperSaplingItem.create(species, amount);
+
+            // Optional: bind the sapling to a specific template variant. When omitted the variant is
+            // left unspecified and chosen at random when the sapling is planted.
+            String variant = null;
+            if (parameterValues.containsKey("variant") && !parameterValues.get("variant").isEmpty()) {
+                String requested = parameterValues.get("variant").get(0);
+                List<String> available = treePlugin.registry().variantsFor(Bukkit.getWorlds().get(0).getName(), species);
+                variant = available.stream()
+                        .filter(v -> v.equals(requested) || v.endsWith("/" + requested) || v.endsWith(":" + requested))
+                        .findFirst().orElse(null);
+                if (variant == null) {
+                    sender.sendMessage(Component.text("Unknown variant '" + requested + "' for " + species.displayName()
+                            + ". Available: " + String.join(", ", available), NamedTextColor.RED));
+                    return true;
+                }
+            }
+
+            ItemStack item = PaperSaplingItem.create(species, amount, variant);
             target.getInventory().addItem(item).values().forEach(l -> target.getWorld().dropItemNaturally(target.getLocation(), l));
-            sender.sendMessage("Gave " + amount + "x " + species.displayName() + " saplings.");
+            sender.sendMessage("Gave " + amount + "x " + species.displayName() + " saplings"
+                    + (variant != null ? " (" + variant + ")" : "") + ".");
             return true;
         }
         @Override public void msgBadParameter(java.util.UUID c, String n, String v) { PaperTreeGenCommand.this.msgBadParameter(c, n, v); }
@@ -239,5 +258,20 @@ public final class PaperTreeGenCommand extends BukkitTreeCommand {
     private class SpeciesParameter extends BukkitParameter {
         SpeciesParameter() { super("leaftreegen.admin", "Species", (s, v) -> true); }
         @Override public Set<String> values() { return new HashSet<>(treePlugin.config().ids()); }
+    }
+
+    /** Tab-completes the template variants available across configured species (full structure keys). */
+    private class VariantParameter extends BukkitParameter {
+        VariantParameter() { super("leaftreegen.admin", "Variant", (s, v) -> true); }
+        @Override public Set<String> values() {
+            if (Bukkit.getWorlds().isEmpty()) return new HashSet<>();
+            String world = Bukkit.getWorlds().get(0).getName();
+            Set<String> out = new HashSet<>();
+            for (String id : treePlugin.config().ids()) {
+                TreeSpecies s = treePlugin.config().get(id);
+                if (s != null) out.addAll(treePlugin.registry().variantsFor(world, s));
+            }
+            return out;
+        }
     }
 }
