@@ -26,18 +26,55 @@ public final class TreeGenConfig {
     private final String packName;
     private final String packDescription;
     private final GenerationMode mode;
+    private final double timeAllocationMs;
+    private final int maxBlocksPerTick;
+    /**
+     * Global chance (0..1) that a decaying or broken custom-tree leaf drops a
+     * species-tagged sapling. Defaults to roughly the vanilla sapling drop rate.
+     */
+    private double saplingDropChance = 0.05;
+    /**
+     * Species ids (lowercased) that are permitted to take root on or in water.
+     * Every other species is rejected on liquid/waterlogged blocks. Defaults to
+     * the swamp species.
+     */
+    private Set<String> waterGrowthTrees = new HashSet<>(Set.of("swamp"));
 
-    public TreeGenConfig(Map<String, TreeSpecies> species, String packName, String packDescription, GenerationMode mode) {
+    public TreeGenConfig(Map<String, TreeSpecies> species, String packName, String packDescription, GenerationMode mode, double timeAllocationMs, int maxBlocksPerTick) {
         this.species = species;
         this.packName = packName;
         this.packDescription = packDescription;
         this.mode = mode;
+        this.timeAllocationMs = timeAllocationMs;
+        this.maxBlocksPerTick = maxBlocksPerTick;
+    }
+
+    public TreeGenConfig(Map<String, TreeSpecies> species, String packName, String packDescription, GenerationMode mode, double timeAllocationMs) {
+        this(species, packName, packDescription, mode, timeAllocationMs, 1000);
+    }
+
+    public TreeGenConfig(Map<String, TreeSpecies> species, String packName, String packDescription, GenerationMode mode) {
+        this(species, packName, packDescription, mode, 5.0, 1000);
     }
 
     public Map<String, TreeSpecies> species() { return species; }
     public String packName() { return packName; }
     public String packDescription() { return packDescription; }
     public GenerationMode mode() { return mode; }
+    public double timeAllocationMs() { return timeAllocationMs; }
+    public int maxBlocksPerTick() { return maxBlocksPerTick; }
+    public double saplingDropChance() { return saplingDropChance; }
+    public void setSaplingDropChance(double saplingDropChance) { this.saplingDropChance = saplingDropChance; }
+    public Set<String> waterGrowthTrees() { return waterGrowthTrees; }
+    public void setWaterGrowthTrees(Set<String> waterGrowthTrees) { this.waterGrowthTrees = waterGrowthTrees; }
+
+    /**
+     * True if the given tree species is allowed to grow on/in water (e.g. swamp trees).
+     */
+    public boolean allowsWaterGrowth(String speciesId) {
+        if (speciesId == null) return false;
+        return waterGrowthTrees.contains(speciesId.toLowerCase(Locale.ROOT));
+    }
 
     public boolean generateDatapack() {
         return mode == GenerationMode.DATAPACK || mode == GenerationMode.BOTH;
@@ -45,6 +82,39 @@ public final class TreeGenConfig {
 
     public boolean useProcedural() {
         return mode == GenerationMode.PROCEDURAL || mode == GenerationMode.BOTH;
+    }
+
+    /**
+     * True if any configured species both replaces vanilla trees and participates
+     * in worldgen. Such species require the vanilla {@code placed_feature}
+     * overrides to be written to a datapack so the trees they replace never spawn.
+     */
+    public boolean hasVanillaSuppression() {
+        for (TreeSpecies s : species.values()) {
+            if (s.worldgen() && s.replaceVanilla()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * True if a datapack must be written at all. The full datapack is needed in
+     * DATAPACK/BOTH mode; in PROCEDURAL mode we still need a suppression-only
+     * datapack when any species replaces vanilla trees (placement itself is then
+     * handled at runtime).
+     */
+    public boolean needsDatapack() {
+        return generateDatapack() || (useProcedural() && hasVanillaSuppression());
+    }
+
+    /**
+     * True when the datapack should contain only the vanilla suppression overrides
+     * (no baked structures / template pools), i.e. PROCEDURAL mode where the plugin
+     * places the trees itself at runtime.
+     */
+    public boolean suppressionOnly() {
+        return !generateDatapack() && useProcedural() && hasVanillaSuppression();
     }
 
     public TreeSpecies get(String id) {
@@ -75,6 +145,17 @@ public final class TreeGenConfig {
         try {
             mode = GenerationMode.valueOf(modeStr.toUpperCase(Locale.ROOT));
         } catch (IllegalArgumentException ignored) {}
+
+        double timeAllocationMs = yaml.getDouble("time-allocation-ms", 5.0);
+        int maxBlocksPerTick = yaml.getInt("max-blocks-per-tick", 1000);
+        double saplingDropChance = yaml.getDouble("sapling-drop-chance", 0.05);
+
+        Set<String> waterGrowthTrees = new HashSet<>(Set.of("swamp"));
+        Object waterTreesObj = yaml.get("water-growth-trees");
+        if (waterTreesObj instanceof List<?> waterTreesList) {
+            waterGrowthTrees = new HashSet<>();
+            for (Object t : waterTreesList) waterGrowthTrees.add(t.toString().toLowerCase(Locale.ROOT));
+        }
 
         Map<String, TreeSpecies> speciesMap = new LinkedHashMap<>();
 
@@ -154,6 +235,42 @@ public final class TreeGenConfig {
                 String step = sec.getString("step", existing.step());
                 int weight = sec.getInt("weight", existing.weight());
 
+                // Optional vanilla-feature placement (density). When `feature-trees` lists vanilla
+                // configured features, the species is placed as a jigsaw feature element wrapping a
+                // `minecraft:count` placement modifier (`trees-per-placement`) so a single structure
+                // placement scatters multiple trees -> vanilla-like density. Cross-platform datapack.
+                TreeSpecies.FeatureConfig featureConfig = existing.featureConfig();
+                int treesPerPlacement = sec.getInt("trees-per-placement",
+                        sec.getInt("trees_per_placement",
+                                featureConfig != null ? featureConfig.treesPerPlacement() : 0));
+                List<?> ftList = sec.getList("feature-trees");
+                if (ftList == null) ftList = sec.getList("feature_trees");
+                if (ftList != null) {
+                    List<TreeSpecies.WeightedFeature> fts = new ArrayList<>();
+                    for (Object o : ftList) {
+                        if (o == null) continue;
+                        String s = o.toString().trim();
+                        if (s.isEmpty()) continue;
+                        int fWeight = 1;
+                        int sp = s.lastIndexOf(' ');
+                        if (sp > 0) {
+                            try {
+                                fWeight = Integer.parseInt(s.substring(sp + 1).trim());
+                                s = s.substring(0, sp).trim();
+                            } catch (NumberFormatException ignored) {}
+                        }
+                        if (!s.contains(":")) s = "minecraft:" + s;
+                        fts.add(new TreeSpecies.WeightedFeature(s, Math.max(1, fWeight)));
+                    }
+                    if (!fts.isEmpty()) {
+                        featureConfig = new TreeSpecies.FeatureConfig(
+                                treesPerPlacement > 0 ? treesPerPlacement : 10, fts);
+                    }
+                } else if (featureConfig != null && treesPerPlacement > 0
+                        && treesPerPlacement != featureConfig.treesPerPlacement()) {
+                    featureConfig = new TreeSpecies.FeatureConfig(treesPerPlacement, featureConfig.trees());
+                }
+
                 Map<String, TreeSpecies.ProceduralParams> treeDefs = new HashMap<>(existing.treeDefinitions() != null ? existing.treeDefinitions() : Map.of());
                 Object defsObj = sec.get("definitions");
                 if (defsObj instanceof io.github.dailystruggle.rtp.common.configuration.yaml.RtpYamlSection dSec) {
@@ -165,7 +282,7 @@ public final class TreeGenConfig {
                                 p.trunkWidth(), p.trunkShape(), p.trunkShapeParams(), p.roundTrunk(),
                                 p.leanAngle(), p.leanAzimuth(), p.azimuthFn(), p.azimuthParams(),
                                 p.curveFn(), p.curveParams(), p.secondaryTrunk(), p.secondaryTrunkStart(),
-                                p.secondaryTrunkEnd(), p.canopy(), dSec.getInt(defName, p.weight())
+                                p.secondaryTrunkEnd(), p.canopy(), p.capTrunk(), p.count(), dSec.getInt(defName, p.weight()), p.decorators()
                             ));
                         }
                     }
@@ -179,14 +296,26 @@ public final class TreeGenConfig {
                 if (treesObj instanceof io.github.dailystruggle.rtp.common.configuration.yaml.RtpYamlSection tSec) {
                     trees = new ArrayList<>();
                     for (String tId : tSec.getKeys(false)) {
-                        trees.add(new TreeSpecies.WeightedSpecies(tId, tSec.getInt(tId, 1)));
+                        String resolvedId = tId.toLowerCase(Locale.ROOT);
+                        if (!registered.containsKey(resolvedId)) {
+                            String alt = resolvedId.replace("_", "-");
+                            if (registered.containsKey(alt)) {
+                                resolvedId = alt;
+                            } else {
+                                alt = resolvedId.replace("-", "_");
+                                if (registered.containsKey(alt)) {
+                                    resolvedId = alt;
+                                }
+                            }
+                        }
+                        trees.add(new TreeSpecies.WeightedSpecies(resolvedId, tSec.getInt(tId, 1)));
                     }
                 }
 
                 speciesMap.put(key, new TreeSpecies(
                     existing.id(), existing.displayName(), existing.namespace(), existing.group(),
                     biomes, existing.saplingItem(), worldgen, replaceVanilla, spacing, separation, salt, spreadType, step,
-                    existing.variants(), existing.procedural(), trees, treeDefs, weight
+                    existing.variants(), existing.procedural(), trees, treeDefs, weight, existing.growth(), featureConfig
                 ));
                 platform.logger().info("Configured species '" + key + "': worldgen=" + worldgen + ", biomes=" + biomes.size());
             }
@@ -227,7 +356,10 @@ public final class TreeGenConfig {
             }
         } while (added);
 
-        return new TreeGenConfig(finalMap, packName, packDescription, mode);
+        TreeGenConfig config = new TreeGenConfig(finalMap, packName, packDescription, mode, timeAllocationMs, maxBlocksPerTick);
+        config.setSaplingDropChance(saplingDropChance);
+        config.setWaterGrowthTrees(waterGrowthTrees);
+        return config;
     }
 
     /**
@@ -274,8 +406,8 @@ public final class TreeGenConfig {
             String sapling = (String) sec.getOrDefault("sapling-item", "OAK_SAPLING");
             boolean worldgen = sec.containsKey("worldgen") ? (boolean) sec.get("worldgen") : !biomes.isEmpty();
             boolean replaceVanilla = sec.containsKey("replace-vanilla") ? (boolean) sec.get("replace-vanilla") : (sec.containsKey("replace_vanilla") ? (boolean) sec.get("replace_vanilla") : false);
-            int spacing = (int) sec.getOrDefault("spacing", 3);
-            int separation = (int) sec.getOrDefault("separation", 2);
+            int spacing = (int) sec.getOrDefault("spacing", 12);
+            int separation = (int) sec.getOrDefault("separation", 6);
             int salt = (int) sec.getOrDefault("salt", -1);
             String spreadType = ((String) sec.getOrDefault("spread-type", "linear")).toLowerCase(Locale.ROOT);
             String step = (String) sec.getOrDefault("step", "surface_structures");

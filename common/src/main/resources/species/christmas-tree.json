@@ -1,0 +1,97 @@
+[
+  {
+    "name": "christmas-tree",
+    "comment": "christmas tree - festive decorated spruce, colored ornaments and glowstone baubles plus glowing end-rod icicles on the branch tips, light snow dusting (no top star: canopy_top caps every column, not just the apex)",
+    "trunk": "minecraft:spruce_log",
+    "leaves": "minecraft:spruce_leaves",
+    "secondary_leaves": "minecraft:snow_block",
+    "secondary_leaf_fraction": 0.06,
+    "profile": "spruce",
+    "height_min": 14,
+    "height_max": 18,
+    "seed": 5300,
+    "count": 1,
+    "trunk_width": 2,
+    "trunk_shape": "linear",
+    "trunk_shape_params": { "start": 1.0, "end": 0.7 },
+    "canopy": {
+      "start_angle": 130,
+      "squish": 1.0,
+      "mode": "trimmed",
+      "leaf_density": 0.9,
+      "crown_volume_fraction": 0.66,
+      "branches": {
+        "prob_fn": "constant",
+        "prob_params": { "p": 0.34 },
+        "length_fn": "linear",
+        "length_params": { "base": 4, "crown": 1 },
+        "azimuth": "random",
+        "elevation": 0,
+        "leaf_start_up": false,
+        "cluster_radius": 2,
+        "cluster_mode": "trimmed",
+        "cluster_density": 0.85,
+        "sub_branches": {
+          "count": 2,
+          "pitch_delta": -18,
+          "yaw_delta": 60,
+          "length_scale": 0.5,
+          "cluster_radius": 2,
+          "cluster_mode": "trimmed"
+        }
+      }
+    },
+    "decorators": [
+      {
+        "target": "branch_tip",
+        "block": "minecraft:red_stained_glass",
+        "chance": 0.2
+      },
+      {
+        "target": "branch_tip",
+        "block": "minecraft:blue_stained_glass",
+        "chance": 0.16
+      },
+      {
+        "target": "branch_tip",
+        "block": "minecraft:yellow_stained_glass",
+        "chance": 0.12
+      },
+      {
+        "target": "branch_tip",
+        "block": "minecraft:shroomlight",
+        "chance": 0.12
+      },
+      {
+        "target": "branch_tip",
+        "block": "minecraft:sea_lantern",
+        "chance": 0.1
+      },
+      {
+        "target": "branch_tip",
+        "block": "minecraft:ochre_froglight",
+        "chance": 0.1
+      },
+      {
+        "target": "branch_tip",
+        "block": "minecraft:verdant_froglight",
+        "chance": 0.1
+      },
+      {
+        "target": "branch_tip",
+        "block": "minecraft:pearlescent_froglight",
+        "chance": 0.1
+      },
+      {
+        "target": "branch_tip",
+        "block": "minecraft:glowstone",
+        "chance": 0.08
+      },
+      {
+        "target": "branch_tip",
+        "block": "minecraft:end_rod[facing=down]",
+        "chance": 0.18
+      }
+    ]
+  }
+]

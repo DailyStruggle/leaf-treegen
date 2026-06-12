@@ -25,10 +25,76 @@ public record TreeSpecies(
         ProceduralParams procedural,
         List<WeightedSpecies> trees, // Optional: for group placement
         Map<String, ProceduralParams> treeDefinitions, // Named tree definitions within this species
-        int weight // Species-level weight for placement
+        int weight, // Species-level weight for placement
+        GrowthParams growth, // Staged-growth settings (never null; disabled by default)
+        FeatureConfig featureConfig // Optional: vanilla minecraft:tree feature placement for vanilla-like density; null when unused
 ) {
 
+        /**
+         * Backwards-compatible constructor without the {@link GrowthParams} component.
+         * Defaults growth to {@link GrowthParams#disabled()} so existing call sites that
+         * predate the growth mechanic keep compiling and behave as before (instant placement).
+         */
+        public TreeSpecies(
+                String id, String displayName, String namespace, String group, Set<String> biomes,
+                String saplingItem, boolean worldgen, boolean replaceVanilla, int spacing, int separation,
+                int salt, String spreadType, String step, List<TreeVariant> variants, ProceduralParams procedural,
+                List<WeightedSpecies> trees, Map<String, ProceduralParams> treeDefinitions, int weight) {
+                this(id, displayName, namespace, group, biomes, saplingItem, worldgen, replaceVanilla, spacing,
+                        separation, salt, spreadType, step, variants, procedural, trees, treeDefinitions, weight,
+                        GrowthParams.disabled(), null);
+        }
+
+        /**
+         * Backwards-compatible constructor without the {@link FeatureConfig} component.
+         * Defaults {@code featureConfig} to {@code null} (NBT/jigsaw placement, the historical
+         * behavior) so existing call sites that predate vanilla-feature placement keep compiling.
+         */
+        public TreeSpecies(
+                String id, String displayName, String namespace, String group, Set<String> biomes,
+                String saplingItem, boolean worldgen, boolean replaceVanilla, int spacing, int separation,
+                int salt, String spreadType, String step, List<TreeVariant> variants, ProceduralParams procedural,
+                List<WeightedSpecies> trees, Map<String, ProceduralParams> treeDefinitions, int weight,
+                GrowthParams growth) {
+                this(id, displayName, namespace, group, biomes, saplingItem, worldgen, replaceVanilla, spacing,
+                        separation, salt, spreadType, step, variants, procedural, trees, treeDefinitions, weight,
+                        growth, null);
+        }
+
+        /** Compact canonical constructor: never store a null {@link GrowthParams}. */
+        public TreeSpecies {
+                if (growth == null) growth = GrowthParams.disabled();
+        }
+
+        /**
+         * Staged-growth settings for a species. The admin authors only whether growth is
+         * {@code enabled} and the total wall-clock time (in ticks) a planted tree takes to
+         * fully reveal; all stage boundaries and per-stage durations are derived from the
+         * baked structure by {@link GrowthPlanner}.
+         */
+        public record GrowthParams(boolean enabled, long totalTime) {
+                private static final GrowthParams DISABLED = new GrowthParams(false, 0L);
+
+                /** Shared disabled instance (growth off, instant placement). */
+                public static GrowthParams disabled() {
+                        return DISABLED;
+                }
+        }
+
         public record TreeVariant(String location, int weight) {}
+
+        /**
+         * Optional vanilla-feature placement for a species. When present, the datapack
+         * generator places vanilla {@code minecraft:tree} configured features (selected from
+         * {@link #trees}) via the species' jigsaw structure, applying a per-placement
+         * {@link #treesPerPlacement} count so a single structure placement scatters multiple trees. This yields
+         * vanilla-like tree density (e.g. old-growth pine taiga) which the one-tree-per-structure
+         * NBT path cannot reach. Cross-platform: pure datapack, no custom worldgen feature.
+         */
+        public record FeatureConfig(int treesPerPlacement, List<WeightedFeature> trees) {}
+
+        /** A vanilla configured-feature id (e.g. {@code minecraft:mega_pine}) with a selection weight. */
+        public record WeightedFeature(String feature, int weight) {}
 
         public record WeightedSpecies(String id, int weight) {}
 
@@ -52,7 +118,22 @@ public record TreeSpecies(
                 double secondaryTrunkStart,
                 double secondaryTrunkEnd,
                 CanopyParams canopy,
-                int weight
+                boolean capTrunk,
+                int count,  // Number of distinct NBT variants to bake (variety only; does NOT affect placement frequency)
+                int weight, // Relative placement weight, independent of count
+                List<Decorator> decorators // Accent block placements (vines, cobwebs, fungus, etc.)
+        ) {}
+
+        /**
+         * Accent block placement applied after the trunk/canopy are built. Mirrors the
+         * offline Python {@code decorators.py} targets so the live/sapling generator and the
+         * datapack baker render the same accents that the NBT export tool would.
+         */
+        public record Decorator(
+                String target,  // branch_tip | trunk_surface | canopy_top | canopy_bottom | trunk_base
+                String block,   // Block id to place
+                double chance,  // Per-candidate placement chance (0..1)
+                boolean axisAware // When true, inject facing=<away-from-trunk> on the block
         ) {}
 
         public record CanopyParams(
@@ -61,7 +142,12 @@ public record TreeSpecies(
                 List<Layer> layers,
                 BranchParams branches,
                 String secondaryLeaves,
-                double secondaryFraction
+                double secondaryFraction,
+                boolean volumeLayers,
+                double leafVerticalScale,
+                Double crownVolumeFraction,
+                String undersideLeaves, // Block placed across the underside (bottom layer) of the canopy, e.g. glow blocks
+                double undersideChance   // Per-block chance (0..1) of replacing a bottom-layer leaf with undersideLeaves
         ) {
                 public record Layer(int yOffset, double radius) {}
         }
@@ -75,8 +161,24 @@ public record TreeSpecies(
                 double minElevation,
                 double maxElevation,
                 double spacing,
-                double startHeight
-        ) {}
+                double startHeight,
+                int clusterRadius,
+                String clusterMode,
+                double clusterDensity,
+                String probFn,
+                Map<String, Double> probParams,
+                SubBranchParams subBranches
+        ) {
+                public record SubBranchParams(
+                        int count,
+                        double pitchDelta,
+                        double yawDelta,
+                        double lengthScale,
+                        int clusterRadius,
+                        String clusterMode,
+                        double clusterDensity
+                ) {}
+        }
 
     public int effectiveSalt() {
         return salt >= 0 ? salt : (id.hashCode() & 0x7fffffff) % 1_000_000;

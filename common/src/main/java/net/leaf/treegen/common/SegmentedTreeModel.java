@@ -25,9 +25,8 @@ public final class SegmentedTreeModel {
         Map<TreeModel.BlockPos, String> blocks = model.getBlocks();
         if (blocks.isEmpty()) return;
 
-        // Simple segmentation: group by Y levels or small 3D regions
-        // For trees, Y-levels (slices) are often good segments
-        Map<Integer, Map<TreeModel.BlockPos, String>> ySlices = new TreeMap<>();
+        // Group by Y levels and sort them descending (top-to-bottom)
+        Map<Integer, Map<TreeModel.BlockPos, String>> ySlices = new TreeMap<>(Collections.reverseOrder());
         for (Map.Entry<TreeModel.BlockPos, String> entry : blocks.entrySet()) {
             ySlices.computeIfAbsent(entry.getKey().y(), k -> new HashMap<>()).put(entry.getKey(), entry.getValue());
         }
@@ -66,17 +65,51 @@ public final class SegmentedTreeModel {
     }
 
     public void place(Platform platform, String worldName, int ox, int oy, int oz) {
-        int placed = 0;
+        long startTime = System.nanoTime();
+        Map<Long, Map<TreeModel.BlockPos, String>> chunks = new HashMap<>();
+        
         for (Segment segment : segments) {
             for (int i = 0; i < segment.blockIndices.length; i++) {
-                int rx = segment.relativePositions[i * 2] & 0xFF;
-                int rz = segment.relativePositions[i * 2 + 1] & 0xFF;
+                int worldX = ox + segment.offsetX + (segment.relativePositions[i * 2] & 0xFF);
+                int worldY = oy + segment.offsetY;
+                int worldZ = oz + segment.offsetZ + (segment.relativePositions[i * 2 + 1] & 0xFF);
                 String state = palette.get(segment.blockIndices[i] & 0xFF);
-                platform.setBlock(worldName, ox + segment.offsetX + rx, oy + segment.offsetY, oz + segment.offsetZ + rz, state);
-                placed++;
+                
+                int cx = worldX >> 4;
+                int cz = worldZ >> 4;
+                long key = ((long) cx << 32) | (cz & 0xFFFFFFFFL);
+                
+                chunks.computeIfAbsent(key, k -> new LinkedHashMap<>())
+                      .put(new TreeModel.BlockPos(worldX, worldY, worldZ), state);
             }
         }
-        platform.logger().info("[DEBUG_LOG] Model " + speciesId + " placed " + placed + " blocks at " + ox + "," + oy + "," + oz);
+        long groupTime = System.nanoTime();
+
+        int placed = 0;
+        // Use a list and sort chunks by key once to ensure stable order if needed, 
+        // but avoid TreeMap for the inner collections.
+        List<Long> chunkKeys = new ArrayList<>(chunks.keySet());
+        Collections.sort(chunkKeys);
+
+        for (long key : chunkKeys) {
+            int cx = (int) (key >> 32);
+            int cz = (int) key;
+            Map<TreeModel.BlockPos, String> chunkBlocks = chunks.get(key);
+            
+            if (!platform.setBlocks(worldName, cx, cz, chunkBlocks)) {
+                platform.logger().warning("[LeafTreeGen] Ceasing placements for model " + speciesId + " due to previous error.");
+                return;
+            }
+            placed += chunkBlocks.size();
+        }
+        long endTime = System.nanoTime();
+        
+        double totalMs = (endTime - startTime) / 1_000_000.0;
+        double groupMs = (groupTime - startTime) / 1_000_000.0;
+        if (totalMs > 10.0) {
+            platform.logger().info(String.format("[LeafTreeGen Profiling] %s placed at %d,%d,%d: %.2fms total (Grouping: %.2fms, Blocks: %d)", 
+                speciesId, ox, oy, oz, totalMs, groupMs, placed));
+        }
     }
 
     public String getSpeciesId() {

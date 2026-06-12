@@ -49,6 +49,11 @@ jar {
             .collect { zipTree(it) }
     }
 
+    // Never let a shaded dependency's plugin descriptor leak into our jar.
+    // This plugin ships a paper-plugin.yml (bootstrap-based); a stray plugin.yml
+    // from a shaded library (e.g. CommandsAPI) would otherwise be picked up.
+    exclude 'plugin.yml'
+
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 

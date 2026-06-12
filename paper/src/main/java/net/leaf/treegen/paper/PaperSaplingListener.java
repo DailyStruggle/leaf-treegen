@@ -1,6 +1,7 @@
 package net.leaf.treegen.paper;
 
 import net.leaf.treegen.common.TreeSpecies;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -53,7 +54,16 @@ public final class PaperSaplingListener implements Listener {
             return;
         }
 
-        Block target = event.getClickedBlock().getRelative(BlockFace.UP);
+        Block clicked = event.getClickedBlock();
+        Block target = clicked.getRelative(BlockFace.UP);
+
+        // Most trees can't take root on or in water (or other liquids). Species listed under
+        // 'water-growth-trees' in config.yml (e.g. swamp trees) are exempt and may grow on water.
+        if (!plugin.config().allowsWaterGrowth(species.id()) && (isLiquid(clicked) || isLiquid(target))) {
+            player.sendMessage(Component.text(species.displayName() + " won't take root on water.", NamedTextColor.YELLOW));
+            return;
+        }
+
         Location base = target.getLocation();
 
         String biome = plugin.platform().getBiomeKey(base.getWorld().getName(), base.getBlockX(), base.getBlockY(), base.getBlockZ());
@@ -69,13 +79,43 @@ public final class PaperSaplingListener implements Listener {
         }
 
         String variant = variants.get(random.nextInt(variants.size()));
-        boolean placed = plugin.platform().placeStructure(base.getWorld().getName(), base.getBlockX(), base.getBlockY(), base.getBlockZ(), variant);
         
-        if (placed) {
-            if (player.getGameMode() != GameMode.CREATIVE) inHand.setAmount(inHand.getAmount() - 1);
-            player.sendMessage(Component.text("A " + species.displayName() + " springs up!", NamedTextColor.GREEN));
-        } else {
-            player.sendMessage(Component.text("The sapling failed to grow.", NamedTextColor.RED));
+        final String finalWorldName = base.getWorld().getName();
+        final int finalX = base.getBlockX();
+        final int finalY = base.getBlockY();
+        final int finalZ = base.getBlockZ();
+        final String finalVariant = variant;
+        final String finalDisplayName = species.displayName();
+        final ItemStack finalInHand = inHand;
+        final boolean isCreative = player.getGameMode() == GameMode.CREATIVE;
+
+        Bukkit.getRegionScheduler().run(plugin, base, task -> {
+            boolean placed = plugin.platform().placeStructure(finalWorldName, finalX, finalY, finalZ, finalVariant);
+
+            // Send feedback on the same thread/next tick safely
+            Bukkit.getRegionScheduler().run(plugin, base, t -> {
+                if (placed) {
+                    int radius = net.leaf.treegen.common.SaplingDropResolver.estimateCanopyRadius(species);
+                    int height = net.leaf.treegen.common.SaplingDropResolver.estimateHeight(species);
+                    plugin.farmStore().recordTree(finalWorldName, finalX, finalY, finalZ, radius, height, species.id());
+                    if (!isCreative) finalInHand.setAmount(finalInHand.getAmount() - 1);
+                    player.sendMessage(Component.text("A " + finalDisplayName + " springs up!", NamedTextColor.GREEN));
+                } else {
+                    player.sendMessage(Component.text("The sapling failed to grow.", NamedTextColor.RED));
+                }
+            });
+        });
+    }
+
+    /**
+     * Returns {@code true} if the block is a liquid (water or lava) or is waterlogged, meaning a
+     * tree should not be planted on or in it.
+     */
+    private static boolean isLiquid(Block block) {
+        if (block.isLiquid()) {
+            return true;
         }
+        org.bukkit.block.data.BlockData data = block.getBlockData();
+        return data instanceof org.bukkit.block.data.Waterlogged waterlogged && waterlogged.isWaterlogged();
     }
 }

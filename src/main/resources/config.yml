@@ -1,11 +1,12 @@
 # LeafTreeGen configuration.
 #
 # Each entry under 'species' binds a tree type to a group of generated structure
-# templates. Templates are authored by tools/tree-gen and shipped in the
-# leaf-worldgen datapack as
+# templates. For procedural species the plugin BAKES the structure templates
+# itself (in Java) when it generates the worldgen datapack, writing
 #   data/<namespace>/structure/<group>/<variant>.nbt
 # addressable as <namespace>:<group>/<variant>. All .nbt files in <group> are
-# treated as interchangeable variants of the species.
+# treated as interchangeable variants of the species. (The tools/tree-gen Python
+# project is kept only as a reference for the prior, externally-baked model.)
 #
 # On enable and on "/leaftree reload" this plugin GENERATES a worldgen datapack
 # from the values below (one jigsaw structure_set -> structure -> template_pool
@@ -41,12 +42,32 @@
 #   step         : worldgen generation step. Default: surface_structures.
 
 # Generation Mode:
-# DATAPACK:   Generates a vanilla worldgen datapack (recommended for performance and native behavior).
+# DATAPACK:   Pure datapack placement (recommended). The plugin bakes N structure
+#             variants per tree (N = each tree's 'count') and lets vanilla worldgen
+#             place them natively. No runtime block placement.
 # PROCEDURAL: Places trees at runtime during chunk load. If 'procedural' block is present, uses the
 #             procedural algorithm; otherwise, it places random .nbt structure variants.
 # BOTH:       Both DATAPACK and PROCEDURAL (likely redundant).
 # NONE:       Only manual placement (commands and saplings).
-generation-mode: BOTH
+generation-mode: DATAPACK
+
+# Time allocation in milliseconds and maximum block placements per tick per regional thread.
+# This helps prevent MSPT spikes by spreading large tree generation over multiple ticks.
+time-allocation-ms: 5.0
+max-blocks-per-tick: 1000
+
+# Chance (0..1) that a decaying or broken custom-tree leaf drops that tree's
+# species-tagged sapling, letting players replant and farm the same tree. The
+# species is resolved first from where trees actually grew (tracked per chunk)
+# and otherwise from the biome + leaf block type. Set to 0 to disable.
+sapling-drop-chance: 0.05
+
+# Species (by id) that are allowed to take root on or in water (water/lava/
+# waterlogged blocks), e.g. swamp trees. Every other species is rejected when a
+# sapling is planted on water or when vanilla worldgen would place it on water.
+# Use the species id as defined in the 'species/' directory.
+water-growth-trees:
+  - swamp
 
 datapack:
   name: leaf-treegen-generated
@@ -57,107 +78,245 @@ datapack:
 # You can override worldgen placement settings here.
 placement:
   # Forest & Plains
+  # NOTE: Dark oak (dark-forest-megas) is intentionally NOT placed here.
+  # Dark oak must only spawn in the dark_forest biome (enforced per-chunk by
+  # the biome check on each placement group's 'biomes' list), so the forest
+  # biome group uses the regular forest species instead.
+  # Forest is a dense vanilla biome (~10 trees/chunk). The one-tree-per-structure
+  # NBT path tops out at ~1 tree/chunk, so (like old-growth pine taiga and jungle)
+  # we place vanilla minecraft:tree configured features (oak + birch + fancy oak)
+  # through this species' jigsaw structure and scatter several per placement
+  # (trees-per-placement) to reach vanilla-like density. Pure datapack, cross-platform.
   forest:
     biomes:
       - "forest"
+    replace-vanilla: true
+    spacing: 1
+    separation: 0
+    trees-per-placement: 10
+    feature-trees:
+      - "minecraft:oak 6"
+      - "minecraft:birch 2"
+      - "minecraft:fancy_oak 2"
+
+  # Flower forest IS still a forest, just a light/open one: it should read as
+  # scattered trees among the flowers, not as bare grassland. We keep the custom
+  # small-to-mid oak NBT trees here (so individual trees stay visible and the
+  # medium oaks stay sparse) but tighten spacing from 5/2 to 3/1 so the canopy
+  # reads as a sparse forest rather than plains-level emptiness. We deliberately
+  # do NOT convert it to the dense feature-trees path (forest/taiga/jungle) - that
+  # would bury the flowers that define the biome.
+  flower_forest:
+    biomes:
       - "flower_forest"
+    replace-vanilla: true
+    spacing: 3
+    separation: 1
+    trees:
+      oak-small-mid: 100
+
+  # Plains: only oak, small-to-mid, sparse (fewer than flower forest).
+  plains:
+    biomes:
       - "plains"
+    replace-vanilla: true
+    spacing: 8
+    separation: 4
+    trees:
+      oak-small-mid: 100
+
+  # Meadow: only oak, small-to-mid, sparse, with a sprinkling of azalea trees.
+  meadow:
+    biomes:
       - "meadow"
     replace-vanilla: true
-    spacing: 1
-    separation: 0
+    spacing: 8
+    separation: 4
     trees:
-      dark_forest_megas: 100
+      oak-small-mid: 85
+      meadow-azalea: 15
 
-  # Dense Dark Forest with multi-layered Dark Oak
-  dense_dark_forest_canopy:
+  # Multi-layered Dark Oak canopy. All three layers are restricted to the
+  # dark_forest biome only (chunk-level biome check), so dark oak never spawns
+  # outside dark forests. Lower spacing/separation => higher tree population.
+  #
+  # Canopy 1 (understory) - lit shrooms (glowcap) emit shroomlight as the only
+  # light source on an otherwise dark forest floor. Wide spacing so the glowing
+  # shrooms appear only occasionally, dotted across the understory rather than
+  # blanketing it.
+  dark_forest_understory:
     biomes:
       - "dark_forest"
     replace-vanilla: true
-    spacing: 1
-    separation: 0
+    spacing: 10
+    separation: 5
     trees:
-      dark_forest_megas: 100
+      glowcap: 100
 
-  dense_dark_forest_understory:
+  # Floor litter - tiny glowing shrooms / nubs (dark-forest-floor-lights) that
+  # emit shroomlight at ground level, scattered occasionally across the dark
+  # forest floor so the floor is littered with small flecks of light between the
+  # wider-spaced glowcap understory. Denser than the glowcap layer but still only
+  # an occasional accent, not a blanket.
+  dark_forest_floor_lights:
+    biomes:
+      - "dark_forest"
+    replace-vanilla: false
+    spacing: 3
+    separation: 1
+    trees:
+      dark-forest-floor-lights: 100
+
+  # Canopy 2 (midstory / mid-size dark oak) - dense population.
+  # Uses the dedicated dark-forest-mids species, which contains ONLY the
+  # small/medium and twisted dark oaks (height 7-22). The tall titan/spiral
+  # definitions live exclusively in dark-forest-megas (canopy 3), so the
+  # midstory always stays strictly below the tall canopy. (Note: per-definition
+  # weights are floored at 1 by the engine, so a tall species cannot simply be
+  # weighted out -- it must be excluded from the species itself.)
+  dark_forest_midstory:
     biomes:
       - "dark_forest"
     replace-vanilla: true
-    spacing: 1
-    separation: 0
+    spacing: 4
+    separation: 2
     trees:
-      # Mix of medium dark oak varieties for a thick forest floor
-      dark_forest_megas: 100
-  dark_forest:
+      dark-forest-mids: 100
+
+  # Canopy 3 (tall dark oak / spiral crown) - dense, but pulled back from the
+  # previous max (spacing 1 / separation 0) so the tall spiral crowns no longer
+  # blanket the entire forest floor. spacing 2 / separation 1 thins the tall
+  # canopy, letting more light reach the understory and floor litter below.
+  # Still restricted to dark_forest only.
+  dark_forest_canopy:
     biomes:
       - "dark_forest"
     replace-vanilla: true
-    spacing: 1
-    separation: 0
+    spacing: 2
+    separation: 1
     trees:
-      dark_forest_megas: 100
-  dark_forest_megas:
-    biomes:
-      - "dark_forest"
-    weight: 90
-    definitions:
-      titan: 100
-      spiral: 1
-    spacing: 1
-    separation: 0
+      dark-forest-megas: 100
 
-  # Birch
-  birch_forest:
+  # Birch forest is a dense vanilla biome (~10 trees/chunk). As with the other
+  # dense biomes we place vanilla minecraft:tree configured features (birch, with
+  # a few oaks) through this species' jigsaw structure and scatter several per
+  # placement to reach vanilla-like density. Pure datapack, cross-platform.
+  birch-forest:
     biomes:
       - "birch_forest"
-    spacing: 4
-    separation: 2
-    trees:
-      birch_forest: 90
-      forest: 10
-  old_growth_birch_forest:
+    replace-vanilla: true
+    spacing: 1
+    separation: 0
+    trees-per-placement: 10
+    feature-trees:
+      - "minecraft:birch 9"
+      - "minecraft:oak 1"
+  old-growth-birch-forest:
     biomes:
       - "old_growth_birch_forest"
-    spacing: 4
-    separation: 2
+    replace-vanilla: true
+    spacing: 3
+    separation: 1
     trees:
       maple_birch_giants: 50
-      old_growth_birch_forest: 50
+      old-growth-birch-forest: 50
 
   # Taiga & Snowy
+  # Taiga is a dense vanilla biome (~10 spruce/pine per chunk). As with the other
+  # dense biomes we place vanilla minecraft:tree configured features (spruce +
+  # pine) through this species' jigsaw structure and scatter several per placement
+  # to reach vanilla-like density. Pure datapack, cross-platform.
   taiga:
     biomes:
       - "taiga"
+    replace-vanilla: true
+    spacing: 1
+    separation: 0
+    trees-per-placement: 10
+    feature-trees:
+      - "minecraft:spruce 6"
+      - "minecraft:pine 4"
+  # Snowy taiga is now all evergreen conifers (small through mega) plus the
+  # frost-laden glacierpine spruce for a colder look. The regular conical taiga
+  # spruce is no longer used here; the tall trees are full large evergreens
+  # rather than a small cap on a thin trunk.
+  snowy_taiga:
+    biomes:
       - "snowy_taiga"
-    spacing: 4
-    separation: 2
+    replace-vanilla: true
+    spacing: 3
+    separation: 1
     trees:
-      taiga: 90
-      glacierpine: 10
-  old_growth_pine_taiga:
+      evergreen: 75
+      glacierpine: 25
+  # Very rare festive landmark: a decorated christmas tree (glowing star, colored
+  # ornaments) scattered extremely sparsely through the snowy taiga. Additive
+  # overlay (does not suppress the primary snowy_taiga trees) with very wide
+  # spacing so it shows up only as an occasional surprise.
+  christmas-tree:
+    biomes:
+      - "snowy_taiga"
+    weight: 1
+    spacing: 96
+    separation: 48
+    trees:
+      christmas-tree: 100
+  # Old-growth pine/spruce taiga is a very dense vanilla biome. The one-tree-per-
+  # structure NBT path tops out at ~1 tree per chunk, so instead we place vanilla
+  # minecraft:tree configured features (mega pine + pine + spruce) through this
+  # species' jigsaw structure and scatter several per placement (trees-per-placement)
+  # so the biome reaches vanilla-like density. Pure datapack, cross-platform.
+  old-growth-pine-taiga:
     biomes:
       - "old_growth_pine_taiga"
       - "old_growth_spruce_taiga"
-    spacing: 5
-    separation: 3
-    trees:
-      old_growth_pine_taiga: 80
-      taiga: 20
+    replace-vanilla: true
+    spacing: 1
+    separation: 0
+    trees-per-placement: 10
+    feature-trees:
+      - "minecraft:mega_pine 3"
+      - "minecraft:mega_spruce 1"
+      - "minecraft:pine 5"
+      - "minecraft:spruce 5"
   glacierpine:
     biomes:
       - "snowy_plains"
       - "ice_spikes"
-    spacing: 12
-    separation: 6
+      - "grove"
+      - "snowy_slopes"
+      - "frozen_peaks"
+      - "jagged_peaks"
+    replace-vanilla: true
+    spacing: 6
+    separation: 3
 
-  # Jungle
+  # Jungle is one of the densest vanilla biomes. The one-tree-per-structure NBT
+  # path tops out at ~1 tree per chunk, so (like old-growth pine taiga) we place
+  # vanilla minecraft:tree configured features (jungle + mega jungle + bushes)
+  # through this species' jigsaw structure and scatter several per placement
+  # (trees-per-placement) to reach vanilla-like density. Pure datapack, cross-platform.
   jungle:
     biomes:
       - "jungle"
       - "sparse_jungle"
+    replace-vanilla: true
+    spacing: 1
+    separation: 0
+    trees-per-placement: 10
+    feature-trees:
+      - "minecraft:mega_jungle_tree 1"
+      - "minecraft:jungle_tree 8"
+      - "minecraft:jungle_bush 10"
+  # Bamboo jungle gets its own bamboo-themed species.
+  bamboo_jungle:
+    biomes:
       - "bamboo_jungle"
-    spacing: 6
-    separation: 3
+    replace-vanilla: true
+    spacing: 3
+    separation: 1
+    trees:
+      bamboo-jungle: 100
 
   # Savanna
   savanna:
@@ -165,55 +324,68 @@ placement:
       - "savanna"
       - "savanna_plateau"
       - "windswept_savanna"
+    replace-vanilla: true
     spacing: 5
     separation: 2
 
   # Other Vanilla Biomes
-  cherry_grove:
+  cherry-grove:
     biomes:
       - "cherry_grove"
-    spacing: 4
-    separation: 2
+    replace-vanilla: true
+    spacing: 3
+    separation: 1
+  # Rare giant jacaranda landmark scattered through cherry groves
+  jacaranda-grove:
+    biomes:
+      - "cherry_grove"
+    weight: 10
+    spacing: 48
+    separation: 24
+  # Swamp: weeping vine-draped oak and mangrove-wood trees.
   swamp:
-    # Use forest species (oak) for swamp but with different settings if needed
-    # or we could create a swamp.json later. For now, use forest.
     biomes:
       - "swamp"
       - "mangrove_swamp"
-    spacing: 5
-    separation: 2
+    replace-vanilla: true
+    spacing: 3
+    separation: 1
+    trees:
+      swamp: 100
 
   # Custom/Overworld Mix
   ashwood:
     biomes:
       - "windswept_forest"
       - "windswept_hills"
-    spacing: 6
-    separation: 3
-  rainbow_grove:
+      - "windswept_gravelly_hills"
+    replace-vanilla: true
+    spacing: 5
+    separation: 2
+  rainbow-grove:
     biomes:
       - "meadow"
-    spacing: 8
-    separation: 4
-  maple_birch_giants:
+    spacing: 32
+    separation: 16
+  maple-birch-giants:
     biomes:
       - "old_growth_birch_forest"
-    spacing: 10
-    separation: 5
+    spacing: 40
+    separation: 20
 
   # Fungi (Overworld/Cave/Other)
   glowcap:
     biomes:
       - "lush_caves"
-    spacing: 8
-    separation: 4
+    spacing: 32
+    separation: 16
   cloudcap:
     biomes:
       - "deep_dark"
-    spacing: 10
-    separation: 5
+    spacing: 40
+    separation: 20
   blightroot:
     biomes:
       - "dripstone_caves"
-    spacing: 12
-    separation: 6
+    spacing: 48
+    separation: 24

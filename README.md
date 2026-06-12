@@ -4,7 +4,7 @@ A server-agnostic Minecraft plugin for custom tree generation and natural placem
 
 ## Overview
 
-LeafTreeGen bridges the gap between offline tree structure generation (via `tools/tree-gen`) and in-game world generation. It discovers `.nbt` structure templates in your world's datapacks and enables their natural placement during chunk generation or via special player-planted saplings.
+LeafTreeGen generates trees in pure Java and places them natively via Minecraft's worldgen. When generating its datapack the plugin bakes each procedural species into N vanilla structure templates (`.nbt`) - N being each tree's `count` - and wires them into jigsaw template pools for natural placement during chunk generation or via special player-planted saplings. It also discovers any pre-existing `.nbt` templates in your world's datapacks. (The `tools/tree-gen` Python project is retained only as a reference for the prior, externally-baked model.)
 
 ## Architecture
 
@@ -20,8 +20,8 @@ This is a multi-platform Gradle project designed to support multiple server envi
 1. **Jigsaw-based Worldgen**: Instead of placing structures at runtime via listeners (which is fragile and heavy), the plugin generates a standard vanilla worldgen datapack on the fly. This allows Minecraft's native jigsaw and structure systems to handle placement efficiently.
 2. **Platform Abstraction**: All core logic interacts with a `Platform` interface, making the plugin portable and easy to maintain across different server implementations.
 3. **Parameter-based Commands**: Uses `CommandsAPI` to provide a modern, discoverable command interface for administrators.
-4. **Offline Generation Integration**: Built specifically to consume the output of the project's Python-based tree generation pipeline.
-5. **Procedural Engine**: Includes a Java port of the Python geometry engine, allowing trees to be generated algorithmically from parameters in `config.yml` without pre-generated NBT files.
+4. **Java-side Structure Baking**: Procedural species are baked into vanilla structure templates (`.nbt`) directly in Java at datapack-generation time, so no external tooling is required. The `tools/tree-gen` Python project is kept only as a reference for the prior, externally-baked model.
+5. **Procedural Engine**: Includes a Java geometry engine, allowing trees to be generated algorithmically from parameters in `config.yml` without pre-generated NBT files.
 
 ## Requirements
 
@@ -32,6 +32,8 @@ This is a multi-platform Gradle project designed to support multiple server envi
 ## Configuration
 
 The plugin's behavior is configured via `config.yml`, while tree species are defined in individual JSON files within the `species/` directory.
+
+For the demo world, see [docs/biome-trees.md](docs/biome-trees.md) for the table mapping each vanilla biome to its iconic tree species.
 
 ### Species Definitions (`species/*.json`)
 
@@ -71,12 +73,11 @@ placement:
 
 To add a new tree species to the server:
 
-1.  **Define the Geometry**: Use the Python tool in `tools/tree-gen/`.
-2.  **Generate the NBT** (Optional): Run the generator script if you want pre-baked structures.
-3.  **Deploy**:
-    - Place `.nbt` files in a datapack (e.g., `datapacks/leaf-worldgen/data/leaf/structure/my_trees/`).
-    - Place the species JSON config in `plugins/leaf-treegen/species/my_tree.json`.
-4.  **Reload**: Run `/leaftree reload` in-game.
+1.  **Define the Species**: Create a species JSON in `plugins/leaf-treegen/species/my_tree.json` (procedural parameters, including `count` for the number of baked variants).
+2.  **Map Placement** (Optional): Add biome/placement overrides under `placement:` in `config.yml`.
+3.  **Reload**: Run `/leaftree reload` in-game. In `DATAPACK` mode the plugin bakes the `.nbt` variants and regenerates the worldgen datapack automatically.
+
+Pre-baked `.nbt` templates may still be dropped into `datapacks/.../data/<namespace>/structure/<group>/` and referenced via `variants`; `tools/tree-gen` can produce these as a reference.
 
 ### Configuration Details
 
@@ -114,7 +115,7 @@ Use the `/leaftree` command (requires `leaftreegen.admin` permission):
 
 ### Generation Modes
 LeafTreeGen can place trees using two different methods, switchable in `config.yml` via `generation-mode`:
-- **`DATAPACK`**: Native jigsaw-based generation via an auto-generated datapack (Recommended).
+- **`DATAPACK`**: Pure-datapack, native jigsaw-based generation via an auto-generated datapack. The plugin bakes N=`count` structure variants per tree in Java (Recommended).
 - **`PROCEDURAL`**: Runtime placement during chunk load.
 - **`BOTH`**: Use both methods.
 - **`NONE`**: Disable automatic placement.

@@ -8,7 +8,7 @@
     "height_min": 5,
     "height_max": 8,
     "seed": 3100,
-    "count": 2,
+    "count": 4,
     "trunk_width": 1,
     "trunk_shape": "constant",
     "trunk_shape_params": {},
@@ -16,7 +16,19 @@
       "start_angle": 122,
       "squish": 1.2,
       "mode": "trimmed",
-      "leaf_density": 0.9
+      "leaf_density": 0.9,
+      "branches": {
+        "prob_fn": "linear",
+        "prob_params": { "base_p": 0.05, "crown_p": 0.55 },
+        "length_fn": "sigmoid",
+        "length_params": { "max_len": 2, "steepness": 5.0 },
+        "azimuth": "random",
+        "elevation": 24,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "trimmed",
+        "cluster_density": 0.88
+      }
     }
   },
   {
@@ -28,7 +40,7 @@
     "height_min": 7,
     "height_max": 10,
     "seed": 3101,
-    "count": 3,
+    "count": 5,
     "trunk_width": 1,
     "trunk_shape": "sine",
     "trunk_shape_params": { "period": 0.7, "amplitude": 0.08 },
@@ -36,7 +48,19 @@
       "start_angle": 120,
       "squish": 1.15,
       "mode": "trimmed",
-      "leaf_density": 0.88
+      "leaf_density": 0.88,
+      "branches": {
+        "prob_fn": "linear",
+        "prob_params": { "base_p": 0.05, "crown_p": 0.58 },
+        "length_fn": "sigmoid",
+        "length_params": { "max_len": 2, "steepness": 5.0 },
+        "azimuth": "random",
+        "elevation": 24,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "trimmed",
+        "cluster_density": 0.87
+      }
     }
   },
   {
@@ -48,7 +72,7 @@
     "height_min": 6,
     "height_max": 9,
     "seed": 3102,
-    "count": 3,
+    "count": 5,
     "trunk_width": 1,
     "trunk_shape": "constant",
     "trunk_shape_params": {},
@@ -56,7 +80,19 @@
       "start_angle": 115,
       "squish": 1.0,
       "mode": "density",
-      "leaf_density": 0.92
+      "leaf_density": 0.92,
+      "branches": {
+        "prob_fn": "linear",
+        "prob_params": { "base_p": 0.06, "crown_p": 0.6 },
+        "length_fn": "sigmoid",
+        "length_params": { "max_len": 2, "steepness": 5.5 },
+        "azimuth": "random",
+        "elevation": 22,
+        "leaf_start_up": true,
+        "cluster_radius": 2,
+        "cluster_mode": "trimmed",
+        "cluster_density": 0.88
+      }
     }
   },
   {
@@ -68,7 +104,7 @@
     "height_min": 12,
     "height_max": 17,
     "seed": 3103,
-    "count": 3,
+    "count": 5,
     "trunk_width": 1,
     "trunk_shape": "log",
     "trunk_shape_params": { "base": 2.0 },
@@ -100,7 +136,7 @@
     "height_min": 14,
     "height_max": 19,
     "seed": 3104,
-    "count": 4,
+    "count": 6,
     "trunk_width": 1,
     "trunk_shape": "sine",
     "trunk_shape_params": { "period": 0.6, "amplitude": 0.1 },
@@ -140,7 +176,7 @@
     "height_min": 15,
     "height_max": 21,
     "seed": 3105,
-    "count": 4,
+    "count": 6,
     "trunk_width": 1,
     "trunk_shape": "sigmoid",
     "trunk_shape_params": { "steepness": 5.0 },
@@ -160,7 +196,7 @@
     "height_min": 20,
     "height_max": 27,
     "seed": 3106,
-    "count": 4,
+    "count": 6,
     "trunk_width": 1,
     "trunk_shape": "sine",
     "trunk_shape_params": { "period": 0.55, "amplitude": 0.12 },
@@ -200,7 +236,7 @@
     "height_min": 22,
     "height_max": 30,
     "seed": 3107,
-    "count": 5,
+    "count": 7,
     "trunk_width": 1,
     "trunk_shape": "log",
     "trunk_shape_params": { "base": 2.2 },
@@ -240,7 +276,7 @@
     "height_min": 26,
     "height_max": 35,
     "seed": 3108,
-    "count": 5,
+    "count": 7,
     "trunk_width": 1,
     "trunk_shape": "linear",
     "trunk_shape_params": { "start": 1.0, "end": 0.8 },

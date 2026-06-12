@@ -1,5 +1,6 @@
 package net.leaf.treegen.common;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
@@ -38,21 +39,25 @@ public final class TreeCache {
 
     public SegmentedTreeModel getOrGenerate(String speciesId, long seed, GeneratorFunction generator) {
         CacheKey key = new CacheKey(speciesId, seed);
-        CachedModel cached = cache.get(key);
         
-        if (cached != null) {
-            cached.uses++;
-            if (maxReuses > 0 && cached.uses >= maxReuses) {
-                cache.remove(key);
+        synchronized (cache) {
+            CachedModel cached = cache.get(key);
+            if (cached != null) {
+                cached.uses++;
+                if (maxReuses > 0 && cached.uses >= maxReuses) {
+                    cache.remove(key);
+                }
+                return cached.model;
             }
-            return cached.model;
         }
 
         TreeModel model = generator.generate(seed);
         if (model == null) return null;
 
         SegmentedTreeModel segmented = new SegmentedTreeModel(model);
-        cache.put(key, new CachedModel(segmented));
+        synchronized (cache) {
+            cache.put(key, new CachedModel(segmented));
+        }
         return segmented;
     }
 

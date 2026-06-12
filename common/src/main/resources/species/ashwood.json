@@ -1,19 +1,19 @@
 [
   {
     "name": "ashwood",
-    "comment": "ashwood small - slim basalt trunk, sparse dead canopy, soul torch tips",
+    "comment": "ashwood small - slim gray pale-oak trunk, sparse dead canopy, cobweb tips",
     "filenames": [
       "ashwood_small_1",
       "ashwood_small_2",
       "ashwood_small_3"
     ],
-    "trunk": "minecraft:basalt",
+    "trunk": "minecraft:pale_oak_log",
     "leaves": "minecraft:dead_bush",
     "profile": "oak",
     "height_min": 6,
     "height_max": 8,
     "seed": 4200,
-    "count": 3,
+    "count": 5,
     "trunk_width": 1,
     "trunk_shape": "log",
     "trunk_shape_params": {
@@ -36,12 +36,12 @@
     "decorators": [
       {
         "target": "branch_tip",
-        "block": "minecraft:soul_torch",
+        "block": "minecraft:cobweb",
         "chance": 0.12
       },
       {
         "target": "trunk_base",
-        "block": "minecraft:basalt",
+        "block": "minecraft:pale_oak_log",
         "chance": 0.35
       }
     ],
@@ -49,19 +49,19 @@
   },
   {
     "name": "ashwood",
-    "comment": "ashwood medium - wider basalt trunk, branching dead crown, soul torch accents",
+    "comment": "ashwood medium - wider gray pale-oak trunk, branching dead crown, cobweb accents",
     "filenames": [
       "ashwood_medium_1",
       "ashwood_medium_2",
       "ashwood_medium_3"
     ],
-    "trunk": "minecraft:basalt",
+    "trunk": "minecraft:pale_oak_log",
     "leaves": "minecraft:dead_bush",
     "profile": "oak",
     "height_min": 9,
     "height_max": 12,
     "seed": 4201,
-    "count": 3,
+    "count": 5,
     "trunk_width": 1,
     "trunk_shape": "log",
     "trunk_shape_params": {
@@ -91,7 +91,7 @@
     "decorators": [
       {
         "target": "branch_tip",
-        "block": "minecraft:soul_torch",
+        "block": "minecraft:cobweb",
         "chance": 0.15
       },
       {
@@ -101,7 +101,7 @@
       },
       {
         "target": "trunk_base",
-        "block": "minecraft:basalt",
+        "block": "minecraft:pale_oak_log",
         "chance": 0.4
       }
     ],
@@ -109,19 +109,19 @@
   },
   {
     "name": "ashwood",
-    "comment": "ashwood tall - thick basalt trunk, gaunt branching crown, ash scatter at base",
+    "comment": "ashwood tall - thick gray pale-oak trunk, gaunt branching crown, deadwood scatter at base",
     "filenames": [
       "ashwood_large_1",
       "ashwood_large_2",
       "ashwood_large_3"
     ],
-    "trunk": "minecraft:basalt",
+    "trunk": "minecraft:pale_oak_log",
     "leaves": "minecraft:dead_bush",
     "profile": "oak",
     "height_min": 13,
     "height_max": 17,
     "seed": 4202,
-    "count": 3,
+    "count": 5,
     "trunk_width": 2,
     "trunk_shape": "log",
     "trunk_shape_params": {
@@ -160,7 +160,7 @@
     "decorators": [
       {
         "target": "branch_tip",
-        "block": "minecraft:soul_torch",
+        "block": "minecraft:cobweb",
         "chance": 0.18
       },
       {
@@ -170,7 +170,7 @@
       },
       {
         "target": "trunk_base",
-        "block": "minecraft:basalt",
+        "block": "minecraft:pale_oak_log",
         "chance": 0.45
       }
     ],

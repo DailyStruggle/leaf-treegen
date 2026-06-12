@@ -44,6 +44,20 @@ public final class DatapackGenerator {
                 platform.logger().warning("No species found in config for datapack generation.");
             }
 
+            // In PROCEDURAL mode the plugin places trees itself at runtime, so the
+            // datapack must contain ONLY the vanilla suppression overrides (no
+            // structure sets / template pools), otherwise vanilla worldgen would
+            // place jigsaw structures on top of the runtime trees.
+            boolean suppressionOnly = config.suppressionOnly();
+
+            // Procedural models are baked into vanilla structure templates so the
+            // pure-datapack worldgen path can place them without any runtime block
+            // placement. Reuse a single generator (with config species for group
+            // resolution) and the platform's data version for all variants.
+            ProceduralGenerator bakeGenerator = new ProceduralGenerator(platform, registry);
+            bakeGenerator.setConfigSpecies(activeSpecies);
+            int dataVersion = platform.getDataVersion();
+
             for (TreeSpecies species : activeSpecies.values()) {
                 if (!species.worldgen()) {
                     platform.logger().info("Species '" + species.id() + "': worldgen disabled; skipping.");
@@ -51,6 +65,19 @@ public final class DatapackGenerator {
                 }
                 if (species.biomes().isEmpty()) {
                     platform.logger().warning("Species '" + species.id() + "': no biomes set; skipping.");
+                    continue;
+                }
+
+                if (suppressionOnly) {
+                    // Runtime (PROCEDURAL) mode: emit only the vanilla suppression
+                    // overrides for species that replace vanilla trees. The trees
+                    // themselves are placed by the plugin at runtime.
+                    if (species.replaceVanilla()) {
+                        writeSuppression(packRoot, species);
+                        platform.logger().info("Species '" + species.id()
+                                + "': generated vanilla suppression features (runtime placement).");
+                        written++;
+                    }
                     continue;
                 }
 
@@ -64,15 +91,22 @@ public final class DatapackGenerator {
                 // No need to duplicate into minecraft namespace in the outer loop anymore
                 // as writeStructureCommon handles it internally now.
 
-                if (species.trees() != null && !species.trees().isEmpty()) {
-                    writeGroupPool(packRoot, species, ns, id, group, poolName, config, registry);
+                if (species.featureConfig() != null && species.featureConfig().trees() != null
+                        && !species.featureConfig().trees().isEmpty()) {
+                    // Vanilla-feature placement: place vanilla minecraft:tree configured features
+                    // via this species' jigsaw structure, scattering several per placement so the
+                    // biome reaches vanilla-like density (the NBT path is one tree per structure).
+                    writeFeaturePool(packRoot, species, ns, id, group, poolName);
+                } else if (species.trees() != null && !species.trees().isEmpty()) {
+                    writeGroupPool(packRoot, species, ns, id, group, poolName, config, registry,
+                            worldName, bakeGenerator, dataVersion);
                 } else {
                     List<String> variants = registry.variantsFor(worldName, species);
                     if (variants.isEmpty() && species.procedural() == null && (species.treeDefinitions() == null || species.treeDefinitions().isEmpty())) {
                         platform.logger().warning("Species '" + species.id() + "': no variants, procedural config, or tree definitions found; skipping.");
                         continue;
                     }
-                    writeSpeciesPool(packRoot, species, ns, id, group, poolName, variants);
+                    writeSpeciesPool(packRoot, species, ns, id, group, poolName, variants, bakeGenerator, dataVersion);
                 }
 
                 if (species.replaceVanilla()) {
@@ -138,8 +172,12 @@ public final class DatapackGenerator {
         }
     }
 
-    private void writeGroupPool(Path packRoot, TreeSpecies species, String ns, String id, String group, String poolName, TreeGenConfig config, TreeRegistry registry) throws IOException {
-        // template_pool (Grouped)
+    private void writeGroupPool(Path packRoot, TreeSpecies species, String ns, String id, String group, String poolName,
+                                TreeGenConfig config, TreeRegistry registry, String worldName,
+                                ProceduralGenerator bakeGenerator, int dataVersion) throws IOException {
+        // template_pool (Grouped). For each referenced child species we bake any
+        // procedural/treeDefinition variants into NBT here too, so the group pool is
+        // fully self-contained even when the child species is not independently active.
         List<Map<String, Object>> elements = new ArrayList<>();
         for (TreeSpecies.WeightedSpecies ws : species.trees()) {
             String[] parts = ws.id().split(":", 2);
@@ -152,57 +190,32 @@ public final class DatapackGenerator {
                 child = config.get(speciesId.replace("_", "-"));
                 if (child == null) child = config.get(speciesId.replace("-", "_"));
             }
-            
+
             if (child == null) {
                 platform.logger().warning("Group '" + id + "' references unknown species '" + speciesId + "'");
                 continue;
             }
 
+            List<Map<String, Object>> childElements;
             if (treeName != null) {
-                // Specific named tree reference
-                Map<String, Object> el = new LinkedHashMap<>();
-                el.put("element_type", "minecraft:single_pool_element");
-                el.put("location", child.namespace() + ":" + child.group() + "/" + treeName);
-                el.put("processors", "minecraft:empty");
-                el.put("projection", "rigid");
-
-                Map<String, Object> entry = new LinkedHashMap<>();
-                entry.put("weight", ws.weight());
-                entry.put("element", el);
-                elements.add(entry);
+                // Specific named tree reference: bake the named definition (honouring count).
+                childElements = bakeNamedTreeElements(packRoot, child, treeName, bakeGenerator, dataVersion);
             } else {
-                // Entire species reference - flatten its variants
-                List<String> variants = registry.variantsFor("world", child);
-                if (child.variants().isEmpty()) {
-                    for (String v : variants) {
-                        Map<String, Object> el = new LinkedHashMap<>();
-                        el.put("element_type", "minecraft:single_pool_element");
-                        el.put("location", v);
-                        el.put("processors", "minecraft:empty");
-                        el.put("projection", "rigid");
+                // Entire species reference - bake + flatten all of its variants.
+                List<String> variants = registry.variantsFor(worldName, child);
+                childElements = bakeAndCollectElements(packRoot, child, variants, bakeGenerator, dataVersion);
+            }
 
-                        Map<String, Object> entry = new LinkedHashMap<>();
-                        entry.put("weight", ws.weight());
-                        entry.put("element", el);
-                        elements.add(entry);
-                    }
-                } else {
-                    for (TreeSpecies.TreeVariant v : child.variants()) {
-                        Map<String, Object> el = new LinkedHashMap<>();
-                        el.put("element_type", "minecraft:single_pool_element");
-                        el.put("location", v.location());
-                        el.put("processors", "minecraft:empty");
-                        el.put("projection", "rigid");
-
-                        Map<String, Object> entry = new LinkedHashMap<>();
-                        entry.put("weight", ws.weight() * v.weight());
-                        entry.put("element", el);
-                        elements.add(entry);
-                    }
-                }
+            for (Map<String, Object> childEntry : childElements) {
+                int baseWeight = ((Number) childEntry.get("weight")).intValue();
+                Map<String, Object> entry = new LinkedHashMap<>();
+                entry.put("weight", Math.max(1, ws.weight()) * baseWeight);
+                entry.put("element", childEntry.get("element"));
+                elements.add(entry);
             }
         }
-        
+
+        normalizePoolWeights(elements);
         Map<String, Object> pool = new LinkedHashMap<>();
         pool.put("name", poolName);
         pool.put("fallback", "minecraft:empty");
@@ -210,55 +223,249 @@ public final class DatapackGenerator {
         writeJson(dataFile(packRoot, ns, "worldgen/template_pool/" + group + "/" + id + ".json"), pool);
     }
 
-    private void writeSpeciesPool(Path packRoot, TreeSpecies species, String ns, String id, String group, String poolName, List<String> variants) throws IOException {
-        // template_pool
+    /**
+     * Bakes the {@code treeName} definition of {@code child} (honouring its {@code count})
+     * and returns the matching pool entries (each with {@code weight}/{@code element}).
+     * Falls back to a single direct location reference when the name is not a procedural
+     * tree definition.
+     */
+    private List<Map<String, Object>> bakeNamedTreeElements(Path packRoot, TreeSpecies child, String treeName,
+                                                            ProceduralGenerator bakeGenerator, int dataVersion) {
+        List<Map<String, Object>> result = new ArrayList<>();
+        String ns = child.namespace();
+        String group = child.group();
+        TreeSpecies.ProceduralParams params =
+                child.treeDefinitions() == null ? null : child.treeDefinitions().get(treeName);
+        if (params != null) {
+            int variantCount = Math.max(1, params.count());
+            int perVariantWeight = variantPoolWeight(params.weight(), variantCount);
+            for (int i = 0; i < variantCount; i++) {
+                String variantName = (variantCount > 1) ? treeName + "_" + (i + 1) : treeName;
+                String location = ns + ":" + group + "/" + variantName;
+                bakeVariant(packRoot, location, child.id() + ":" + treeName, params, bakeGenerator,
+                        variantSeed(child, variantName), dataVersion);
+                result.add(poolEntry(location, perVariantWeight));
+            }
+        } else {
+            // Not a procedural definition: reference the location directly (best effort).
+            result.add(poolEntry(ns + ":" + group + "/" + treeName, variantPoolWeight(1, 1)));
+        }
+        return result;
+    }
+
+    /**
+     * Bakes (when procedural) and collects all pool entries for a species: named
+     * {@code treeDefinitions} (honouring {@code count}), explicit {@code variants},
+     * a single {@code procedural} block, or pre-existing variant locations.
+     */
+    private List<Map<String, Object>> bakeAndCollectElements(Path packRoot, TreeSpecies species, List<String> variants,
+                                                             ProceduralGenerator bakeGenerator, int dataVersion) {
         List<Map<String, Object>> elements = new ArrayList<>();
-        
-        // Add named tree definitions if they exist
+        String ns = species.namespace();
+        String group = species.group();
+        String id = species.id();
+
         if (species.treeDefinitions() != null && !species.treeDefinitions().isEmpty()) {
-            for (String treeName : species.treeDefinitions().keySet()) {
-                Map<String, Object> element = new LinkedHashMap<>();
-                element.put("element_type", "minecraft:single_pool_element");
-                element.put("location", ns + ":" + group + "/" + treeName);
-                element.put("processors", "minecraft:empty");
-                element.put("projection", "rigid");
-                Map<String, Object> entry = new LinkedHashMap<>();
-                entry.put("weight", 1);
-                entry.put("element", element);
-                elements.add(entry);
+            for (Map.Entry<String, TreeSpecies.ProceduralParams> entry : species.treeDefinitions().entrySet()) {
+                String treeName = entry.getKey();
+                TreeSpecies.ProceduralParams params = entry.getValue();
+                int variantCount = Math.max(1, params.count());
+                int perVariantWeight = variantPoolWeight(params.weight(), variantCount);
+                for (int i = 0; i < variantCount; i++) {
+                    String variantName = (variantCount > 1) ? treeName + "_" + (i + 1) : treeName;
+                    String location = ns + ":" + group + "/" + variantName;
+                    bakeVariant(packRoot, location, species.id() + ":" + treeName, params, bakeGenerator,
+                            variantSeed(species, variantName), dataVersion);
+                    elements.add(poolEntry(location, perVariantWeight));
+                }
             }
         }
-        
+
         if (!species.variants().isEmpty()) {
             for (TreeSpecies.TreeVariant v : species.variants()) {
-                Map<String, Object> element = new LinkedHashMap<>();
-                element.put("element_type", "minecraft:single_pool_element");
-                element.put("location", v.location());
-                element.put("processors", "minecraft:empty");
-                element.put("projection", "rigid");
-                Map<String, Object> entry = new LinkedHashMap<>();
-                entry.put("weight", v.weight());
-                entry.put("element", element);
-                elements.add(entry);
+                elements.add(poolEntry(v.location(), variantPoolWeight(v.weight(), 1)));
+            }
+        } else if (species.procedural() != null) {
+            int variantCount = Math.max(1, species.procedural().count());
+            int perVariantWeight = variantPoolWeight(species.procedural().weight(), variantCount);
+            for (int i = 0; i < variantCount; i++) {
+                String variantName = (variantCount > 1) ? id + "_" + (i + 1) : id;
+                String location = ns + ":" + group + "/" + variantName;
+                bakeVariant(packRoot, location, species.id(), species.procedural(), bakeGenerator,
+                        variantSeed(species, variantName), dataVersion);
+                elements.add(poolEntry(location, perVariantWeight));
             }
         } else {
             for (String variant : variants) {
-                Map<String, Object> element = new LinkedHashMap<>();
-                element.put("element_type", "minecraft:single_pool_element");
-                element.put("location", variant);
-                element.put("processors", "minecraft:empty");
-                element.put("projection", "rigid");
-                Map<String, Object> entry = new LinkedHashMap<>();
-                entry.put("weight", 1);
-                entry.put("element", element);
-                elements.add(entry);
+                elements.add(poolEntry(variant, variantPoolWeight(1, 1)));
             }
         }
+        return elements;
+    }
+
+    /**
+     * Common multiple (divisible by every integer 1..10) used to spread a definition's
+     * placement {@code weight} evenly across its {@code count} baked NBT variants. Because
+     * each of the {@code count} pool entries gets {@code weight * WEIGHT_SCALE / count}, the
+     * definition's <em>total</em> pool weight is {@code weight * WEIGHT_SCALE} regardless of
+     * how many NBT files were baked, so the number of variants (variety) no longer affects
+     * how often the tree is placed.
+     */
+    private static final int WEIGHT_SCALE = 2520;
+
+    /** Per-variant pool weight so that {@code count} variants together carry placement weight {@code weight}. */
+    private int variantPoolWeight(int weight, int count) {
+        return Math.max(1, Math.max(1, weight) * WEIGHT_SCALE / Math.max(1, count));
+    }
+
+    /**
+     * Maximum weight Minecraft accepts for a {@code template_pool} element. Weights are
+     * validated against the inclusive range {@code [1, 150]} during registry loading, so
+     * the internally-scaled per-variant weights must be normalised back into this range.
+     */
+    private static final int MAX_POOL_WEIGHT = 150;
+
+    /**
+     * Scales every element weight in a pool proportionally so the largest weight fits within
+     * {@link #MAX_POOL_WEIGHT}, clamping each result into the inclusive {@code [1, 150]} range
+     * Minecraft requires. Relative placement frequencies are preserved as closely as integer
+     * rounding allows. No-op when the pool is empty or already in range.
+     */
+    private void normalizePoolWeights(List<Map<String, Object>> elements) {
+        if (elements.isEmpty()) {
+            return;
+        }
+        int maxWeight = 1;
+        for (Map<String, Object> entry : elements) {
+            maxWeight = Math.max(maxWeight, ((Number) entry.get("weight")).intValue());
+        }
+        if (maxWeight <= MAX_POOL_WEIGHT) {
+            for (Map<String, Object> entry : elements) {
+                entry.put("weight", Math.max(1, ((Number) entry.get("weight")).intValue()));
+            }
+            return;
+        }
+        double scale = (double) MAX_POOL_WEIGHT / maxWeight;
+        for (Map<String, Object> entry : elements) {
+            int original = ((Number) entry.get("weight")).intValue();
+            int scaled = (int) Math.round(original * scale);
+            entry.put("weight", Math.min(MAX_POOL_WEIGHT, Math.max(1, scaled)));
+        }
+    }
+
+    /** Builds a single jigsaw {@code single_pool_element} pool entry. */
+    private Map<String, Object> poolEntry(String location, int weight) {
+        Map<String, Object> element = new LinkedHashMap<>();
+        element.put("element_type", "minecraft:single_pool_element");
+        element.put("location", sanitizeLocation(location));
+        element.put("processors", "minecraft:empty");
+        element.put("projection", "rigid");
+        Map<String, Object> entry = new LinkedHashMap<>();
+        entry.put("weight", weight);
+        entry.put("element", element);
+        return entry;
+    }
+
+    private void writeSpeciesPool(Path packRoot, TreeSpecies species, String ns, String id, String group, String poolName,
+                                  List<String> variants, ProceduralGenerator bakeGenerator, int dataVersion) throws IOException {
+        // template_pool: bake + collect all variant entries for this species.
+        List<Map<String, Object>> elements =
+                bakeAndCollectElements(packRoot, species, variants, bakeGenerator, dataVersion);
+        normalizePoolWeights(elements);
         Map<String, Object> pool = new LinkedHashMap<>();
         pool.put("name", poolName);
         pool.put("fallback", "minecraft:empty");
         pool.put("elements", elements);
         writeJson(dataFile(packRoot, ns, "worldgen/template_pool/" + group + "/" + id + ".json"), pool);
+    }
+
+    /**
+     * Writes the jigsaw pool and placed features for a vanilla-feature species. Each entry in
+     * {@link TreeSpecies.FeatureConfig#trees()} becomes a generated {@code placed_feature} that
+     * wraps the referenced vanilla {@code minecraft:tree} configured feature with the standard
+     * tree placement modifiers ({@code count} = {@code treesPerPlacement}, {@code in_square},
+     * {@code heightmap}, {@code biome}). The species' start pool selects between those placed
+     * features via weighted {@code feature_pool_element}s, so a single structure placement
+     * scatters {@code treesPerPlacement} trees - reaching vanilla-like density purely via the
+     * datapack, with no custom worldgen feature and no biome JSON edits.
+     */
+    private void writeFeaturePool(Path packRoot, TreeSpecies species, String ns, String id, String group,
+                                  String poolName) throws IOException {
+        TreeSpecies.FeatureConfig fc = species.featureConfig();
+        int perPlacement = Math.max(1, fc.treesPerPlacement());
+
+        List<Map<String, Object>> elements = new ArrayList<>();
+        for (TreeSpecies.WeightedFeature wf : fc.trees()) {
+            String featureId = wf.feature();
+            String local = featureId.contains(":") ? featureId.substring(featureId.indexOf(':') + 1) : featureId;
+            local = local.toLowerCase(java.util.Locale.ROOT).replaceAll("[^a-z0-9._-]", "_");
+            String placedPath = group + "/" + id + "/" + local;
+            String placedId = ns + ":" + placedPath;
+
+            // placed_feature: the vanilla configured feature plus tree placement modifiers.
+            Map<String, Object> placed = new LinkedHashMap<>();
+            placed.put("feature", featureId);
+            placed.put("placement", List.of(
+                    Map.of("type", "minecraft:count", "count", perPlacement),
+                    Map.of("type", "minecraft:in_square"),
+                    Map.of("type", "minecraft:heightmap", "heightmap", "WORLD_SURFACE_WG"),
+                    Map.of("type", "minecraft:biome")
+            ));
+            writeJson(dataFile(packRoot, ns, "worldgen/placed_feature/" + placedPath + ".json"), placed);
+
+            // feature_pool_element referencing the placed feature.
+            Map<String, Object> element = new LinkedHashMap<>();
+            element.put("element_type", "minecraft:feature_pool_element");
+            element.put("feature", placedId);
+            element.put("projection", "rigid");
+            Map<String, Object> entry = new LinkedHashMap<>();
+            entry.put("weight", Math.max(1, wf.weight()));
+            entry.put("element", element);
+            elements.add(entry);
+        }
+        normalizePoolWeights(elements);
+
+        Map<String, Object> pool = new LinkedHashMap<>();
+        pool.put("name", poolName);
+        pool.put("fallback", "minecraft:empty");
+        pool.put("elements", elements);
+        writeJson(dataFile(packRoot, ns, "worldgen/template_pool/" + group + "/" + id + ".json"), pool);
+    }
+
+    /**
+     * Builds a procedural model for one variant and writes it as a vanilla
+     * structure template at the location the template pool references. Failures to
+     * build a model are logged but do not abort datapack generation.
+     */
+    private void bakeVariant(Path packRoot, String location, String modelId,
+                             TreeSpecies.ProceduralParams params, ProceduralGenerator bakeGenerator,
+                             long seed, int dataVersion) {
+        try {
+            TreeModel model = bakeGenerator.buildProceduralModel(modelId, params, new java.util.Random(seed));
+            if (model == null || model.getBlocks().isEmpty()) {
+                platform.logger().warning("Procedural bake produced no blocks for '" + location + "'");
+                return;
+            }
+            StructureNbtWriter.write(nbtFileFor(packRoot, location), model.getBlocks(), dataVersion);
+        } catch (IOException ex) {
+            throw new UncheckedIOException("Failed to bake structure for '" + location + "'", ex);
+        } catch (RuntimeException ex) {
+            platform.logger().warning("Failed to bake structure for '" + location + "': " + ex.getMessage());
+        }
+    }
+
+    /** Resolves the {@code .nbt} file for a structure location, matching {@link #sanitizeLocation}. */
+    private static Path nbtFileFor(Path packRoot, String location) {
+        String sanitized = sanitizeLocation(location);
+        int colon = sanitized.indexOf(':');
+        String ns = sanitized.substring(0, colon);
+        String path = sanitized.substring(colon + 1);
+        return dataFile(packRoot, ns, "structure/" + path + ".nbt");
+    }
+
+    /** Deterministic per-variant seed so regenerating the datapack is stable. */
+    private static long variantSeed(TreeSpecies species, String variantName) {
+        return ((long) species.effectiveSalt()) * 1_000_003L + variantName.hashCode();
     }
 
     private void writeSuppression(Path packRoot, TreeSpecies species) throws IOException {
@@ -291,6 +498,27 @@ public final class DatapackGenerator {
         pack.put("pack_format", 71);
         pack.put("supported_formats", List.of(61, 71));
         writeJson(packRoot.resolve("pack.mcmeta"), Map.of("pack", pack));
+    }
+
+    /**
+     * Sanitizes a resource location so it satisfies Minecraft's {@code [a-z0-9/._-]}
+     * path / {@code [a-z0-9._-]} namespace constraints. Authored tree names such as
+     * {@code titan_mega_B} contain uppercase letters, which the vanilla registry
+     * rejects ("Non [a-z0-9/._-] character in path of location"), aborting world
+     * load. These element locations are only used by the worldgen datapack, so
+     * lowercasing / replacing illegal characters is safe.
+     */
+    static String sanitizeLocation(String location) {
+        if (location == null) return null;
+        int colon = location.indexOf(':');
+        String namespace = colon >= 0 ? location.substring(0, colon) : "minecraft";
+        String path = colon >= 0 ? location.substring(colon + 1) : location;
+
+        String ns = namespace.toLowerCase(java.util.Locale.ROOT)
+                .replaceAll("[^a-z0-9._-]", "_");
+        String p = path.toLowerCase(java.util.Locale.ROOT)
+                .replaceAll("[^a-z0-9/._-]", "_");
+        return ns + ":" + p;
     }
 
     private static Path dataFile(Path packRoot, String namespace, String relative) {

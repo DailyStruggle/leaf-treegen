@@ -16,5 +16,6 @@ public class FabricPlatform implements Platform {
     @Override public boolean placeStructure(String w, int x, int y, int z, String k) { return false; }
     @Override public void giveSapling(UUID p, String s, int a) {}
     @Override public void sendMessage(UUID p, String m, boolean e) {}
-    @Override public void setBlock(String w, int x, int y, int z, String b) {}
+    @Override public boolean setBlock(String w, int x, int y, int z, String b) { return true; }
+    @Override public boolean setBlocks(String w, int cx, int cz, java.util.Map<net.leaf.treegen.common.TreeModel.BlockPos, String> blocks) { return true; }
 }

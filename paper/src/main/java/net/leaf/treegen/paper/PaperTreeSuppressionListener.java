@@ -3,6 +3,8 @@ package net.leaf.treegen.paper;
 import net.leaf.treegen.common.TreeSpecies;
 import org.bukkit.Location;
 import org.bukkit.TreeType;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -34,21 +36,52 @@ public final class PaperTreeSuppressionListener implements Listener {
                 // Check if the growth is a vanilla tree type
                 if (isVanillaTree(event.getSpecies())) {
                     event.setCancelled(true);
-                    
+
+                    // Most trees can't take root on or in water (or other liquids). Species listed
+                    // under 'water-growth-trees' in config.yml (e.g. swamp trees) are exempt and may
+                    // grow on water; for all others, suppress the vanilla tree without replacing it.
+                    if (!plugin.config().allowsWaterGrowth(species.id())) {
+                        Block growBlock = loc.getBlock();
+                        if (isLiquid(growBlock) || isLiquid(growBlock.getRelative(BlockFace.DOWN))) {
+                            return;
+                        }
+                    }
+
                     // Optionally replace with a procedural tree
                     if (species.worldgen()) {
                         List<String> variants = plugin.registry().variantsFor(loc.getWorld().getName(), species);
                         if (!variants.isEmpty()) {
                             String variant = variants.get(random.nextInt(variants.size()));
                             plugin.platform().placeStructure(loc.getWorld().getName(), loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), variant);
+                            recordRegion(loc, species);
                         } else if (species.procedural() != null) {
                             plugin.proceduralGenerator().generate(loc.getWorld().getName(), loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), species, random);
+                            recordRegion(loc, species);
                         }
                     }
                     return;
                 }
             }
         }
+    }
+
+    private void recordRegion(Location loc, TreeSpecies species) {
+        if (loc.getWorld() == null) return;
+        int radius = net.leaf.treegen.common.SaplingDropResolver.estimateCanopyRadius(species);
+        int height = net.leaf.treegen.common.SaplingDropResolver.estimateHeight(species);
+        plugin.farmStore().recordTree(loc.getWorld().getName(), loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), radius, height, species.id());
+    }
+
+    /**
+     * Returns {@code true} if the block is a liquid (water or lava) or is waterlogged, meaning a
+     * tree should not be planted on or in it.
+     */
+    private static boolean isLiquid(Block block) {
+        if (block.isLiquid()) {
+            return true;
+        }
+        org.bukkit.block.data.BlockData data = block.getBlockData();
+        return data instanceof org.bukkit.block.data.Waterlogged waterlogged && waterlogged.isWaterlogged();
     }
 
     private boolean isVanillaTree(TreeType type) {

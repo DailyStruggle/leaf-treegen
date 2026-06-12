@@ -14,7 +14,7 @@
     "height_min": 8,
     "height_max": 12,
     "seed": 4300,
-    "count": 4,
+    "count": 6,
     "trunk_width": 2,
     "trunk_shape": "sigmoid",
     "trunk_shape_params": {

@@ -15,7 +15,7 @@
     "height_min": 9,
     "height_max": 12,
     "seed": 4100,
-    "count": 3,
+    "count": 5,
     "trunk_width": 1,
     "trunk_shape": "constant",
     "trunk_shape_params": {},
@@ -69,7 +69,7 @@
     "height_min": 13,
     "height_max": 17,
     "seed": 4101,
-    "count": 3,
+    "count": 5,
     "trunk_width": 1,
     "trunk_shape": "log",
     "trunk_shape_params": {
@@ -135,7 +135,7 @@
     "height_min": 18,
     "height_max": 24,
     "seed": 4102,
-    "count": 4,
+    "count": 6,
     "trunk_width": 2,
     "trunk_shape": "log",
     "trunk_shape_params": {

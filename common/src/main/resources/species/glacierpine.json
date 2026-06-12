@@ -1,7 +1,7 @@
 [
   {
     "name": "glacierpine",
-    "comment": "glacierpine small - slim frost-laden spruce, snow cap, dripstone icicle tips",
+    "comment": "glacierpine small - slim frost-laden spruce, snow cap, dripstone and glowing end-rod icicle tips",
     "filenames": [
       "glacierpine_small_1",
       "glacierpine_small_2",
@@ -15,7 +15,7 @@
     "height_min": 10,
     "height_max": 14,
     "seed": 4400,
-    "count": 3,
+    "count": 5,
     "trunk_width": 1,
     "trunk_shape": "constant",
     "trunk_shape_params": {},
@@ -35,12 +35,17 @@
         "target": "branch_tip",
         "block": "minecraft:pointed_dripstone[vertical_direction=down,thickness=tip]",
         "chance": 0.35
+      },
+      {
+        "target": "branch_tip",
+        "block": "minecraft:end_rod[facing=down]",
+        "chance": 0.08
       }
     ]
   },
   {
     "name": "glacierpine",
-    "comment": "glacierpine medium - wider trunk, heavier snow, more icicles",
+    "comment": "glacierpine medium - wider trunk, heavier snow, more dripstone and glowing end-rod icicles",
     "filenames": [
       "glacierpine_medium_1",
       "glacierpine_medium_2",
@@ -54,7 +59,7 @@
     "height_min": 16,
     "height_max": 22,
     "seed": 4401,
-    "count": 3,
+    "count": 5,
     "trunk_width": 2,
     "trunk_shape": "linear",
     "trunk_shape_params": {
@@ -77,12 +82,17 @@
         "target": "branch_tip",
         "block": "minecraft:pointed_dripstone[vertical_direction=down,thickness=tip]",
         "chance": 0.42
+      },
+      {
+        "target": "branch_tip",
+        "block": "minecraft:end_rod[facing=down]",
+        "chance": 0.1
       }
     ]
   },
   {
     "name": "glacierpine",
-    "comment": "glacierpine tall - thick trunk, drooping branches, dense icicle fringe",
+    "comment": "glacierpine tall - thick trunk, drooping branches, dense dripstone and glowing end-rod icicle fringe",
     "filenames": [
       "glacierpine_large_1",
       "glacierpine_large_2",
@@ -97,7 +107,7 @@
     "height_min": 26,
     "height_max": 36,
     "seed": 4402,
-    "count": 4,
+    "count": 6,
     "trunk_width": 3,
     "trunk_shape": "log",
     "trunk_shape_params": {
@@ -144,6 +154,11 @@
         "target": "branch_tip",
         "block": "minecraft:pointed_dripstone[vertical_direction=down,thickness=tip]",
         "chance": 0.48
+      },
+      {
+        "target": "branch_tip",
+        "block": "minecraft:end_rod[facing=down]",
+        "chance": 0.12
       }
     ]
   }

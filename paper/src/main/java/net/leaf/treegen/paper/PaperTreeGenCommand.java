@@ -34,6 +34,7 @@ public final class PaperTreeGenCommand extends BukkitTreeCommand {
         addSubCommand(new ListSubcommand(plugin, this));
         addSubCommand(new DebugSubcommand(plugin, this));
         addSubCommand(new ReloadSubcommand(plugin, this));
+        addSubCommand(new StatsSubcommand(plugin, this));
     }
 
     @Override public String name() { return "leaftree"; }
@@ -191,6 +192,47 @@ public final class PaperTreeGenCommand extends BukkitTreeCommand {
         @Override public void msgBadParameter(java.util.UUID c, String n, String v, java.util.function.Consumer<String> m) { PaperTreeGenCommand.this.msgBadParameter(c, n, v, m); }
         @Override public void msgInvalidCommand(java.util.UUID c, String a) { PaperTreeSuppressionListener suppression = new PaperTreeSuppressionListener(treePlugin); // dummy to ensure class is loaded
             PaperTreeGenCommand.this.msgInvalidCommand(c, a); }
+        @Override public void msgInvalidCommand(java.util.UUID c, String a, java.util.function.Consumer<String> m) { PaperTreeGenCommand.this.msgInvalidCommand(c, a, m); }
+    }
+
+    private class StatsSubcommand extends BukkitTreeCommand {
+        StatsSubcommand(PaperLeafTreeGenPlugin p, PaperTreeGenCommand parent) {
+            super(p, parent);
+            addParameter("reset", new io.github.dailystruggle.commandsapi.common.parameters.BooleanParameter("leaftreegen.admin", "Reset stats", (s, v) -> true));
+        }
+        @Override public String name() { return "stats"; }
+        @Override public String permission() { return "leaftreegen.admin"; }
+        @Override public String description() { return "Show tick budget consumption stats."; }
+        @Override public boolean onCommand(CommandSender sender, Map<String, List<String>> parameterValues, CommandsAPICommand nextCommand) {
+            PaperPlatform platform = (PaperPlatform) treePlugin.platform();
+            if (parameterValues.containsKey("reset") && Boolean.parseBoolean(parameterValues.get("reset").get(0))) {
+                platform.resetStats();
+                sender.sendMessage(Component.text("Stats reset.", NamedTextColor.GREEN));
+                return true;
+            }
+
+            long blocks = platform.getTotalBlocksPlaced();
+            long timeNanos = platform.getTotalTimeSpentNanos();
+            long batches = platform.getTotalBatches();
+            long exceeded = platform.getBudgetExceededCount();
+            
+            double timeMs = timeNanos / 1_000_000.0;
+            double avgTimeBatch = batches > 0 ? timeMs / batches : 0;
+            double avgBlocksBatch = batches > 0 ? (double) blocks / batches : 0;
+
+            sender.sendMessage(Component.text("--- LeafTreeGen Tick Budget Stats ---", NamedTextColor.GOLD));
+            sender.sendMessage(Component.text("Total Blocks Placed: ", NamedTextColor.GRAY).append(Component.text(blocks, NamedTextColor.WHITE)));
+            sender.sendMessage(Component.text("Total Time Spent: ", NamedTextColor.GRAY).append(Component.text(String.format("%.2f ms", timeMs), NamedTextColor.WHITE)));
+            sender.sendMessage(Component.text("Total Batches: ", NamedTextColor.GRAY).append(Component.text(batches, NamedTextColor.WHITE)));
+            sender.sendMessage(Component.text("Budget Exceeded Events: ", NamedTextColor.GRAY).append(Component.text(exceeded, NamedTextColor.WHITE)));
+            sender.sendMessage(Component.text("Avg Time per Batch: ", NamedTextColor.GRAY).append(Component.text(String.format("%.2f ms", avgTimeBatch), NamedTextColor.WHITE)));
+            sender.sendMessage(Component.text("Avg Blocks per Batch: ", NamedTextColor.GRAY).append(Component.text(String.format("%.2f", avgBlocksBatch), NamedTextColor.WHITE)));
+            
+            return true;
+        }
+        @Override public void msgBadParameter(java.util.UUID c, String n, String v) { PaperTreeGenCommand.this.msgBadParameter(c, n, v); }
+        @Override public void msgBadParameter(java.util.UUID c, String n, String v, java.util.function.Consumer<String> m) { PaperTreeGenCommand.this.msgBadParameter(c, n, v, m); }
+        @Override public void msgInvalidCommand(java.util.UUID c, String a) { PaperTreeGenCommand.this.msgInvalidCommand(c, a); }
         @Override public void msgInvalidCommand(java.util.UUID c, String a, java.util.function.Consumer<String> m) { PaperTreeGenCommand.this.msgInvalidCommand(c, a, m); }
     }
 

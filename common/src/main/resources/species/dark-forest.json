@@ -1,6 +1,6 @@
 [
   {
-    "name": "darkoak",
+    "name": "darkoak_A",
     "comment": "darkoak small A - squat dense canopy",
     "trunk": "minecraft:dark_oak_log",
     "leaves": "minecraft:dark_oak_leaves",
@@ -8,7 +8,7 @@
     "height_min": 7,
     "height_max": 10,
     "seed": 3300,
-    "count": 2,
+    "count": 4,
     "trunk_width": 2,
     "trunk_shape": "constant",
     "trunk_shape_params": {},
@@ -16,7 +16,8 @@
       "start_angle": 162,
       "squish": 0.2,
       "mode": "density",
-      "leaf_density": 0.93
+      "leaf_density": 1.0,
+      "leaf-vertical-scale": 0.5
     }
   },
   {
@@ -28,7 +29,7 @@
     "height_min": 8,
     "height_max": 12,
     "seed": 3301,
-    "count": 3,
+    "count": 5,
     "trunk_width": 2,
     "trunk_shape": "constant",
     "trunk_shape_params": {},
@@ -36,7 +37,10 @@
       "start_angle": 158,
       "squish": 0.22,
       "mode": "density",
-      "leaf_density": 0.92,
+      "leaf_density": 1.0,
+      "noise-scale": 0.0,
+      "noise-threshold": 0.0,
+      "leaf-vertical-scale": 0.5,
       "branches": {
         "prob_fn": "sigmoid",
         "prob_params": { "steepness": 14.0, "midpoint": 0.84 },
@@ -45,9 +49,9 @@
         "azimuth": "random",
         "elevation": 5,
         "leaf_start_up": true,
-        "cluster_radius": 3,
+        "cluster_radius": 2,
         "cluster_mode": "density",
-        "cluster_density": 0.9
+        "cluster_density": 0.85
       }
     }
   },
@@ -60,15 +64,20 @@
     "height_min": 12,
     "height_max": 17,
     "seed": 3302,
-    "count": 3,
+    "count": 5,
     "trunk_width": 2,
     "trunk_shape": "parabolic",
     "trunk_shape_params": { "peak_offset": 0.22 },
+    "cap_trunk": false,
     "canopy": {
+      "volume_layers": false,
       "start_angle": 155,
       "squish": 0.25,
       "mode": "density",
-      "leaf_density": 0.92,
+      "leaf_density": 1.0,
+      "noise-scale": 0.0,
+      "noise-threshold": 0.0,
+      "leaf-vertical-scale": 0.5,
       "branches": {
         "prob_fn": "sigmoid",
         "prob_params": { "steepness": 13.0, "midpoint": 0.8 },
@@ -78,16 +87,16 @@
         "elevation": 5,
         "leaf_start_up": true,
         "cluster_radius": 3,
-        "cluster_mode": "density",
-        "cluster_density": 0.9,
+        "cluster_mode": "trimmed",
+        "cluster_density": 1.0,
         "sub_branches": {
           "count": 2,
           "pitch_delta": -5,
           "yaw_delta": 58,
           "length_scale": 0.5,
           "cluster_radius": 2,
-          "cluster_mode": "density",
-          "cluster_density": 0.86
+          "cluster_mode": "trimmed",
+          "cluster_density": 1.0
         }
       }
     }
@@ -101,15 +110,20 @@
     "height_min": 14,
     "height_max": 20,
     "seed": 3303,
-    "count": 4,
+    "count": 6,
     "trunk_width": 3,
     "trunk_shape": "sigmoid",
     "trunk_shape_params": { "steepness": 4.0 },
+    "cap_trunk": false,
     "canopy": {
+      "volume_layers": false,
       "start_angle": 152,
       "squish": 0.28,
       "mode": "density",
-      "leaf_density": 0.91,
+      "leaf_density": 1.0,
+      "noise-scale": 0.0,
+      "noise-threshold": 0.0,
+      "leaf-vertical-scale": 0.5,
       "branches": {
         "prob_fn": "sigmoid",
         "prob_params": { "steepness": 12.0, "midpoint": 0.78 },
@@ -119,8 +133,8 @@
         "elevation": 5,
         "leaf_start_up": true,
         "cluster_radius": 4,
-        "cluster_mode": "density",
-        "cluster_density": 0.9,
+        "cluster_mode": "trimmed",
+        "cluster_density": 1.0,
         "sub_branches": {
           "count": 2,
           "pitch_delta": -5,
@@ -142,7 +156,7 @@
     "height_min": 15,
     "height_max": 22,
     "seed": 3304,
-    "count": 4,
+    "count": 6,
     "trunk_width": 3,
     "trunk_shape": "log",
     "trunk_shape_params": { "base": 2.5 },
@@ -160,16 +174,16 @@
         "elevation": 6,
         "leaf_start_up": true,
         "cluster_radius": 3,
-        "cluster_mode": "density",
-        "cluster_density": 0.88,
+        "cluster_mode": "trimmed",
+        "cluster_density": 1.0,
         "sub_branches": {
           "count": 2,
           "pitch_delta": -6,
           "yaw_delta": 60,
           "length_scale": 0.5,
           "cluster_radius": 2,
-          "cluster_mode": "density",
-          "cluster_density": 0.84
+          "cluster_mode": "trimmed",
+          "cluster_density": 1.0
         }
       }
     }
@@ -183,7 +197,7 @@
     "height_min": 9,
     "height_max": 14,
     "seed": 3305,
-    "count": 3,
+    "count": 5,
     "trunk_width": 2,
     "trunk_shape": "log",
     "trunk_shape_params": { "base": 2.5 },
@@ -219,7 +233,7 @@
     "height_min": 13,
     "height_max": 19,
     "seed": 3306,
-    "count": 4,
+    "count": 6,
     "trunk_width": 2,
     "trunk_shape": "log",
     "trunk_shape_params": { "base": 2.8 },
@@ -241,16 +255,16 @@
         "elevation": 8,
         "leaf_start_up": true,
         "cluster_radius": 3,
-        "cluster_mode": "density",
-        "cluster_density": 0.88,
+        "cluster_mode": "trimmed",
+        "cluster_density": 1.0,
         "sub_branches": {
           "count": 3,
           "pitch_delta": -35,
           "yaw_delta": 60,
           "length_scale": 0.55,
           "cluster_radius": 2,
-          "cluster_mode": "density",
-          "cluster_density": 0.82
+          "cluster_mode": "trimmed",
+          "cluster_density": 1.0
         }
       }
     }
@@ -264,7 +278,7 @@
     "height_min": 55,
     "height_max": 75,
     "seed": 3307,
-    "count": 4,
+    "count": 6,
     "trunk_width": 4,
     "trunk_shape": "parabolic",
     "trunk_shape_params": { "peak_offset": 0.3, "floor": 0.65 },
@@ -286,16 +300,16 @@
         "elevation": 14,
         "leaf_start_up": true,
         "cluster_radius": 5,
-        "cluster_mode": "density",
-        "cluster_density": 0.88,
+        "cluster_mode": "trimmed",
+        "cluster_density": 1.0,
         "sub_branches": {
           "count": 3,
           "pitch_delta": -20,
           "yaw_delta": 58,
           "length_scale": 0.5,
           "cluster_radius": 3,
-          "cluster_mode": "density",
-          "cluster_density": 0.82
+          "cluster_mode": "trimmed",
+          "cluster_density": 1.0
         }
       }
     }
@@ -309,7 +323,7 @@
     "height_min": 72,
     "height_max": 95,
     "seed": 3308,
-    "count": 5,
+    "count": 7,
     "trunk_width": 5,
     "trunk_shape": "parabolic",
     "trunk_shape_params": { "peak_offset": 0.35, "floor": 0.7 },
@@ -331,22 +345,22 @@
         "elevation": 14,
         "leaf_start_up": true,
         "cluster_radius": 5,
-        "cluster_mode": "density",
-        "cluster_density": 0.88,
+        "cluster_mode": "trimmed",
+        "cluster_density": 1.0,
         "sub_branches": {
           "count": 3,
           "pitch_delta": -20,
           "yaw_delta": 60,
           "length_scale": 0.5,
           "cluster_radius": 3,
-          "cluster_mode": "density",
-          "cluster_density": 0.82
+          "cluster_mode": "trimmed",
+          "cluster_density": 1.0
         }
       }
     }
   },
   {
-    "name": "spiral",
+    "name": "spiral_A",
     "comment": "spiral darkoak A - spiral lean, mid-giant",
     "trunk": "minecraft:dark_oak_log",
     "leaves": "minecraft:dark_oak_leaves",
@@ -354,7 +368,7 @@
     "height_min": 50,
     "height_max": 68,
     "seed": 3309,
-    "count": 4,
+    "count": 6,
     "trunk_width": 3,
     "trunk_shape": "parabolic",
     "trunk_shape_params": { "peak_offset": 0.38, "floor": 0.58 },
@@ -378,22 +392,22 @@
         "elevation": 12,
         "leaf_start_up": true,
         "cluster_radius": 4,
-        "cluster_mode": "density",
-        "cluster_density": 0.88,
+        "cluster_mode": "trimmed",
+        "cluster_density": 1.0,
         "sub_branches": {
           "count": 3,
           "pitch_delta": -18,
           "yaw_delta": 60,
           "length_scale": 0.5,
           "cluster_radius": 2,
-          "cluster_mode": "density",
-          "cluster_density": 0.82
+          "cluster_mode": "trimmed",
+          "cluster_density": 1.0
         }
       }
     }
   },
   {
-    "name": "spiral",
+    "name": "spiral_B",
     "comment": "spiral darkoak B - tall spiral, enormous crown",
     "trunk": "minecraft:dark_oak_log",
     "leaves": "minecraft:dark_oak_leaves",
@@ -401,7 +415,7 @@
     "height_min": 65,
     "height_max": 88,
     "seed": 3310,
-    "count": 5,
+    "count": 7,
     "trunk_width": 4,
     "trunk_shape": "parabolic",
     "trunk_shape_params": { "peak_offset": 0.4, "floor": 0.62 },
@@ -425,16 +439,16 @@
         "elevation": 12,
         "leaf_start_up": true,
         "cluster_radius": 5,
-        "cluster_mode": "density",
-        "cluster_density": 0.88,
+        "cluster_mode": "trimmed",
+        "cluster_density": 1.0,
         "sub_branches": {
           "count": 3,
           "pitch_delta": -18,
           "yaw_delta": 60,
           "length_scale": 0.5,
           "cluster_radius": 3,
-          "cluster_mode": "density",
-          "cluster_density": 0.82
+          "cluster_mode": "trimmed",
+          "cluster_density": 1.0
         }
       }
     }
